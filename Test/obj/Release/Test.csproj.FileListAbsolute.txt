@@ -1,0 +1,6 @@
+D:\SVN\Lignis\Projects\RolePermissions\Test\bin\Release\Test.exe.config
+D:\SVN\Lignis\Projects\RolePermissions\Test\bin\Release\Test.exe
+D:\SVN\Lignis\Projects\RolePermissions\Test\bin\Release\Test.pdb
+D:\SVN\Lignis\Projects\RolePermissions\Test\obj\Release\Test.csprojResolveAssemblyReference.cache
+D:\SVN\Lignis\Projects\RolePermissions\Test\obj\Release\Test.exe
+D:\SVN\Lignis\Projects\RolePermissions\Test\obj\Release\Test.pdb

@@ -124,6 +124,24 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка инициализации кластера подразделения.
+        /// </summary>
+        public static string ClusterInitializationException {
+            get {
+                return ResourceManager.GetString("ClusterInitializationException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Номер кластера.
+        /// </summary>
+        public static string ClusterNumber {
+            get {
+                return ResourceManager.GetString("ClusterNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Код.
         /// </summary>
         public static string Code {
@@ -165,6 +183,33 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Группировка.
+        /// </summary>
+        public static string Grouping {
+            get {
+                return ResourceManager.GetString("Grouping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Нижестоящий.
+        /// </summary>
+        public static string Inferior {
+            get {
+                return ResourceManager.GetString("Inferior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Взаимодействующий.
+        /// </summary>
+        public static string Interacting {
+            get {
+                return ResourceManager.GetString("Interacting", resourceCulture);
             }
         }
         
@@ -313,6 +358,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Подчиненность.
+        /// </summary>
+        public static string Subordination {
+            get {
+                return ResourceManager.GetString("Subordination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Настройка подсистем.
         /// </summary>
         public static string SubsystemsSettings {
@@ -327,6 +381,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         public static string Summary {
             get {
                 return ResourceManager.GetString("Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вышестоящий.
+        /// </summary>
+        public static string Superior {
+            get {
+                return ResourceManager.GetString("Superior", resourceCulture);
             }
         }
         

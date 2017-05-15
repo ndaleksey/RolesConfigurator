@@ -11,9 +11,9 @@
     <Setting Name="ConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Host=10.6.7.103;Port=5432;Database=los_db;SearchPath=public;Username=postgres;Password=rjynbytyn;Persist Security Info=True&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Host=127.0.0.1;Port=5432;Database=los_db;SearchPath=public;Username=postgres;Password=postgres;Persist Security Info=True&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Host=10.6.7.103;Port=5432;Database=los_db;SearchPath=public;Username=postgres;Password=rjynbytyn;Persist Security Info=True</Value>
+      <Value Profile="(Default)">Host=127.0.0.1;Port=5432;Database=los_db;SearchPath=public;Username=postgres;Password=postgres;Persist Security Info=True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

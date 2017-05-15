@@ -54,6 +54,8 @@
   <ItemGroup>
     <Reference Include="DevExpress.Mvvm.v15.2, Version=15.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Xpf.Core.v15.2, Version=15.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v15.2, Version=15.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpf.Grid.v15.2.Core, Version=15.2.10.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
@@ -108,6 +110,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\SubsystemConverter.cs" />
     <Compile Include="Converters\YesNoBoolValueConverter.cs" />
     <Compile Include="Infrastructure\BindableBaseExtanded.cs" />
     <Compile Include="Infrastructure\ELogMessageType.cs" />
@@ -133,6 +136,10 @@
       <DependentUpon>PostgreSQLErrorCodes.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CustomViewModel.cs" />
+    <Compile Include="ViewModels\DepartmentClustersViewModel.cs" />
+    <Compile Include="ViewModels\ExternalRolesViewModel.cs" />
+    <Compile Include="ViewModels\InternalRolesViewModel.cs" />
+    <Compile Include="ViewModels\Items\MilitaryUnit.cs" />
     <Compile Include="ViewModels\Items\Plugin.cs" />
     <Compile Include="ViewModels\Items\PluginPermission.cs" />
     <Compile Include="ViewModels\Items\PluginPermissionType.cs" />
@@ -141,6 +148,15 @@
     <Compile Include="ViewModels\RoleSettingsViewModel.cs" />
     <Compile Include="Views\AccountsSelectionView.xaml.cs">
       <DependentUpon>AccountsSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartmentClustersView.xaml.cs">
+      <DependentUpon>DepartmentClustersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExternalRolesView.xaml.cs">
+      <DependentUpon>ExternalRolesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InternalRolesView.xaml.cs">
+      <DependentUpon>InternalRolesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RoleSettingsView.xaml.cs">
       <DependentUpon>RoleSettingsView.xaml</DependentUpon>
@@ -155,6 +171,18 @@
     <Page Include="Views\AccountsSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DepartmentClustersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExternalRolesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InternalRolesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>

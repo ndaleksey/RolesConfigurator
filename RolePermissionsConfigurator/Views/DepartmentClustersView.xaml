@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Swsu.Lignis.RolePermissionsConfigurator.Views.DepartmentClustersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:properties="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="800">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<dxg:GridControl x:Name="Grid"
+                                  Grid.Row="0" 
+                                  EnableSmartColumnsGeneration="True"
+                                  SelectedItem="{Binding Path=SelectedGroupingItem, UpdateSourceTrigger=PropertyChanged}"
+                                  ItemsSource="{Binding Path=MilitaryUnits}"
+                                  Margin="3"
+                                  MinWidth="300">
+
+			<dxg:GridControl.Columns>
+				<dxg:GridColumn Header="{x:Static properties:Resources.Grouping}" 
+                                    FieldName="Name" 
+                                    ReadOnly="True"
+                                    MinWidth="100"
+                                    HorizontalHeaderContentAlignment="Center"/>
+
+				<dxg:GridColumn FieldName="ClusterNumber"
+                                        HorizontalHeaderContentAlignment="Center"
+                                        FixedWidth="True"
+                                        Width="150"
+                                        MinWidth="150"
+                                        ReadOnly="False"
+                                        Header="{x:Static properties:Resources.ClusterNumber}">
+
+					<dxg:GridColumn.CellTemplate>
+						<DataTemplate>
+							<dxe:TextEdit  EditValue="{Binding Path=RowData.Row.ClusterNumber, 
+                                                   RelativeSource={RelativeSource TemplatedParent},
+                                                   Mode=TwoWay,
+                                                   UpdateSourceTrigger=PropertyChanged}"  
+                                                   InvalidValueBehavior="AllowLeaveEditor"                                     
+                                                   MaskType="RegEx" 
+                                                   Mask="[1-9]\d*"/>
+						</DataTemplate>
+					</dxg:GridColumn.CellTemplate>
+
+				</dxg:GridColumn>
+
+				<dxg:GridColumn FieldName="Subordinate" 
+                                        HorizontalHeaderContentAlignment="Center"
+                                        FixedWidth="True"
+                                        Width="150"
+                                        MinWidth="150"
+                                        ReadOnly="False"
+                                        Header="{x:Static properties:Resources.Subordination}">
+
+					<dxg:GridColumn.EditSettings>
+						<dxe:ComboBoxEditSettings ItemsSource="{Binding SubordinationTypes}" 
+                                                  DisplayMember="TypeName" ValueMember="Subordinate" >
+							<dxe:ComboBoxEditSettings.StyleSettings>
+								<dxe:ComboBoxStyleSettings />
+							</dxe:ComboBoxEditSettings.StyleSettings>
+						</dxe:ComboBoxEditSettings>
+					</dxg:GridColumn.EditSettings>
+
+				</dxg:GridColumn>
+			</dxg:GridControl.Columns>
+
+			<dxg:GridControl.View>
+				<dxg:TreeListView  AllowPerPixelScrolling="True"
+                                           ShowTotalSummary="True"
+                                           AutoWidth="True"
+                                           AllowEditing="True"
+                                           KeyFieldName="Id" 
+                                           ParentFieldName="ParentId"
+                                           AllowCommitOnValidationAttributeError="True" 
+                                           ItemsSourceErrorInfoShowMode="RowAndCell">
+
+				</dxg:TreeListView>
+			</dxg:GridControl.View>
+		</dxg:GridControl>
+
+	</Grid>
+</UserControl>

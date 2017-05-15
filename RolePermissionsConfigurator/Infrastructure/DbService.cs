@@ -673,5 +673,45 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 				}
 			}
 		}
+
+		public static Task<List<MilitaryUnit>> GetMilitaryUnitsByGroupingNameAsync(DbConnection connection,
+			string groupingName)
+		{
+			return Task.Run(() => GetGroupingUnitsByGroupingName(connection, groupingName));
+		}
+
+		public static List<MilitaryUnit> GetGroupingUnitsByGroupingName(DbConnection connection, string groupingName)
+		{
+			var units = new List<MilitaryUnit>();
+
+			var sql = "SELECT g.id, g.parent_id, g.name, c.number AS cluster " +
+			          $"FROM {groupingName} g " +
+			          "FULL JOIN permission.cluster c ON g.id = c.id " +
+			          "ORDER BY parent_id DESC;";
+
+			using (var command = connection.CreateCommand())
+			{
+				command.Connection = connection;
+				command.CommandText = sql;
+
+				using (var reader = command.ExecuteReader())
+				{
+					if (!reader.HasRows) return units;
+
+					while (reader.Read())
+					{
+						if (reader.IsDBNull(0)) continue;
+
+						var id = reader.GetGuid(0).ToString();
+						var parentId = reader.IsDBNull(1) ? Guid.Empty.ToString() : reader.GetGuid(1).ToString();
+						var name = reader.IsDBNull(2) ? string.Empty : reader.GetString(2);
+						var cluster = reader.IsDBNull(3) ? (int?) null : reader.GetInt32(3);
+
+						units.Add(new MilitaryUnit(id, parentId, name, cluster));
+					}
+				}
+			}
+			return units;
+		}
 	}
 }

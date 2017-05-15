@@ -318,7 +318,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Methods
 
-		private void Initialization()
+		protected override void Initialization()
 		{
 			if (ModifiedRole != null)
 			{

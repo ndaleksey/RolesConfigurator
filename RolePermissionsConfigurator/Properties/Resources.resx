@@ -240,4 +240,32 @@
     <value>Выделить всё</value>
     <comment>Выделить всё</comment>
   </data>
+  <data name="Grouping" xml:space="preserve">
+    <value>Группировка</value>
+    <comment>Группировка</comment>
+  </data>
+  <data name="ClusterInitializationException" xml:space="preserve">
+    <value>Ошибка инициализации кластера подразделения</value>
+    <comment>Ошибка инициализации кластера подразделения</comment>
+  </data>
+  <data name="ClusterNumber" xml:space="preserve">
+    <value>Номер кластера</value>
+    <comment>Номер кластера</comment>
+  </data>
+  <data name="Inferior" xml:space="preserve">
+    <value>Нижестоящий</value>
+    <comment>Нижестоящий</comment>
+  </data>
+  <data name="Interacting" xml:space="preserve">
+    <value>Взаимодействующий</value>
+    <comment>Взаимодействующий</comment>
+  </data>
+  <data name="Subordination" xml:space="preserve">
+    <value>Подчиненность</value>
+    <comment>Подчиненность</comment>
+  </data>
+  <data name="Superior" xml:space="preserve">
+    <value>Вышестоящий</value>
+    <comment>Вышестоящий</comment>
+  </data>
 </root>

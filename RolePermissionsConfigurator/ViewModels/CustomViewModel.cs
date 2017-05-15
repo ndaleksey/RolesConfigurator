@@ -20,5 +20,13 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		}
 
 		#endregion
+
+		#region MyRegion
+
+		protected virtual void Initialization()
+		{
+			
+		}
+		#endregion
 	}
 }

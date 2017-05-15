@@ -141,6 +141,14 @@
     <value>Annuler</value>
     <comment>Отмена</comment>
   </data>
+  <data name="ClusterInitializationException" xml:space="preserve">
+    <value>Erreur d'initialisation de cluster unité</value>
+    <comment>Ошибка инициализации кластера подразделения</comment>
+  </data>
+  <data name="ClusterNumber" xml:space="preserve">
+    <value>Numéro de grappe</value>
+    <comment>Номер кластера</comment>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>Code</value>
     <comment>Код</comment>
@@ -160,6 +168,18 @@
   <data name="Edit" xml:space="preserve">
     <value>Modifier</value>
     <comment>Изменить</comment>
+  </data>
+  <data name="Grouping" xml:space="preserve">
+    <value>Regroupement</value>
+    <comment>Группировка</comment>
+  </data>
+  <data name="Inferior" xml:space="preserve">
+    <value>Inférieur</value>
+    <comment>Нижестоящий</comment>
+  </data>
+  <data name="Interacting" xml:space="preserve">
+    <value>Interaction</value>
+    <comment>Взаимодействующий</comment>
   </data>
   <data name="Login" xml:space="preserve">
     <value>S'identifier</value>
@@ -225,6 +245,10 @@
     <value>Autorisation de démarrage</value>
     <comment>Разрешение на запуск</comment>
   </data>
+  <data name="Subordination" xml:space="preserve">
+    <value>Subordination</value>
+    <comment>Подчиненность</comment>
+  </data>
   <data name="SubsystemsSettings" xml:space="preserve">
     <value>Paramètres du sous-système</value>
     <comment>Настройка подсистем</comment>
@@ -232,6 +256,10 @@
   <data name="Summary" xml:space="preserve">
     <value>Résumé</value>
     <comment>Описание</comment>
+  </data>
+  <data name="Superior" xml:space="preserve">
+    <value>Supérieur</value>
+    <comment>Вышестоящий</comment>
   </data>
   <data name="Value" xml:space="preserve">
     <value>Valeur</value>
