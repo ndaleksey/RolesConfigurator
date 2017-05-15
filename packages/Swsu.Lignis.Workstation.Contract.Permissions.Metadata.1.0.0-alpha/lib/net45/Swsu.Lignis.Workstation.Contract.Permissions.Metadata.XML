@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Swsu.Lignis.Workstation.Contract.Permissions.Metadata</name>
+    </assembly>
+    <members>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.ErrorMessages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.ErrorMessages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.ErrorMessages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.ErrorMessages.DuplicatePermissionName">
+            <summary>
+              Looks up a localized string similar to The value of InvariantName property must be unique within the table..
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.ErrorMessages.DuplicatePermissionValue">
+            <summary>
+              Looks up a localized string similar to The value of Value property must be unique within the type..
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.ErrorMessages.EmptyString">
+            <summary>
+              Looks up a localized string similar to Must be non-empty string..
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.IPermissionTableProvider">
+            <summary>
+            Должен реализовываться поставщиками метаданных о разрешениях.
+            </summary>
+            <remarks>
+            В каждом модуле, использующем разрешения, должен быть один класс, реализующий данный интерфейс.
+            Имя этого класса должно задаваться в атрибуте <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableProviderAttribute"/>.
+            </remarks>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.IPermissionTableProvider.Provide(System.Globalization.CultureInfo)">
+            <summary>
+            Возвращает набор метаданных разрешений.
+            </summary>
+            <param name="culture">Информация о культуре.</param>
+            <returns>Набор метаданных.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission">
+            <summary>
+            Представляет метаданные о разрешении.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission.#ctor(System.String,System.String,Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionType)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="invariantName">Инвариантное имя.</param>
+            <param name="displayName">Культурно-зависимое имя.</param>
+            <param name="type">Набор возможных значений.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission.#ctor(System.String,System.String,Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionType,System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="invariantName">Инвариантное имя.</param>
+            <param name="displayName">Культурно-зависимое имя.</param>
+            <param name="type">Набор возможных значений.</param>
+            <param name="summary">Резюме.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission.DisplayName">
+            <summary>
+            Возвращает культурно-зависимое имя.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission.InvariantName">
+            <summary>
+            Возвращает инвариантное имя.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission.Summary">
+            <summary>
+            Возвращает резюме.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission.Type">
+            <summary>
+            Возвращает набор возможных значений.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTable">
+            <summary>
+            Представляет набор метаданных о разрешениях.
+            </summary>
+            <remarks>
+            Для создания наборов разрешений следует использовать класс <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableBuilder"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTable.Empty">
+            <summary>
+            Пустой набор метаданных.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTable.Permissions">
+            <summary>
+            Возвращает метаданные разрешений.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTable.Load(System.String,System.Globalization.CultureInfo)">
+            <summary>
+            Загружает набор метаданных из заданной сборки.
+            </summary>
+            <param name="assemblyString">Имя сборки (без пути и расширения).</param>
+            <param name="culture">Информация о культуре.</param>
+            <returns>Набор метаданных.</returns>
+            <remarks>
+            Данный метод загружает сборку и ищет у нее атрибут <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableProviderAttribute"/>.
+            Если атрибут найден, то создается объект соответствующего класса,
+            у которого вызывается метод <see cref="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.IPermissionTableProvider.Provide(System.Globalization.CultureInfo)"/>.
+            В противном случае возвращается пустой набор метаданных. 
+            </remarks>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableBuilder">
+            <summary>
+            Используется для создания объектов класса <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTable"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableBuilder.#ctor">
+            <summary>
+            Инициализирует объект.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableBuilder.Add(Swsu.Lignis.Workstation.Contract.Permissions.Metadata.Permission)">
+            <summary>
+            Добавляет заданное разрешение в набор.
+            </summary>
+            <param name="permission">Метаданные разрешения.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableBuilder.Build">
+            <summary>
+            Создает и возвращается объект класса <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTable"/>.
+            </summary>
+            <returns>Созданный объект.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableProviderAttribute">
+            <summary>
+            Задает класс, реализующий интерфейс <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.IPermissionTableProvider"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableProviderAttribute.#ctor(System.Type)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="type">Тип поставщика метаданных.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableProviderAttribute.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="typeName">Имя типа поставщика метаданных.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTableProviderAttribute.TypeName">
+            <summary>
+            Возвращает имя типа поставщика метаданных.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionType">
+            <summary>
+            Представляет набор метаданных о значениях разрешений.
+            </summary>
+            <remarks>
+            Для создания наборов значений разрешений следует использовать класс <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypeBuilder"/>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionType.Values">
+            <summary>
+            Возвращает метаданные значений разрешений.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypeBuilder">
+            <summary>
+            Используется для создания объектов класса <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionType"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypeBuilder.#ctor">
+            <summary>
+            Инициализирует объект.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypeBuilder.Add(Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionValue)">
+            <summary>
+            Добавляет заданное значение разрешения в набор.
+            </summary>
+            <param name="value">Метаданные значения разрешения.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypeBuilder.Build">
+            <summary>
+            Создает и возвращается объект класса <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionType"/>.
+            </summary>
+            <returns>Созданный объект.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes">
+            <summary>
+            Содержит методы для получения метаданных предопределенных наборов разрешений.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes.GetAllowDeny(System.Globalization.CultureInfo)">
+            <summary>
+            Возвращает метаданные набора значений, представленного перечислением <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.AllowDeny"/>.
+            </summary>
+            <param name="culture">Информация о культуре.</param>
+            <returns>Набор метаданных.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes.GetDataAccess(System.Globalization.CultureInfo)">
+            <summary>
+            Возвращает метаданные набора значений, представленного перечислением <see cref="T:Swsu.Lignis.Workstation.Contract.Permissions.DataAccess"/>.
+            </summary>
+            <param name="culture">Информация о культуре.</param>
+            <returns>Набор метаданных.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_AllowDeny">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_AllowDeny.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_AllowDeny.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_AllowDeny.Allow_DisplayName">
+            <summary>
+              Looks up a localized string similar to Allow.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_AllowDeny.Allow_Summary">
+            <summary>
+              Looks up a localized string similar to Allows specified action..
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_AllowDeny.Deny_DisplayName">
+            <summary>
+              Looks up a localized string similar to Deny.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_AllowDeny.Deny_Summary">
+            <summary>
+              Looks up a localized string similar to Denies specified action..
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.Full_DisplayName">
+            <summary>
+              Looks up a localized string similar to Full.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.Full_Summary">
+            <summary>
+              Looks up a localized string similar to Allows both reads and writes..
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.None_DisplayName">
+            <summary>
+              Looks up a localized string similar to None.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.None_Summary">
+            <summary>
+              Looks up a localized string similar to Denies all access..
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.ReadOnly_DisplayName">
+            <summary>
+              Looks up a localized string similar to Read-only.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionTypes_DataAccess.ReadOnly_Summary">
+            <summary>
+              Looks up a localized string similar to Allows only reads..
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionValue">
+            <summary>
+            Представляет метаданные о значении разрешения.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionValue.#ctor(System.Int16,System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="value">Значение.</param>
+            <param name="displayName">Культурно-зависимое имя.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionValue.#ctor(System.Int16,System.String,System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="value">Значение.</param>
+            <param name="displayName">Культурно-зависимое имя.</param>
+            <param name="summary">Резюме.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionValue.DisplayName">
+            <summary>
+            Возвращает культурно-зависимое имя.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionValue.Summary">
+            <summary>
+            Возвращает резюме.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Permissions.Metadata.PermissionValue.Value">
+            <summary>
+            Возвращает значение.
+            </summary>
+        </member>
+    </members>
+</doc>

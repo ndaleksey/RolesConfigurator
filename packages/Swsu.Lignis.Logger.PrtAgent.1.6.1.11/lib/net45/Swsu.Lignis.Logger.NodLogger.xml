@@ -1,0 +1,915 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Swsu.Lignis.Logger.NodLogger</name>
+    </assembly>
+    <members>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.DataDirection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataDirection.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataDirection.Incoming">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataDirection.Outcoming">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.DataRawPassport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataRawPassport.BeginPassport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataRawPassport.EndPassport">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataRawPassport.BeginPassportSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataRawPassport.EndPassportSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataRawPassport.MaxNoCompressSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.DataRawPassport.MinSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.#ctor(System.String,System.DateTime,Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.String,Swsu.Lignis.Logger.NodLogger.DataDirection,System.String,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="livel"></param>
+            <param name="source"></param>
+            <param name="address"></param>
+            <param name="direction"></param>
+            <param name="protocol"></param>
+            <param name="captureDate"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.#ctor(System.String,System.DateTime,Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.String,Swsu.Lignis.Logger.NodLogger.DataDirection,System.String,System.Byte[],System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="captureDate"></param>
+            <param name="livel"></param>
+            <param name="address"></param>
+            <param name="direction"></param>
+            <param name="protocol"></param>
+            <param name="data"></param>
+            <param name="cultureInfo"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.#ctor(System.String,System.DateTime,System.Nullable{System.DateTime},Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.String,Swsu.Lignis.Logger.NodLogger.DataDirection,System.String,System.Byte[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="captureDate"></param>
+            <param name="operatingDate"></param>
+            <param name="livel"></param>
+            <param name="address"></param>
+            <param name="direction"></param>
+            <param name="protocol"></param>
+            <param name="data"></param>
+            <param name="remark"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.#ctor(System.String,System.DateTime,System.Nullable{System.DateTime},Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.String,Swsu.Lignis.Logger.NodLogger.DataDirection,System.String,System.Byte[],System.String,System.Globalization.CultureInfo)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="captureDate"></param>
+            <param name="operatingDate"></param>
+            <param name="livel"></param>
+            <param name="address"></param>
+            <param name="direction"></param>
+            <param name="protocol"></param>
+            <param name="data"></param>
+            <param name="remark"></param>
+            <param name="cultureInfo"></param>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Livel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Source">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Address">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Protocol">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Remark">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Direction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.CaptureDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.OperatingDate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Culture">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.RawLenght">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.#ctor(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="offset"></param>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Version">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.DataRawPassport.IsCompressed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Encode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Decode(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.DataRawPassport.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Layout.BufferLayout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Layout.BufferLayout.GetEventData(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.Path">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.IsApplicationNameEnable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.ApplicationName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.LogFileNameExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.FileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.SequenceResetPeriod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.MaxHistoryDay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.Precalculate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Layout.LignisFileNameLayout.GetEventData(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Layout.Layout`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="DataType"></typeparam>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Layout.Layout`1.Precalculate(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Layout.Layout`1.Render(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Layout.Layout`1.GetEventData(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Delegates.AsyncContinuation">
+            <summary>
+            
+            </summary>
+            <param name="exception"></param>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Exceptions.RawPassportPayloadLengthException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Exceptions.RawPassportPayloadLengthException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Exceptions.RawPassportPayloadLengthException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Exceptions.RawPassportPayloadLengthException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Exceptions.RawPassportPayloadLengthException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Resources.MsgStrings">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Resources.MsgStrings.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Resources.MsgStrings.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Resources.MsgStrings.DefaultRemark">
+            <summary>
+              Ищет локализованную строку, похожую на Not known.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.SequenceResetPeriod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.SequenceResetPeriod.None">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.SequenceResetPeriod.Month">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.SequenceResetPeriod.Day">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.SequenceResetPeriod.Hour">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.AsyncTools">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.AsyncTools.PreventMultipleCalls(Swsu.Lignis.Logger.NodLogger.Delegates.AsyncContinuation)">
+            <summary>
+            
+            </summary>
+            <param name="asyncContinuation"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo.#ctor(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo,Swsu.Lignis.Logger.NodLogger.Delegates.AsyncContinuation)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+            <param name="continuation"></param>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo.LogEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo.Continuation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo.op_Equality(Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo,Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="eventInfo1"></param>
+            <param name="eventInfo2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo.op_Inequality(Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo,Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="eventInfo1"></param>
+            <param name="eventInfo2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo.Equals(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo.GetHashCode">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.globalSequenceId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.#ctor(System.String,System.DateTime,Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.Byte[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.#ctor(System.String,System.DateTime,System.Byte[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.#ctor(System.String,System.Byte[])">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.SequenceID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.Livel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.Source">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.TimeStamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo.WithContinuation(Swsu.Lignis.Logger.NodLogger.Delegates.AsyncContinuation)">
+            <summary>
+            
+            </summary>
+            <param name="asyncContinuation"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.FileCharacteristics">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileCharacteristics.#ctor(System.DateTime,System.DateTime,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="creationTimeUtc"></param>
+            <param name="lastWriteTimeUtc"></param>
+            <param name="length"></param>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileCharacteristics.CreationTimeUtc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileCharacteristics.LastWriteTimeUtc">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileCharacteristics.FileLength">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Interfaces.ICreateFileParameters">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Interfaces.ICreateFileParameters.BufferSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Interfaces.ICreateFileParameters.ConcurrentWriteAttemptDelay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Interfaces.ICreateFileParameters.ConcurrentWriteAttempts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Interfaces.ICreateFileParameters.ConcurrentWrites">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Interfaces.ICreateFileParameters.CreateDirs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Interfaces.ICreateFileParameters.EnableFileDelete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Target">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Target.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Target.SyncRoot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Target.IsInitialized">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.Target.Layout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.Dispose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.Flush(Swsu.Lignis.Logger.NodLogger.Delegates.AsyncContinuation)">
+            <summary>
+            
+            </summary>
+            <param name="asyncContinuation"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.WriteAsyncLogEvent(Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.WriteAsyncLogEvents(Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo[])">
+            <summary>
+            
+            </summary>
+            <param name="logEvents"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.InitializeTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.CloseTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.FlushAsync(Swsu.Lignis.Logger.NodLogger.Delegates.AsyncContinuation)">
+            <summary>
+            
+            </summary>
+            <param name="asyncContinuation"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.Write(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.Write(Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Target.Write(Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo[])">
+            <summary>
+            
+            </summary>
+            <param name="logEvents"></param>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.FileTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.FileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.CleanupFileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.CreateDirs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.DeleteOldFileOnStartup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.ReplaceFileContentsOnEachWrite">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.KeepFileOpen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.maxLogFilenames">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.EnableFileDelete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.AutoFlush">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.OpenFileCacheSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.OpenFileCacheTimeout">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.BufferSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.Encoding">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.ConcurrentWrites">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.NetworkWrites">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.ConcurrentWriteAttempts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.ConcurrentWriteAttemptDelay">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Logger.NodLogger.FileTarget.ForceManaged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.CleanupInitializedFiles">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.CleanupInitializedFiles(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="cleanupThreshold"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.FlushAsync(Swsu.Lignis.Logger.NodLogger.Delegates.AsyncContinuation)">
+            <summary>
+            
+            </summary>
+            <param name="asyncContinuation"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.InitializeTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.CloseTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.Write(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.Write(Swsu.Lignis.Logger.NodLogger.EventInfo.AsyncLogEventInfo[])">
+            <summary>
+            
+            </summary>
+            <param name="logEvents"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.GetFormattedData(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.FileTarget.GetBytesToWrite(Swsu.Lignis.Logger.NodLogger.EventInfo.LogEventInfo)">
+            <summary>
+            
+            </summary>
+            <param name="logEvent"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Logger.NodLogger.Logger">
+            <summary>
+            Класс ведения журнала данных 
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Logger.NodLogger.Logger.SysRoot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.#ctor(System.String,System.String,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="workDir"></param>
+            <param name="extension"></param>
+            <param name="maxHistoryDay"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.#ctor(System.String,System.String,Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="workDir"></param>
+            <param name="extension"></param>
+            <param name="logLevel"></param>
+            <param name="maxHistoryDay"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.Write(Swsu.Lignis.MiddleWare.Common.Loggers.LoggerEntity)">
+            <summary>
+            
+            </summary>
+            <param name="logEntity"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.Write(System.String,System.DateTime,Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="captureDate"></param>
+            <param name="livel"></param>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.Write(System.String,System.DateTime,Swsu.Lignis.MiddleWare.Common.Enums.LogLevel,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="captureDate"></param>
+            <param name="livel"></param>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.Write(System.String,System.DateTime,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="captureDate"></param>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.Write(System.String,System.DateTime,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="captureDate"></param>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.Write(System.String,System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:Swsu.Lignis.Logger.NodLogger.Logger.Write(System.String,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+        </member>
+    </members>
+</doc>

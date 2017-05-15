@@ -1,0 +1,1647 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Swsu.Lignis.Workstation.Contract</name>
+    </assembly>
+    <members>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ContractNames">
+            <summary>
+            Содержит имена контрактов.
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.BaseLignisUri">
+            <summary>
+            Имя контракта, которое должно указываться при импорте базового URI для ресурсов,
+            предоставляемых оболочной приложения и модулями.
+            </summary>
+            <remarks>
+            Декларация импорта с этим именем контракта должна применяться
+            ко свойству типа <see cref="T:System.Uri"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.ClientId">
+            <summary>
+            Имя контракта, которое должно указываться при импорте идентификатора абонента.
+            </summary>
+            <remarks>
+            Декларация импорта с этим именем контракта должна применяться ко свойству строкового типа.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.CoverageServiceLocation">
+            <summary>
+            Имя контракта, которое должно указываться при импорте ссылки на ресурс,
+            реализующий операцию <c>GetCapabilities</c> сервиса, соответствующего стандарту WCS.
+            </summary>
+            <remarks>
+            Декларация импорта с этим именем контракта должна применяться
+            ко свойству типа <see cref="T:System.Uri"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.ElevationsCoverage">
+            <summary>
+            Имя контракта, которое должно указываться при импорте карты высот.
+            </summary>
+            <remarks>
+            Декларация импорта с этим именем контракта должна применяться
+            ко свойству типа <see cref="T:Swsu.Lignis.Workstation.Contract.ICoverageDataAccessor"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.EpsgRegistry">
+            <summary>
+            Имя контракта, которое должно устанавливает при импорте базы данных EPSG.
+            </summary>
+            <remarks>
+            Декларация импорта с этим именем контракта должна применяться
+            ко свойству типа <see cref="T:System.Object"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.FeatureServiceLocation">
+            <summary>
+            Имя контракта, которое должно указываться при импорте ссылки на ресурс,
+            реализующий операцию <c>GetCapabilities</c> сервиса, соответствующего стандарту WFS.
+            </summary>
+            <remarks>
+            Декларация импорта с этим именем контракта должна применяться
+            ко свойству типа <see cref="T:System.Uri"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.Initializer">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте инициализатора.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу, 
+            принимающему параметр типа <seealso cref="T:Swsu.Lignis.Workstation.Contract.IInitializationContext"/> и не возвращающему значения.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.LignisWebRequestHandler">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте обработчиков запросов,
+            использующих URI, к ресурсам, реализуемым модулями.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.ILignisWebRequestContext"/> и не возвращающему значения.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.MapContext">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте данных, используемых в контекстных меню карты.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться ко свойству типа object,
+            снабженному метаданными, соответствующими интерфейсу <see cref="T:Swsu.Lignis.Workstation.Contract.IMapContextMetadata"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.MapLayerBinder">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте методов,
+            выполняющих привязку объектов типа <see cref="T:Swsu.Lignis.Workstation.Contract.IMapLayer"/>.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.IMapLayerBindingContext"/> и не возвращающему значения.
+            Метод должен быть снабжен метаданными, соответствующими интерфейсу <see cref= "T:Swsu.Lignis.Workstation.Contract.IMapLayerBinderMetadata" />.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.MapLayerItems">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте коллекции элементов слоя карты.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к коллекции,
+            снабженной атрибутом <see cref="T:Swsu.Lignis.Workstation.Contract.MapLayerMetadataAttribute"/>.
+            В качестве типа контракта должен быть указан <see cref="T:System.Collections.IEnumerable"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.PaneFactory">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте фабрик содержания панелей.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.IPaneCreationContext"/> и не возвращающему значения.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.PrimaryFunction">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте первичных функций.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext"/> и не возвращающему значения.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.Resources">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте словарей ресурсов.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться ко свойству строкового типа,
+            значением которого должен быть pack-URI словаря ресурсов.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.RunningMode">
+            <summary>
+            Имя контракта, которое должно указываться при импорте режима работы.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться ко свойству типа <see cref="T:Swsu.Lignis.Workstation.Contract.RunningMode"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.SecondaryFunction">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте вторичных функций.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.ISecondaryInvocationContext"/> и не возвращающему значения.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.ServiceEntryPoint">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте сервисов.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.IServiceInvocationContext"/> и не возвращающему значения.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.UIButtonBinder">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте методов,
+            выполняющих привязку объектов типа <see cref="T:Swsu.Lignis.Workstation.Contract.IUIButton"/>.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext"/> и не возвращающему значения.
+            Метод должен быть снабжен метаданными, соответствующими интерфейсу <see cref="T:Swsu.Lignis.Workstation.Contract.IUIButtonBinderMetadata"/>.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.UICheckBinder">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте методов,
+            выполняющих привязку объектов типа <see cref="T:Swsu.Lignis.Workstation.Contract.IUICheck"/>.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.IUICheckBindingContext"/> и не возвращающему значения.
+            Метод должен быть снабжен метаданными, соответствующими интерфейсу<see cref= "T:Swsu.Lignis.Workstation.Contract.IUICheckBinderMetadata" />.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.UIStaticBinder">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте методов, 
+            выполняющих привязку объектов типа <see cref="T:Swsu.Lignis.Workstation.Contract.IUIStatic"/>.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу,
+            принимающему параметр типа <see cref="T:Swsu.Lignis.Workstation.Contract.IUIStaticBindingContext"/> и не возвращающему значения.
+            Метод должен быть снабжен метаданными, соответствующими интерфейсу<see cref= "T:Swsu.Lignis.Workstation.Contract.IUIStaticBinderMetadata" />.
+            </remarks>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.ContractNames.Uninitializer">
+            <summary>
+            Имя контракта, которое должно указываться при экспорте метода финализатора.
+            </summary>
+            <remarks>
+            Декларация экспорта с этим именем контракта должна применяться к методу без параметров
+            и не возвращающему значения.
+            </remarks>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.DialogInjectionCallback">
+            <summary>
+            Представляет метод, который должен включать ссылку на диалоговое окно в ее содержимое.
+            </summary>
+            <param name="content">Содержимое.</param>
+            <param name="dialog">Диалоговое окно.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Envelope">
+            <summary>
+            Представляет прямоугольную область, заданную верхним левым и нижним правым углом.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Envelope.#ctor(Swsu.Lignis.Workstation.Contract.RectangularLocation,Swsu.Lignis.Workstation.Contract.RectangularLocation)">
+            <summary>
+            Инициализирует соответствующие свойства.
+            </summary>
+            <param name="topLeftCorner">Верхний левый угол.</param>
+            <param name="bottomRightCorner">Нижний правый угол.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Envelope.BottomRightCorner">
+            <summary>
+            Возвращает или задает верхний левый угол.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Envelope.TopLeftCorner">
+            <summary>
+            Возвращает или задает нижний правый угол.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Envelope.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Envelope.Equals(Swsu.Lignis.Workstation.Contract.Envelope)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Envelope.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Envelope.op_Equality(Swsu.Lignis.Workstation.Contract.Envelope,Swsu.Lignis.Workstation.Contract.Envelope)">
+            <summary>
+            Проверяет, является ли левый операнд равным правому.
+            </summary>
+            <param name="left">Левый операнд.</param>
+            <param name="right">Правый операнд.</param>
+            <returns><c>true</c>, если операнды равны, или <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.Envelope.op_Inequality(Swsu.Lignis.Workstation.Contract.Envelope,Swsu.Lignis.Workstation.Contract.Envelope)">
+            <summary>
+            Проверяет, является ли левый операнд неравным правому.
+            </summary>
+            <param name="left">Левый операнд.</param>
+            <param name="right">Правый операнд.</param>
+            <returns><c>true</c>, если операнды неравны, или <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ErrorStrings">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ErrorStrings.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ErrorStrings.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ErrorStrings.NotEqualArrayLength">
+            <summary>
+              Looks up a localized string similar to Arrays must be of the same length..
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IListener">
+            <summary>
+            Экспериментальная возможность. Представляет слушатель.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IListener.Id">
+            <summary>
+            Возвращает идентификатор, предназначенный для передачи в метод <see cref="M:Swsu.Lignis.Workstation.Contract.IListenerManager.InvokeListener(System.String,System.String[])"/>.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IListenerManager">
+            <summary>
+            Экспериментальная возможность.
+            Используется для создания и вызова слушателей.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IListenerManager.CreateListener(Swsu.Lignis.Workstation.Contract.ListenerCallback)">
+            <summary>
+            Создает слушатель.
+            </summary>
+            <param name="callback">Делегат, который будет вызван при вызове слушателя.</param>
+            <returns>Объект, представляющий слушатель.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IListenerManager.InvokeListener(System.String,System.String[])">
+            <summary>
+            Вызывает слушатель.
+            </summary>
+            <param name="id">Идентификатор, представленный свойством <see cref="P:Swsu.Lignis.Workstation.Contract.IListener.Id"/>.</param>
+            <param name="args">Набор аргументов.</param>
+            <exception cref="T:Swsu.Lignis.Workstation.Contract.ListenerNotFoundException">Если слушателя с заданным идентификатором не существует.</exception>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ICoverageDataAccessor">
+            <summary>
+            Предоставляет доступ к растровой цифровой модели местности.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ICoverageDataAccessor.Select(System.Int32,Swsu.Lignis.Workstation.Contract.GeographicLocation[],System.Int32,Swsu.Lignis.Workstation.Contract.SpatialReferenceSystem,System.Double[],System.Int32)">
+            <summary>
+            Выбирает значения из растра.
+            </summary>
+            <param name="count">Количество выбираемых значений.</param>
+            <param name="locations">Набор пар координат, задающих выбираемые элементы растра.</param>
+            <param name="locationsOffset">Индекс первого используемого элемента массива <paramref name="locations"/>.</param>
+            <param name="spatialReferenceSystem">Система координат.</param>
+            <param name="values">Буфер, в который помещаются выбранные значения.</param>
+            <param name="valuesOffset">Индекс первого используемого элемента массива <paramref name="values"/>.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ICoverageDataAccessor.SelectAsync(System.Int32,Swsu.Lignis.Workstation.Contract.GeographicLocation[],System.Int32,Swsu.Lignis.Workstation.Contract.SpatialReferenceSystem,System.Double[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронно выбирает значения из растра.
+            </summary>
+            <param name="count">Количество выбираемых значений.</param>
+            <param name="locations">Набор пар координат, задающих выбираемые элементы растра.</param>
+            <param name="locationsOffset">Индекс первого используемого элемента массива <paramref name="locations"/>.</param>
+            <param name="spatialReferenceSystem">Система координат.</param>
+            <param name="values">Буфер, в который помещаются выбранные значения.</param>
+            <param name="valuesOffset">Индекс первого используемого элемента массива <paramref name="values"/>.</param>
+            <param name="cancellationToken">Объект, использующийся для извещения об отмене операции.</param>
+            <returns>Объект, представляющий асинхронную операцию.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IPermissionChecker">
+            <summary>
+            Используется модулями для проверки того, какие разрешения выданы текущему пользователю.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IPermissionChecker.Check(System.String,System.String,System.Int32)">
+            <summary>
+            Проверяет, обладает ли текущий пользователь заданным разрешением.
+            </summary>
+            <param name="plugInName">Идентификатор модуля, запрашивающего наличие разрешения.</param>
+            <param name="permissionName">Идентификатор разрешения.</param>
+            <param name="value">Запрашиваемое значение разрешения.</param>
+            <returns><c>true</c>, если разрешение выдано, <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.LignisWebRequestException">
+            <summary>
+            Должно выбрасываться из обработчиком внутренних веб-запросов в случае невозможности выполнить запрос.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.LignisWebRequestException.#ctor(System.String,System.Byte[])">
+            <summary>
+            Создает объект.
+            </summary>
+            <param name="responseType">Тип содержания отклика.</param>
+            <param name="response">Содержание отклика.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.LignisWebRequestException.#ctor(System.String,System.Byte[],System.String)">
+            <summary>
+            Создает объект.
+            </summary>
+            <param name="responseType">Тип содержания отклика.</param>
+            <param name="response">Содержание отклика.</param>
+            <param name="message">Текст сообщения.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.LignisWebRequestException.#ctor(System.String,System.Byte[],System.String,System.Exception)">
+            <summary>
+            Создает объект.
+            </summary>
+            <param name="responseType">Тип содержания отклика.</param>
+            <param name="response">Содержание отклика.</param>
+            <param name="message">Текст сообщения.</param>
+            <param name="innerException">Исключение, вызвавшее данное.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.LignisWebRequestException.Response">
+            <summary>
+            Возвращает тип содержания отклика.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.LignisWebRequestException.ResponseType">
+            <summary>
+            Возвращает содержание отклика.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.MapManagerMapBoundaryChangedEventArgs">
+            <summary>
+            Представляет информацию о событии <see cref="E:Swsu.Lignis.Workstation.Contract.IMapManager.MapBoundaryChanged"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.MapManagerMapBoundaryChangedEventArgs.#ctor(Swsu.Lignis.Workstation.Contract.Envelope,Swsu.Lignis.Workstation.Contract.Envelope)">
+            <summary>
+            Инициализирует состояние объекта.
+            </summary>
+            <param name="oldMapBoundary">Предыдущий ограничивающий прямоугольник карты.</param>
+            <param name="newMapBoundary">Новый ограничивающий прямоугольник карты.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.MapManagerMapBoundaryChangedEventArgs.NewMapBoundary">
+            <summary>
+            Возвращает новый ограничивающий прямоугольник карты.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.MapManagerMapBoundaryChangedEventArgs.OldMapBoundary">
+            <summary>
+            Возвращает предыдущий ограничивающий прямоугольник карты.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.MapManagerViewBoundaryChangedEventArgs">
+            <summary>
+            Представляет информацию о событии <see cref="E:Swsu.Lignis.Workstation.Contract.IMapManager.ViewBoundaryChanged"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.MapManagerViewBoundaryChangedEventArgs.#ctor(Swsu.Lignis.Workstation.Contract.Envelope,Swsu.Lignis.Workstation.Contract.Envelope)">
+            <summary>
+            Инициализирует состояние объекта.
+            </summary>
+            <param name="oldViewBoundary">Предыдущая видимая часть карты.</param>
+            <param name="newViewBoundary">Новая видимая часть карты.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.MapManagerViewBoundaryChangedEventArgs.NewViewBoundary">
+            <summary>
+            Возвращает новую видимую часть карты.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.MapManagerViewBoundaryChangedEventArgs.OldViewBoundary">
+            <summary>
+            Возвращает предыдущую видимую часть карты.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.PermissionCheckerExtensions">
+            <summary>
+            Содержит методы расширения интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IPermissionChecker"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PermissionCheckerExtensions.Check``1(Swsu.Lignis.Workstation.Contract.IPermissionChecker,System.String,System.String,``0)">
+            <summary>
+            Проверяет, обладает ли текущий пользователь заданным разрешением.
+            </summary>
+            <typeparam name="T">Тип разрешения.</typeparam>
+            <param name="checker">Объект, используемый для проверки наличия разрешения.</param>
+            <param name="plugInName">Идентификатор модуля, запрашивающего наличие разрешения.</param>
+            <param name="permissionName">Идентификатор разрешения.</param>
+            <param name="value">Запрашиваемое значение разрешения.</param>
+            <returns><c>true</c>, если разрешение выдано, <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PermissionCheckerExtensions.Verify(Swsu.Lignis.Workstation.Contract.IPermissionChecker,System.String,System.String,System.Int32)">
+            <summary>
+            Выбрасывает исключение, если текущий пользователь не обладает заданным разрешением.
+            </summary>
+            <param name="checker">Объект, используемый для проверки наличия разрешения.</param>
+            <param name="plugInName">Идентификатор модуля, запрашивающего наличие разрешения.</param>
+            <param name="permissionName">Идентификатор разрешения.</param>
+            <param name="value">Запрашиваемое значение разрешения.</param>
+            <exception cref="T:Swsu.Lignis.Workstation.Contract.PermissionNotGrantedException">Если разрешения нет.</exception>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PermissionCheckerExtensions.Verify``1(Swsu.Lignis.Workstation.Contract.IPermissionChecker,System.String,System.String,``0)">
+            <summary>
+            Выбрасывает исключение, если текущий пользователь не обладает заданным разрешением.
+            </summary>
+            <typeparam name="T">Тип разрешения.</typeparam>
+            <param name="checker">Объект, используемый для проверки наличия разрешения.</param>
+            <param name="plugInName">Идентификатор модуля, запрашивающего наличие разрешения.</param>
+            <param name="permissionName">Идентификатор разрешения.</param>
+            <param name="value">Запрашиваемое значение разрешения.</param>
+            <exception cref="T:Swsu.Lignis.Workstation.Contract.PermissionNotGrantedException">Если разрешения нет.</exception>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.PermissionNotGrantedException">
+            <summary>
+            Выбрасывается в случае отсутствия у текущего пользователя запрошенного разрешения.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PermissionNotGrantedException.#ctor">
+            <summary>
+            Инициализирует объект.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PermissionNotGrantedException.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="message">Текст сообщения.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PermissionNotGrantedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="message">Текст сообщения.</param>
+            <param name="innerException">Исключение, вызвавшее данное.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs">
+            <summary>
+            Содержит вспомогательный метод для создания объекта класса <see cref="T:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs`1"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs.Create``1(``0,``0)">
+            <summary>
+            Создает объект класса <see cref="T:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs`1"/>.
+            </summary>
+            <typeparam name="T">Тип свойства.</typeparam>
+            <param name="oldValue">Предыдущее значение.</param>
+            <param name="newValue">Новое значение.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs`1">
+            <summary>
+            Представляет информацию о событии, происходящем при изменении значения свойства.
+            </summary>
+            <typeparam name="T">Тип свойства.</typeparam>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs`1.#ctor(`0,`0)">
+            <summary>
+            Инициализирует состояние объекта.
+            </summary>
+            <param name="oldValue">Предыдущее значение.</param>
+            <param name="newValue">Новое значение.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs`1.NewValue">
+            <summary>
+            Возвращает новое значение свойства.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.PropertyChangedEventArgs`1.OldValue">
+            <summary>
+            Возвращает предыдущее значение свойства.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.RunningMode">
+            <summary>
+            Представляет режим запуска.
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.RunningMode.Normal">
+            <summary>
+            Обычный (боевой).
+            </summary>
+        </member>
+        <member name="F:Swsu.Lignis.Workstation.Contract.RunningMode.Training">
+            <summary>
+            Учебный
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer">
+            <summary>
+            Представляет контейнер содержимого.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parameter">
+            <summary>
+            Возвращает объект, указанный при создании содержимого в качестве параметра.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parent">
+            <summary>
+            Возвращает объект, указанный при создании содержимого в качестве родительского.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Workspace">
+            <summary>
+            Возвращает набор объектов, импортируемых в модуль.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.ParameterChanged">
+            <summary>
+            Возникает при изменении значения свойства <see cref="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parameter"/>.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.ParentChanged">
+            <summary>
+            Возникает при изменении значения свойства <see cref="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parent"/>.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ViewModels.IDialog">
+            <summary>
+            Представляет диалоговое окно.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IDialog.Parameter">
+            <summary>
+            Возвращает значение,
+            переданное через одноименный параметр
+            метода <see cref="M:Swsu.Lignis.Workstation.Contract.IDialogManager.ShowModalDialog(System.Object,System.Windows.DataTemplate,System.Windows.Controls.DataTemplateSelector,Swsu.Lignis.Workstation.Contract.DialogInjectionCallback,System.Uri,System.Object,System.Object,System.String,System.Double,System.Double,System.Windows.ResizeMode)"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IDialog.Parent">
+            <summary>
+            Возвращает значение,
+            переданное через одноименный параметр
+            метода <see cref="M:Swsu.Lignis.Workstation.Contract.IDialogManager.ShowModalDialog(System.Object,System.Windows.DataTemplate,System.Windows.Controls.DataTemplateSelector,Swsu.Lignis.Workstation.Contract.DialogInjectionCallback,System.Uri,System.Object,System.Object,System.String,System.Double,System.Double,System.Windows.ResizeMode)"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IDialog.Title">
+            <summary>
+            Возвращает или устанавливает заголовок диалогового окна.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ViewModels.IDialog.Close">
+            <summary>
+            Закрывает диалоговое окно.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ViewModels.IManagerPane">
+            <summary>
+            Представляет панель, отображаемую в нижней части универсального менеджера страниц.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ViewModels.IManagerPaneContent">
+            <summary>
+            Может реализовываться контекстом данных содержания панели,
+            отображаемой в нижней части универсального менеджера страниц.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IManagerPaneContent.ManagerPane">
+            <summary>
+            Возвращает или задает панель, в которую помещено соответствующее содержание.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace">
+            <summary>
+            Содержит свойства для доступа к объектам, импортируемым в модуль.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.DatabaseConnectionFactory">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IDatabaseConnectionFactory"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.ListenerManager">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IListenerManager"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.LocalizationManager">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.ILocalizationManager"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.LoggerFactory">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.ILoggerFactory"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.MapManager">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IMapManager"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.PaneManager">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IPaneManager"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.PermissionChecker">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IPermissionChecker"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.ScreenshotCaptor">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IScreenshotCaptor"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IWorkspace.ServiceManager">
+            <summary>
+            Возвращает предоставляемую оболочкой приложения реализацию интерфейса <see cref="T:Swsu.Lignis.Workstation.Contract.IServiceManager"/>.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ViewModels.IPane">
+            <summary>
+            Представляет панель, отображаемую под картой.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IPane.Title">
+            <summary>
+            Возвращает или устанавливает заголовок панели.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ViewModels.IPane.Close">
+            <summary>
+            Закрывает панель.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.ViewModels.IPane.Closed">
+            <summary>
+            Происходит после закрытия панели.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.ViewModels.IPane.Closing">
+            <summary>
+            Происходит при попытке закрыть панель.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ViewModels.IPaneContent">
+            <summary>
+            Может реализовываться контекстом данных содержания панели, отображаемой под картой.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ViewModels.IPaneContent.Pane">
+            <summary>
+            Возвращает или задает панель, в которую помещено соответствующее содержание.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ILocalizationManager">
+            <summary>
+            Используется для локализации.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ILocalizationManager.Culture">
+            <summary>
+            Возвращает или устанавливает язык пользовательского интерфейса.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.ILocalizationManager.CultureChanged">
+            <summary>
+            Возникает при изменении значения свойства <see cref="P:Swsu.Lignis.Workstation.Contract.ILocalizationManager.Culture"/>.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ILogger">
+            <summary>
+            Представляет журнал протоколирования.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ILogger.Log(Swsu.Lignis.Workstation.Contract.LogLevel,System.Exception,System.String,System.Object[])">
+            <summary>
+            Добавляет запись в журнал.
+            </summary>
+            <param name="level">Уровень важности.</param>
+            <param name="exception">Связанное исключение либо <c>null</c>.</param>
+            <param name="message">Текст сообщения.</param>
+            <param name="args">Значения, подставляемые в текст сообщения.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ILoggerFactory">
+            <summary>
+            Используется для создания журнала протоколирования.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ILoggerFactory.GetLogger(System.String)">
+            <summary>
+            Возвращает журнал протоколирования.
+            </summary>
+            <param name="name">Имя журнала (обычно — имя класса, в которым будет вестись данный журнал).</param>
+            <returns>Журнал протоколирования.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IMapLayerMetadata">
+            <summary>
+            Представляет метаданные, которые необходимо указать при экспорте коллекции объектов,
+            являющихся содержимым одного из слоев карты.
+            </summary>
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.MapLayerItems"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.MapLayerMetadataAttribute"/>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapLayerMetadata.LayerName">
+            <summary>
+            Возвращает имя слоя карты.
+            </summary>
+            <remarks>
+            Допустимые имена слоев перечислены в базе данных в таблице <c>map.layer</c>
+            в столбце <c>layer_name</c>.
+            </remarks>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IMapManager">
+            <summary>
+            Используется для управления картой.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.Brightness">
+            <summary>
+            Возвращает или устанавливает яркость.
+            </summary>
+            <remarks>
+            Диапазон допустимых значений: от <c>-1</c> до <c>1</c>.
+            Значение по умолчанию: <c>0</c>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.Contrast">
+            <summary>
+            Возвращает или устанавливает контрастность.
+            </summary>
+            <remarks>
+            Диапазон допустимых значений: от <c>-1</c> до <c>1</c>.
+            Значение по умолчанию: <c>0</c>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.DefaultTool">
+            <summary>
+            Возвращает инструмент для работы с картой по умолчанию.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.GeographicLocationUnderMouse">
+            <summary>
+            Возвращает текущее положение указателя мыши в географических координатах.
+            </summary>
+            <remarks>
+            При изменении значения данного свойства возникает событие <see cref="E:Swsu.Lignis.Workstation.Contract.IMapManager.GeographicLocationUnderMouseChanged"/>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.MapBoundary">
+            <summary>
+            Возвращает ограничивающий прямоугольник карты.
+            </summary>
+            <remarks>
+            При изменении значения данного свойства возникает событие <see cref="E:Swsu.Lignis.Workstation.Contract.IMapManager.MapBoundaryChanged"/>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.ScaleDenominator">
+            <summary>
+            Возвращает или устанавливает текущее значение знаменателя масштаба.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.Tool">
+            <summary>
+            Возвращает или устанавливает инструмент для работы с картой.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IMapManager.ViewBoundary">
+            <summary>
+            Возвращает видимую область карты.
+            </summary>
+            <remarks>
+            При изменении значения данного свойства возникает событие <see cref="E:Swsu.Lignis.Workstation.Contract.IMapManager.ViewBoundaryChanged"/>.
+            </remarks>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.Locate(Swsu.Lignis.Workstation.Contract.SpatialReferenceSystem,Swsu.Lignis.Workstation.Contract.GeographicLocation)">
+            <summary>
+            Прокручивает карту так, чтобы заданная точка отображалась по центру.
+            </summary>
+            <param name="spatialReferenceSystem">Система координат.</param>
+            <param name="location">Пара координат, задающих точку.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.Locate(Swsu.Lignis.Workstation.Contract.RectangularLocation)">
+            <summary>
+            Прокручивает карту так, чтобы заданная точка отображалась по центру.
+            </summary>
+            <param name="location">Пара координат, задающих точку.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.LocateAsync(Swsu.Lignis.Workstation.Contract.SpatialReferenceSystem,Swsu.Lignis.Workstation.Contract.GeographicLocation,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронно прокручивает карту так, чтобы заданная точка отображалась по центру.
+            </summary>
+            <param name="spatialReferenceSystem">Система координат.</param>
+            <param name="location">Пара координат, задающих точку.</param>
+            <param name="cancellationToken">Объект, использующийся для извещения об отмене операции.</param>
+            <returns>Объект, представляющий асинхронную операцию.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.LocateAndScaleToFit(Swsu.Lignis.Workstation.Contract.SpatialReferenceSystem,System.Int32,Swsu.Lignis.Workstation.Contract.GeographicLocation[],System.Int32)">
+            <summary>
+            Прокручивает карту и изменяет масштаб так, чтобы отображались все заданные точки.
+            </summary>
+            <param name="spatialReferenceSystem">Система координат.</param>
+            <param name="count">Количество точек.</param>
+            <param name="locations">Набор пар координат, задающих точки.</param>
+            <param name="locationsOffset">Индекс первого используемого элемента массива <paramref name="locations"/>.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.LocateAndScaleToFit(Swsu.Lignis.Workstation.Contract.Envelope)">
+            <summary>
+            Прокручивает карту и изменяет масштаб так, чтобы отображался заданный прямоугольник.
+            </summary>
+            <param name="envelope">Прямоугольник.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.LocateAndScaleToFitAsync(Swsu.Lignis.Workstation.Contract.SpatialReferenceSystem,System.Int32,Swsu.Lignis.Workstation.Contract.GeographicLocation[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Асинхронно прокручивает карту и изменяет масштаб так, чтобы отображались все заданные точки.
+            </summary>
+            <param name="spatialReferenceSystem">Система координат.</param>
+            <param name="count">Количество точек.</param>
+            <param name="locations">Набор пар координат, задающих точки.</param>
+            <param name="locationsOffset">Индекс первого используемого элемента массива <paramref name="locations"/>.</param>
+            <param name="cancellationToken">Объект, использующийся для извещения об отмене операции.</param>
+            <returns>Объект, представляющий асинхронную операцию.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.RenderToBitmap(Swsu.Lignis.Workstation.Contract.RectangularLocation,System.Double,System.Int32,System.Int32,System.Double,System.Double)">
+            <summary>
+            Выводит прямоугольный фрагмент карты в растровое изображение.
+            </summary>
+            <param name="topLeftCorner">Верхний левый угол фрагмента.</param>
+            <param name="scaleDenominator">Знаменатель масштаба.</param>
+            <param name="pixelWidth">Ширина изображения в пикселях.</param>
+            <param name="pixelHeight">Высота изображения в пикселях.</param>
+            <param name="dpiX">Разрешение изображения по вертикали в пикселях на дюйм.</param>
+            <param name="dpiY">Разрешение изображения по горизонтали в пикселях на дюйм.</param>
+            <returns>Растровое изображение.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IMapManager.RenderToBitmapAsync(Swsu.Lignis.Workstation.Contract.RectangularLocation,System.Double,System.Int32,System.Int32,System.Double,System.Double,System.IProgress{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Асинхронно выводит прямоугольный фрагмент карты в растровое изображение.
+            </summary>
+            <param name="topLeftCorner">Верхний левый угол фрагмента.</param>
+            <param name="scaleDenominator">Знаменатель масштаба.</param>
+            <param name="pixelWidth">Ширина изображения в пикселях.</param>
+            <param name="pixelHeight">Высота изображения в пикселях.</param>
+            <param name="dpiX">Разрешение изображения по вертикали в пикселях на дюйм.</param>
+            <param name="dpiY">Разрешение изображения по горизонтали в пикселях на дюйм.</param>
+            <param name="progress">Объект, использующийся для мониторинга хода выполнения.</param>
+            <param name="cancellationToken">Объект, использующийся для извещения об отмене операции.</param>
+            <returns>Объект, представляющий асинхронную операцию, возвращающую растровое изображение.</returns>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.IMapManager.GeographicLocationUnderMouseChanged">
+            <summary>
+            Возникает при изменении значения свойства <see cref="P:Swsu.Lignis.Workstation.Contract.IMapManager.GeographicLocationUnderMouse"/>.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.IMapManager.MapBoundaryChanged">
+            <summary>
+            Возникает при изменении значения свойства <see cref="P:Swsu.Lignis.Workstation.Contract.IMapManager.MapBoundary"/>.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.IMapManager.ToolChanged">
+            <summary>
+            Возникает при изменении значения свойства <see cref="P:Swsu.Lignis.Workstation.Contract.IMapManager.Tool"/>.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.IMapManager.ViewBoundaryChanged">
+            <summary>
+            Возникает при изменении значения свойства <see cref="P:Swsu.Lignis.Workstation.Contract.IMapManager.ViewBoundary"/>.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IDatabaseConnectionFactory">
+            <summary>
+            Используется для создания соединения с базой данных.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IDatabaseConnectionFactory.CreateConnection">
+            <summary>
+            Создает соединение с базой данных.
+            </summary>
+            <remarks>
+            Возвращаемое соединение не является открытым.
+            Вызывающий код должен сам вызвать
+            <see cref="M:System.Data.Common.DbConnection.Open"/>,
+            <see cref="M:System.Data.Common.DbConnection.OpenAsync"/> или
+            <see cref="M:System.Data.Common.DbConnection.OpenAsync(System.Threading.CancellationToken)"/>.
+            </remarks>
+            <returns>Соединение с базой данных.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IInitializationContext">
+            <summary>
+            Представляет контекст инициализации.
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.Initializer"/>
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IInitializationContext.CancellationToken">
+            <summary>
+            Возвращает объект, который задача <see cref="P:Swsu.Lignis.Workstation.Contract.IInitializationContext.Task"/> должна использовать для отслеживания запросов на отмену.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IInitializationContext.Task">
+            <summary>
+            Возвращает или устанавливает объект, представляющий задачу выполняемую во время инициализации.
+            </summary>
+            <remarks>
+            Изначально данное свойство содержит <c>null</c>.
+            Модуль может оставить значение этого свойства без изменений,
+            если длительная инициализация не требуется.
+            </remarks>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IPaneFactoryMetadata">
+            <summary>
+            Представляет метаданные, которые необходимо указать при экспорте метода,
+            который будет использоваться для создания панелей, отображаемых под картой.
+            </summary>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.PaneFactoryMetadataAttribute"/>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneFactoryMetadata.FactoryName">
+            <summary>
+            Возвращает имя фабрики.
+            </summary>
+            <remarks>
+            Должно быть уникальным в пределах всей оболочки приложения.
+            Рекомендуется в качестве префикса использовать имя модуля.
+            </remarks>
+            <seealso cref="M:Swsu.Lignis.Workstation.Contract.IPaneManager.ShowPane(System.String,System.String[])"/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IPrimaryFunctionMetadata">
+            <summary>
+            Представляет метаданные, которые необходимо указать при экспорте метода, 
+            который будет вызываться при активизации пользователем первичной функции.
+            </summary>
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.PrimaryFunction"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.PrimaryFunctionMetadataAttribute"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext"/>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryFunctionMetadata.Key">
+            <summary>
+            Ключ, задающий функцию.
+            </summary>
+            <remarks>
+            Возможные значения ключей хранятся в таблицах <c>abi.chapter_function</c>
+            и <c>abi.page_function</c> в столбце <c>function_key</c>.
+            Внимание, значения ключей чувствительны к регистру!
+            </remarks>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext">
+            <summary>
+            Представляет контекст вызова первичной функции.
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.PrimaryFunction"/>
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext.Content">
+            <summary>
+            Возвращает или устанавливает содержание области,
+            отображаемой в нижней части универсального менеджера страниц. 
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext.ContentTemplate">
+            <summary>
+            Возвращает или устанавливает шаблон содержания области,
+            отображаемой в нижней части универсального менеджера страниц. 
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext.ContentTemplateSelector">
+            <summary>
+            Возвращает или устанавливает селектор шаблона содержания области,
+            отображаемой в нижней части универсального менеджера страниц. 
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext.Id">
+            <summary>
+            Возвращает идентификатор главы или страницы универсального менеджера страниц,
+            выбор которой пользователем привел к вызову данной функции.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext.Parameter">
+            <summary>
+            Возвращает или задает произвольное значение, 
+            которое будет доступно содержанию панели через свойство 
+            <see cref="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parameter"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext.Parent">
+            <summary>
+            Возвращает или задает произвольное значение, 
+            которое будет доступно содержанию панели через свойство 
+            <see cref="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parent"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPrimaryInvocationContext.Source">
+            <summary>
+            Возвращает или устанавливает URI, задающий содержание панели.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ISecondaryInvocationContext">
+            <summary>
+            Представляет контекст вызова вторичной функции.
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.SecondaryFunction"/>
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ISecondaryInvocationContext.Id">
+            <summary>
+            Возвращает идентификатор узла универсального менеджера страниц,
+            выбор которого пользователем привел к вызову данной функции.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IServiceInvocationContext">
+            <summary>
+            Представляет контекст вызова сервиса.
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.IServiceManager"/>
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IServiceInvocationContext.Args">
+            <summary>
+            Возвращает список аргументов,
+            переданных в вызове метода <see cref="M:Swsu.Lignis.Workstation.Contract.IServiceManager.InvokeService(System.String,System.String[])"/>
+            через второй параметр.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IServiceManager">
+            <summary>
+            Используется для вызова сервисов, реализуемых другими модулями.
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.IServiceEntryPointMetadata"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.IServiceInvocationContext"/>
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IServiceManager.InvokeService(System.String,System.String[])">
+            <summary>
+            Вызывает указанный сервис.
+            </summary>
+            <param name="entryPointName">Имя точки входа.</param>
+            <param name="args">Список аргументов, передаваемых сервису.</param>
+            <exception cref="T:Swsu.Lignis.Workstation.Contract.ServiceEntryPointNotFoundException">Если точка входа сервиса с указанным именем не найдена.</exception>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IServiceEntryPointMetadata">
+            <summary>
+            Представляет набор метаданных о точке входа сервиса, реализуемого модулем.
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.IServiceManager"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.ServiceEntryPointMetadataAttribute"/>
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IServiceEntryPointMetadata.EntryPointName">
+            <summary>
+            Возвращает имя точки входа.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IUIButton">
+            <summary>
+            Представляет элемент в меню либо кнопку на панели инструментов,
+            при выборе которого должно происходить некоторое действие.
+            </summary>
+        </member>
+        <member name="E:Swsu.Lignis.Workstation.Contract.IUIButton.Clicked">
+            <summary>
+            Происходит при выборе пользователем данного элемента или кнопки.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IUIButtonBinderMetadata">
+            <summary>
+            Представляет метаданные, которые необходимо указать при экспорте метода, 
+            который привязывает элемент в меню либо кнопку на панели инструментов.
+            </summary>
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.UIButtonBinder"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.UIButtonBinderMetadataAttribute"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext"/>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIButtonBinderMetadata.CommandName">
+            <summary>
+            Должно возвращать имя команды,
+            заданное в описании элемента в меню либо кнопки на панели инструментов в базе данных.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext">
+            <summary>
+            Представляет контекст привязки элемента в меню либо кнопки на панели инструментов,
+            при выборе которого должно происходить некоторое действие.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext.Args">
+            <summary>
+            Возвращает список аргументов,
+            заданных в описании элемента или кнопки в базе данных.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext.Id">
+            <summary>
+            Возвращает идентификатор элемента в меню либо кнопки на панели инструментов.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext.NewButton">
+            <summary>
+            Представляет объект, который сейчас представляет элемент в меню либо кнопку на панели инструментов.
+            </summary>
+            <remarks>
+            Может быть <c>null</c>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext.OldButton">
+            <summary>
+            Представляет объект, который ранее представлял элемент в меню либо кнопку на панели инструментов.
+            </summary>
+            <remarks>
+            Может быть <c>null</c>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIControl.CustomContent">
+            <summary>
+            Возвращает или устанавливает пользовательское содержание.
+            </summary>
+            <remarks>
+            Значение этого свойства используется только, если <see cref="P:Swsu.Lignis.Workstation.Contract.IUIControl.UseCustomContent"/> равно <c>true</c>.
+            </remarks>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIControl.IsEnabled">
+            <summary>
+            Возвращает или устанавливает признак доступности элемента управления.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IUIControl.UseCustomContent">
+            <summary>
+            Возвращает или устанавливает признак того, что элемент управления использует пользовательское содержание.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IUninitializationContext">
+            <summary>
+            Представляет контекст финализации.
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.Uninitializer"/>
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.LignisWebRequestHandlerMetadataAttribute.ServiceName">
+            <inheritdoc/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ListenerCallback">
+            <summary>
+            Представляет метод, который вызывается при вызове слушателя.
+            </summary>
+            <param name="args">Набор аргументов переданных в <see cref="M:Swsu.Lignis.Workstation.Contract.IListenerManager.InvokeListener(System.String,System.String[])"/>.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ListenerNotFoundException">
+            <summary>
+            Выбрасывается из метода <see cref="M:Swsu.Lignis.Workstation.Contract.IListenerManager.InvokeListener(System.String,System.String[])"/> в случае, если слушатель с заданным идентификатором не найден.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ListenerNotFoundException.#ctor">
+            <summary>
+            Инициализирует объект.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ListenerNotFoundException.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="message">Сообщение об ошибке.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ListenerNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="message">Сообщение об ошибке.</param>
+            <param name="innerException">Исключение, ставшее причиной данного.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.LocalizationManagerCultureChangedEventArgs">
+            <summary>
+            Представляет информацию о событии <see cref="E:Swsu.Lignis.Workstation.Contract.ILocalizationManager.CultureChanged"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.LocalizationManagerCultureChangedEventArgs.#ctor(System.Globalization.CultureInfo,System.Globalization.CultureInfo)">
+            <summary>
+            Инициализирует состояние объекта.
+            </summary>
+            <param name="oldCulture">Предыдущий язык пользовательского интерфейса.</param>
+            <param name="newCulture">Новый язык пользовательского интерфейса.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.LocalizationManagerCultureChangedEventArgs.NewCulture">
+            <summary>
+            Возвращает новый язык пользовательского интерфейса.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.LocalizationManagerCultureChangedEventArgs.OldCulture">
+            <summary>
+            Возвращает предыдущий язык пользовательского интерфейса.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.MapLayerMetadataAttribute">
+            <summary>
+            Указывает, что свойство является коллекцией объектов, отображаемых на одном слое карты.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.MapLayerMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="layerName">Имя слоя карты.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.MapLayerMetadataAttribute.LayerName">
+            <inheritdoc/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IPaneCreationContext">
+            <summary>
+            Представляет контекст создания панели.
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.PaneFactory"/>
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.Args">
+            <summary>
+            Возвращает список аргументов,
+            переданных в вызове метода <see cref="M:Swsu.Lignis.Workstation.Contract.IPaneManager.ShowPane(System.String,System.String[])"/>
+            через третий параметр.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.Caption">
+            <summary>
+            Возвращает или устанавливает заголовок панели.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.CaptionTemplate">
+            <summary>
+            Возвращает или устанавливает шаблон заголовка панели.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.CaptionTemplateSelector">
+            <summary>
+            Возвращает или устанавливает селектор шаблона заголовка панели.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.Content">
+            <summary>
+            Возвращает или устанавливает содержание панели.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.ContentTemplate">
+            <summary>
+            Возвращает или устанавливает шаблон содержания панели.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.ContentTemplateSelector">
+            <summary>
+            Возвращает или устанавливает селектор шаблона содержания панели.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.InjectIntoContent">
+            <summary>
+            Возвращает или задает метод, который должен включать ссылку на панель в ее содержимое.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.Parameter">
+            <summary>
+            Возвращает или задает произвольное значение, 
+            которое будет доступно содержанию панели через свойство 
+            <see cref="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parameter"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.Parent">
+            <summary>
+            Возвращает или задает произвольное значение, 
+            которое будет доступно содержанию панели через свойство 
+            <see cref="P:Swsu.Lignis.Workstation.Contract.ViewModels.IContentContainer.Parent"/>.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.IPaneCreationContext.Source">
+            <summary>
+            Возвращает или устанавливает URI, задающий содержание панели.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.MapManagerToolChangedEventArgs">
+            <summary>
+            Представляет информацию о событии <see cref="E:Swsu.Lignis.Workstation.Contract.IMapManager.ToolChanged"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.MapManagerToolChangedEventArgs.#ctor(System.Object,System.Object)">
+            <summary>
+            Инициализирует состояние объекта.
+            </summary>
+            <param name="oldTool">Предыдущий инструмент.</param>
+            <param name="newTool">Новый инструмент.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.MapManagerToolChangedEventArgs.NewTool">
+            <summary>
+            Возвращает новый инструмент.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.MapManagerToolChangedEventArgs.OldTool">
+            <summary>
+            Возвращает предыдущий инструмент.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.PaneFactoryMetadataAttribute">
+            <summary>
+            Указывает, что метод является фабрикой панелей, отображаемых под картой.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PaneFactoryMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="factoryName">Имя фабрики.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.PaneFactoryMetadataAttribute.FactoryName">
+            <inheritdoc/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.GeographicLocation">
+            <summary>
+            Представляет пару географических координат.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.GeographicLocation.#ctor(System.Double,System.Double)">
+            <summary>
+            Инициализирует соответствующие свойства.
+            </summary>
+            <param name="latitude">Широта в градусах.</param>
+            <param name="longitude">Долгота в градусах.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.GeographicLocation.Latitude">
+            <summary>
+            Возвращает или задает широту в градусах.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.GeographicLocation.Longitude">
+            <summary>
+            Возвращает или задает долготу в градусах.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.GeographicLocation.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.GeographicLocation.Equals(Swsu.Lignis.Workstation.Contract.GeographicLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.GeographicLocation.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.GeographicLocation.op_Equality(Swsu.Lignis.Workstation.Contract.GeographicLocation,Swsu.Lignis.Workstation.Contract.GeographicLocation)">
+            <summary>
+            Проверяет, является ли левый операнд равным правому.
+            </summary>
+            <param name="left">Левый операнд.</param>
+            <param name="right">Правый операнд.</param>
+            <returns><c>true</c>, если операнды равны, или <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.GeographicLocation.op_Inequality(Swsu.Lignis.Workstation.Contract.GeographicLocation,Swsu.Lignis.Workstation.Contract.GeographicLocation)">
+            <summary>
+            Проверяет, является ли левый операнд неравным правому.
+            </summary>
+            <param name="left">Левый операнд.</param>
+            <param name="right">Правый операнд.</param>
+            <returns><c>true</c>, если операнды неравны, или <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.PaneInjectionCallback">
+            <summary>
+            Представляет метод, который должен включать ссылку на панель в ее содержимое.
+            </summary>
+            <param name="content">Содержимое.</param>
+            <param name="pane">Панель.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.PrimaryFunctionMetadataAttribute">
+            <summary>
+            Указывает, что метод является точкой входа первичной функции.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.PrimaryFunctionMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="key">Имя функции.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.PrimaryFunctionMetadataAttribute.Key">
+            <inheritdoc/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.RectangularLocation">
+            <summary>
+            Представляет пару прямоугольных координат.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.RectangularLocation.#ctor(System.Double,System.Double)">
+            <summary>
+            Инициализирует соответствующие свойства.
+            </summary>
+            <param name="x">Координата X в метрах.</param>
+            <param name="y">Координата Y в метрах.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.RectangularLocation.X">
+            <summary>
+            Возвращает или задает координату X в метрах.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.RectangularLocation.Y">
+            <summary>
+            Возвращает или задает координату Y в метрах.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.RectangularLocation.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.RectangularLocation.Equals(Swsu.Lignis.Workstation.Contract.RectangularLocation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.RectangularLocation.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.RectangularLocation.op_Equality(Swsu.Lignis.Workstation.Contract.RectangularLocation,Swsu.Lignis.Workstation.Contract.RectangularLocation)">
+            <summary>
+            Проверяет, является ли левый операнд равным правому.
+            </summary>
+            <param name="left">Левый операнд.</param>
+            <param name="right">Правый операнд.</param>
+            <returns><c>true</c>, если операнды равны, или <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.RectangularLocation.op_Inequality(Swsu.Lignis.Workstation.Contract.RectangularLocation,Swsu.Lignis.Workstation.Contract.RectangularLocation)">
+            <summary>
+            Проверяет, является ли левый операнд неравным правому.
+            </summary>
+            <param name="left">Левый операнд.</param>
+            <param name="right">Правый операнд.</param>
+            <returns><c>true</c>, если операнды неравны, или <c>false</c> в противном случае.</returns>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.SecondaryFunctionMetadataAttribute">
+            <summary>
+            Указывает, что метод является точкой входа вторичной функции.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.SecondaryFunctionMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="key">Имя функции.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.SecondaryFunctionMetadataAttribute.Key">
+            <inheritdoc/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ServiceEntryPointMetadataAttribute">
+            <summary>
+            Указывает, что метод представляет собой точку входа севриса.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ServiceEntryPointMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Создает объект.
+            </summary>
+            <param name="entryPointName">Имя точки входа.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ServiceEntryPointMetadataAttribute.EntryPointName">
+            <inheritdoc/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.BadArgsException">
+            <summary>
+            Должно выбрасываться фабрикой панелей либо точкой входа сервиса в случае невозможности выполнить запрошенное действие.
+            <see cref="T:Swsu.Lignis.Workstation.Contract.IPaneCreationContext"/>
+            <see cref="T:Swsu.Lignis.Workstation.Contract.IPaneManager"/>
+            <see cref="T:Swsu.Lignis.Workstation.Contract.IServiceInvocationContext"/>
+            <see cref="T:Swsu.Lignis.Workstation.Contract.IServiceManager"/>
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.BadArgsException.#ctor">
+            <summary>
+            Создает объект.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.BadArgsException.#ctor(System.String)">
+            <summary>
+            Создает объект.
+            </summary>
+            <param name="message">Текст сообщения.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.BadArgsException.#ctor(System.String,System.Exception)">
+            <summary>
+            Создает объект.
+            </summary>
+            <param name="message">Текст сообщения.</param>
+            <param name="innerException">Исключение, вызвавшее данное.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ServiceEntryPointNotFoundException">
+            <summary>
+            Выбрасывается из метода <see cref="M:Swsu.Lignis.Workstation.Contract.IServiceManager.InvokeService(System.String,System.String[])"/> в случае, если указанная точка входа не найдена.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ServiceEntryPointNotFoundException.#ctor">
+            <summary>
+            Инициализирует объект.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ServiceEntryPointNotFoundException.#ctor(System.String)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="message">Сообщение об ошибке.</param>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.ServiceEntryPointNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            Инициализирует объект.
+            </summary>
+            <param name="message">Сообщение об ошибке.</param>
+            <param name="innerException">Исключение, ставшее причиной данного.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.UIButtonBinderMetadataAttribute">
+            <summary>
+            Указывает метод, который должен привязывать элемент в меню либо кнопку на панели инструментов.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.UIButtonBinderMetadataAttribute.#ctor(System.String)">
+            <summary>
+            Создает объект.
+            </summary>
+            <param name="commandName">Имя команды.</param>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.UIButtonBinderMetadataAttribute.CommandName">
+            <inheritdoc/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.UIButtonClickedEventArgs">
+            <summary>
+            Представляет информацию о событии <see cref="E:Swsu.Lignis.Workstation.Contract.IUIButton.Clicked"/>.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.UIButtonClickedEventArgs.#ctor">
+            <summary>
+            Инициализирует объект.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.UIButtonClickedEventArgs.Handled">
+            <summary>
+            Возвращает или устанавливает признак того, что данное событие обработано.
+            </summary>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.UIButtonHelper">
+            <summary>
+            Упрощает реализацию модуля, отвечающего за пункт меню либо кнопку панели инструментов.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.UIButtonHelper.Bind(Swsu.Lignis.Workstation.Contract.IUIButton,Swsu.Lignis.Workstation.Contract.IUIButton)">
+            <summary>
+            Должен вызываться из экспортируемого метода привязки.
+            </summary>
+            <param name="oldButton">Значение свойства <see cref="P:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext.OldButton"/> контекста привязки.</param>
+            <param name="newButton">Значение свойства <see cref="P:Swsu.Lignis.Workstation.Contract.IUIButtonBindingContext.NewButton"/> контекста привязки.</param>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.IPaneManager">
+            <summary>
+            Используется для управления панелями.
+            </summary>
+        </member>
+        <member name="M:Swsu.Lignis.Workstation.Contract.IPaneManager.ShowPane(System.String,System.String[])">
+            <summary>
+            Отображает панель в оболочке приложения.
+            </summary>
+            <param name="factoryName">Имя фабрики панелей.</param>
+            <param name="args">Список аргументов, передаваемых фабрике панелей.</param>
+            <remarks>
+            Если панель еще не существует,
+            то она создается путем вызова соответствующей фабрики.
+            </remarks>
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.PaneFactory"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.IPaneFactoryMetadata"/>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.ISecondaryFunctionMetadata">
+            <summary>
+            Представляет метаданные, которые необходимо указать при экспорте метода,
+            который будет вызываться при активизации пользователем вторичной функции.
+            </summary>
+            <seealso cref="F:Swsu.Lignis.Workstation.Contract.ContractNames.SecondaryFunction"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.SecondaryFunctionMetadataAttribute"/>
+            <seealso cref="T:Swsu.Lignis.Workstation.Contract.ISecondaryInvocationContext"/>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.ISecondaryFunctionMetadata.Key">
+            <summary>
+            Ключ, задающий функцию.
+            </summary>
+            <remarks>
+            Возможные значения ключей хранятся в таблице <c>abi.node</c> в столбце <c>function_key</c>.
+            Внимание, значения ключей чувствительны к регистру!
+            </remarks>
+        </member>
+        <member name="T:Swsu.Lignis.Workstation.Contract.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Swsu.Lignis.Workstation.Contract.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="Swsu.Lignis.RolePermissionsConfigurator.Views.RoleSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:items="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:properties="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="500">
+	<dxmvvm:Interaction.Behaviors>
+		<dx:CurrentDialogService/>
+	</dxmvvm:Interaction.Behaviors>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/Resources/CommonResource.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<Grid Margin="5, 5">
+        <Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" MinWidth="100"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+
+		<TextBlock Text="{x:Static properties:Resources.Number}" Margin="0, 5"/>
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=ModifiedRole.Number}" 
+				 PreviewTextInput="UIElement_OnPreviewTextInput" Margin="0, 5"/>
+
+		<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.Name}" Margin="0, 5"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=ModifiedRole.Name}" Margin="0, 5"/>
+
+		<TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.Summary}" Margin="0, 5"/>
+		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=ModifiedRole.Description}" Margin="0, 5"/>
+
+		<TabControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0, 10, 0, 0" SelectedIndex="0">
+			<TabItem Header="{x:Static properties:Resources.Accounts}">
+				<ListView ItemsSource="{Binding Path=Accounts}">
+					<ListView.View>
+						<GridView>
+							<GridView.Columns>
+								<GridViewColumn Width="40">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate DataType="{x:Type items:Account}">
+											<CheckBox IsChecked="{Binding Path=IsSelected}"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+
+								<GridViewColumn Header="{x:Static properties:Resources.Login}" DisplayMemberBinding="{Binding Path=Login}" Width="120"/>
+								<GridViewColumn Header="{x:Static properties:Resources.Name}" DisplayMemberBinding="{Binding Path=Name}" Width="120"/>
+								<GridViewColumn Header="{x:Static properties:Resources.Attachment}" DisplayMemberBinding="{Binding Path=Role.Name}" Width="230"/>
+							</GridView.Columns>
+						</GridView>
+					</ListView.View>
+				</ListView>
+			</TabItem>
+
+			<!--	    Запуск плагинов    -->
+			<TabItem Header="{x:Static properties:Resources.PluginsStartup}">
+				<DockPanel LastChildFill="True">
+					<CheckBox DockPanel.Dock="Top" Style="{StaticResource PluginSelectionStatusCheckBoxStyle}"
+							  IsChecked="{Binding Path=PluginSelectionStatus}" Command="{Binding Path=SelectAllPluginsCommand}"/>
+					<DataGrid ItemsSource="{Binding Path=ModifiedRole.Plugins}" CanUserAddRows="False">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="{x:Static properties:Resources.Name}" Binding="{Binding Path=Name}" MinWidth="150" IsReadOnly="True"/>
+							<DataGridCheckBoxColumn Header="{x:Static properties:Resources.Permission}" Binding="{Binding Path=IsSet}" MinWidth="100"/>
+						</DataGrid.Columns>
+					</DataGrid>
+				</DockPanel>
+			</TabItem>
+
+			<!-- 	Настройка плагинов    -->
+			<TabItem Header="{x:Static properties:Resources.PluginsSettings}">
+				<ListBox ItemsSource="{Binding Path=ModifiedRole.Plugins}">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type items:Plugin}">
+							<Expander Header="{Binding Path=Name}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+								<Expander.HeaderTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding}" FontWeight="Bold"/>
+									</DataTemplate>
+								</Expander.HeaderTemplate>
+
+								<Expander.ToolTip>
+									<ToolTip Content="{Binding Path=Summary}"/>
+								</Expander.ToolTip>
+
+								<ListBox x:Name="Test" ItemsSource="{Binding Path=Permissions}" SelectedItem="{Binding Path=Value}"
+										 HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+									<ListBox.ItemTemplate>
+										<DataTemplate DataType="{x:Type items:PluginPermission}">
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="Auto" MinWidth="300"/>
+													<ColumnDefinition Width="*" MinWidth="100"/>
+												</Grid.ColumnDefinitions>
+
+												<TextBlock Text="{Binding Path=DisplayName}" Padding="5"/>
+												<ComboBox Grid.Column="1" ItemsSource="{Binding Path=Type.Values}" 
+															  SelectedItem="{Binding Path=Value}"/>
+											</Grid>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Expander>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</TabItem>
+
+			<!--	    Выбор подсистем    -->
+			<TabItem Header="{x:Static properties:Resources.SubsystemsSettings}">
+				<DockPanel LastChildFill="True">
+					<CheckBox DockPanel.Dock="Top" Style="{StaticResource SubsystemSelectionStatusCheckBoxStyle}"
+							  IsChecked="{Binding Path=SubsystemSelectionStatus}" Command="{Binding Path=SelectAllSubsystemsCommand}"/>
+					<DataGrid x:Name="PermissionsGrid" ItemsSource="{Binding Path=ModifiedRole.SubsystemPermissions}" 
+							  CanUserAddRows="False">
+						<DataGrid.Columns>
+							<DataGridTextColumn Header="{x:Static properties:Resources.Code}" Binding="{Binding Path=Subsystem.Number}" MinWidth="80" IsReadOnly="True"/>
+							<DataGridTextColumn Header="{x:Static properties:Resources.Name}" Binding="{Binding Path=Subsystem.Name}" MinWidth="150" IsReadOnly="True"/>
+							<DataGridCheckBoxColumn Header="{x:Static properties:Resources.Permission}" Binding="{Binding Path=IsSet}" MinWidth="100"/>
+						</DataGrid.Columns>
+					</DataGrid>
+				</DockPanel>
+			</TabItem>
+		</TabControl>
+
+		<StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 10">
+			<Button Content="Ok" Command="{Binding Path=ApplyChangesCommand}" IsDefault="True" Margin="5, 0" MinWidth="100"/>
+			<Button Content="{x:Static properties:Resources.Cancel}" Command="{Binding Path=CancelCommand}" IsCancel="True" Margin="5, 0" MinWidth="100"/>
+		</StackPanel>
+
+	</Grid>
+</UserControl>
