@@ -62,7 +62,7 @@
 			<!--					<Button Content="Копировать как"/>-->
 		</ToolBar>
 
-		<TabControl DockPanel.Dock="Bottom" TabIndex="{Binding Path=TabIndex}">
+		<TabControl DockPanel.Dock="Bottom" SelectedIndex="{Binding Path=TabIndex, UpdateSourceTrigger=PropertyChanged}">
 			<TabControl.Items>
 				<TabItem Header="Внутренние абоненты">
 					<views:InternalRolesView DataContext="{Binding Path=InternalRolesViewModel}"/>

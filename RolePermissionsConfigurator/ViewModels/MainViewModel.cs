@@ -27,8 +27,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		public int TabIndex
 		{
-			get;
-			set;
+			get { return _tabIndex; }
+			set { SetProperty(ref _tabIndex, value, nameof(TabIndex), SetActiveRolesViewModel); }
 		}
 
 		public string AppTitle
@@ -81,7 +81,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 			Initialization();
 		}
-		
+
 		#endregion
 
 		private void SetActiveRolesViewModel()
@@ -152,6 +152,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				InternalRolesViewModel = new InternalRolesViewModel(_currentClusterId.Value);
 				ExternalRolesViewModel = new ExternalRolesViewModel(_currentClusterId.Value);
 				DepartmentClustersViewModel = new DepartmentClustersViewModel();
+
+				TabIndex = 0;
 			}
 			catch (Exception e)
 			{

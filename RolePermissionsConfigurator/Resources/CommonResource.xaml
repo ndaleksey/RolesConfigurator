@@ -12,6 +12,16 @@
 		<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
 	</Style>
 	
+	<Style TargetType="ToolBar">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Path=TabIndex}" Value="2">
+				<DataTrigger.Setters>
+					<Setter Property="Visibility" Value="Hidden"/>
+				</DataTrigger.Setters>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+	
 	<Style TargetType="ListBoxItem">
 		<Setter Property="HorizontalAlignment" Value="Stretch"/>
 		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
