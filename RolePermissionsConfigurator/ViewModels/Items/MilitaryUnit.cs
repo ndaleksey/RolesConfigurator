@@ -1,24 +1,34 @@
-﻿using DevExpress.Mvvm;
+﻿using System;
+using DevExpress.Mvvm;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 {
 	public class MilitaryUnit : BindableBase
 	{
-		#region Properties
-		public string Id { get; set; }
-		public string ParentId { get; set; }
-		public string Name { get; set; }
-		public int? Cluster { get; set; }
+		#region Fields
+
+		private string _name;
+
 		#endregion
 
-		#region Constructors
+		#region Properties
 
-		public MilitaryUnit(string id, string parentId, string name, int? cluster)
+		public Guid Id { get; set; }
+
+		public string Name
+		{
+			get { return _name; }
+			set { SetProperty(ref _name, value, nameof(Name)); }
+		}
+
+		#endregion
+
+		#region Constructions
+
+		public MilitaryUnit(Guid id, string name)
 		{
 			Id = id;
-			ParentId = parentId;
-			Name = name;
-			Cluster = cluster;
+			_name = name;
 		}
 
 		#endregion

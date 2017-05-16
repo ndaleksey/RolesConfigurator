@@ -81,6 +81,7 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="{x:Static properties:Resources.AbonentNumber}" Binding="{Binding Path=Number}"/>
 						<DataGridTextColumn Header="{x:Static properties:Resources.RoleName}" Binding="{Binding Path=Name}"/>
+						<DataGridTextColumn Header="{x:Static properties:Resources.DepartmentName}" Binding="{Binding Path=Department}"/>
 					</DataGrid.Columns>
 				</DataGrid>
 			</DockPanel>
@@ -93,8 +94,7 @@
 				<!--		Пользователи	-->
 				<TabItem Header="{x:Static properties:Resources.Accounts}">
 					<DockPanel LastChildFill="True">
-						<DataGrid DockPanel.Dock="Top" IsReadOnly="True"
-								  ItemsSource="{Binding Path=SelectedRole.Accounts}" SelectedItem="{Binding Path=SelectedAccount}">
+						<DataGrid DockPanel.Dock="Top" IsReadOnly="True" ItemsSource="{Binding Path=SelectedRole.Accounts}">
 							<DataGrid.Columns>
 								<DataGridTextColumn Width="150" Binding="{Binding Path=Login}" Header="{x:Static properties:Resources.Login}"/>
 								<DataGridTextColumn Width="200" Binding="{Binding Path=Name}" Header="{x:Static properties:Resources.Name}"/>

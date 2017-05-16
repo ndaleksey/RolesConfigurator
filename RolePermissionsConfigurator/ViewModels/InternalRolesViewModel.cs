@@ -23,7 +23,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	{
 		#region Fields
 
-		private readonly Guid _clusterId;
 		private readonly List<Plugin> _pluginsFromConfig;
 
 		#endregion
@@ -37,9 +36,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		
 		#region Constructors
 
-		public InternalRolesViewModel(Guid clusterId)
+		public InternalRolesViewModel(Guid currentClusterId):base(currentClusterId)
 		{
-			_clusterId = clusterId;
 			_pluginsFromConfig = new List<Plugin>();
 			Accounts = new ObservableCollection<Account>();
 			Subsystems = new ObservableCollection<Subsystem>();
@@ -63,7 +61,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				WorkflowType = EWorkflowType.LoadFromDb;
 
 				var maxNumber = Roles.Count > 0 ? Roles.Max(r => r.Number) + 1 : 1;
-				var newRole = new Role(Guid.NewGuid(), _clusterId, maxNumber,
+				var newRole = new Role(Guid.NewGuid(), CurrentClusterId, maxNumber,
 					$"{Properties.Resources.NewRole} {maxNumber}", string.Empty);
 
 				foreach (var subsystem in Subsystems)
@@ -242,7 +240,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 			using (var t = new Transaction())
 			{
-				roles = await DbService.GetRolesByClusterIdAsync(t.Connection, _clusterId);
+				roles = await DbService.GetRolesByClusterIdAsync(t.Connection, CurrentClusterId);
 				accounts = await DbService.GetAccountsAsync(t.Connection);
 				subsystems = await DbService.GetSubsystemsAsync(t.Connection);
 				subsystemsPermissions = await DbService.GetSubsystemsPermissionsAsTuppleAsync(t.Connection);

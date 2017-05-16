@@ -38,21 +38,21 @@
 		
 		<ToolBar DockPanel.Dock="Top" AllowDrop="False" TabIndex="{Binding Path=TabIndex}">
 
-			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=AddRoleCommand}">
+			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=SelectedTab.AddRoleCommand}">
 				<Button.ToolTip>
 					<ToolTip Content="{x:Static properties:Resources.Add}"/>
 				</Button.ToolTip>
 				<Image Source="/Resources/Images/add.ico"/>
 			</Button>
 
-			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ModifyRoleCommand}">
+			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=SelectedTab.ModifyRoleCommand}">
 				<Button.ToolTip>
 					<ToolTip Content="{x:Static properties:Resources.Edit}"/>
 				</Button.ToolTip>
 				<Image Source="/Resources/Images/edit.ico"/>
 			</Button>
 
-			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=DeleteRoleCommand}">
+			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=SelectedTab.DeleteRoleCommand}">
 				<Button.ToolTip>
 					<ToolTip Content="{x:Static properties:Resources.Delete}"/>
 				</Button.ToolTip>

@@ -11,14 +11,16 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 		private int _number;
 		private string _name;
 		private string _description;
+		private string _department;
 		
 		#endregion
 
 		#region Properties
 
 		public Guid Id { get; private set; }
-		public Guid ClusterId { get; set; }
 
+		public Guid ClusterId { get; set; }
+		
 		public int Number
 		{
 			get { return _number; }
@@ -35,6 +37,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 			set { SetProperty(ref _description, value, nameof(Description)); }
 		}
 
+		public string Department
+		{
+			get { return _department; }
+			set { SetProperty(ref _department, value, nameof(Department)); }
+		}
+
 		public ObservableCollection<Account> Accounts { get; }
 		public ObservableCollection<Plugin> Plugins { get; }
 		public ObservableCollection<SubsystemPermission> SubsystemPermissions { get; }
@@ -43,21 +51,24 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 
 		#region Constructors
 		
-		public Role(int number, string name, string description = null)
+		public Role(int number, string name, string description = null, string department = null)
 		{
-			_number = number;
-			_name = name;
-			_description = description;
+			Number = number;
+			Name = name;
+			Description = description;
+			Department = department;
 			Accounts = new ObservableCollection<Account>();
 			Plugins = new ObservableCollection<Plugin>();
 			SubsystemPermissions = new ObservableCollection<SubsystemPermission>();
 		}
-		public Role(Guid id, Guid clusterId, int number, string name, string description = null) : this(number, name, description)
+
+		public Role(Guid id, Guid clusterId, int number, string name, string description = null, string department = null)
+			: this(number, name, description, department)
 		{
 			Id = id;
 			ClusterId = clusterId;
 		}
-		
+
 		#endregion
 
 		#region Methods

@@ -169,6 +169,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Наименование подразделения.
+        /// </summary>
+        public static string DepartmentName {
+            get {
+                return ResourceManager.GetString("DepartmentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Снять выделение.
         /// </summary>
         public static string DeselectAll {
