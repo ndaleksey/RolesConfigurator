@@ -17,10 +17,19 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		private InternalRolesViewModel _internalRolesViewModel;
 		private ExternalRolesViewModel _externalRolesViewModel;
 		private DepartmentClustersViewModel _departmentClustersViewModel;
+
+
+		private RolesViewModel _selectedTab;
+		private int _tabIndex;
 		#endregion
 
 		#region Properties
-		public int TabIndex { get; set; }
+
+		public int TabIndex
+		{
+			get;
+			set;
+		}
 
 		public string AppTitle
 		{
@@ -44,6 +53,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		{
 			get { return _departmentClustersViewModel; }
 			set { SetProperty(ref _departmentClustersViewModel, value, nameof(DepartmentClustersViewModel)); }
+		}
+
+		public RolesViewModel SelectedTab
+		{
+			get { return _selectedTab; }
+			set { SetProperty(ref _selectedTab, value, nameof(SelectedTab)); }
 		}
 		#endregion
 
@@ -69,54 +84,51 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		
 		#endregion
 
-		private RolesViewModel GetActiveRolesViewModel()
+		private void SetActiveRolesViewModel()
 		{
 			switch (TabIndex)
 			{
 				case 0:
-					return InternalRolesViewModel;
+					SelectedTab = InternalRolesViewModel;
+					break;
 				case 1:
-					return ExternalRolesViewModel;
+					SelectedTab = ExternalRolesViewModel;
+					break;
 				default:
-					return null;
+					SelectedTab = null;
+					break;
 			}
 		}
 
 		#region Commands' methods
 		private bool CanAddRole()
 		{
-			var vm = GetActiveRolesViewModel();
-
-			return vm != null && vm.CanAddRole();
+			return SelectedTab != null && SelectedTab.CanAddRole();
 		}
 
 		private void AddRole()
 		{
-			GetActiveRolesViewModel()?.AddRole();
+			SelectedTab?.AddRole();
 		}
 
 		private bool CanModifyRole()
 		{
-			var vm = GetActiveRolesViewModel();
-
-			return vm != null && vm.CanModifyRole();
+			return SelectedTab != null && SelectedTab.CanModifyRole();
 		}
 
 		private void ModifyRole()
 		{
-			GetActiveRolesViewModel()?.ModifyRole();
+			SelectedTab?.ModifyRole();
 		}
 
 		private bool CanDeleteRole()
 		{
-			var vm = GetActiveRolesViewModel();
-
-			return vm != null && vm.CanDeleteRole();
+			return SelectedTab != null && SelectedTab.CanDeleteRole();
 		}
 
 		private void DeleteRole()
 		{
-			GetActiveRolesViewModel().DeleteRole();
+			SelectedTab.DeleteRole();
 		}
 		#endregion
 
@@ -138,7 +150,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				await CreateApplicationTitleAsync();
 
 				InternalRolesViewModel = new InternalRolesViewModel(_currentClusterId.Value);
-				ExternalRolesViewModel = new ExternalRolesViewModel();
+				ExternalRolesViewModel = new ExternalRolesViewModel(_currentClusterId.Value);
 				DepartmentClustersViewModel = new DepartmentClustersViewModel();
 			}
 			catch (Exception e)

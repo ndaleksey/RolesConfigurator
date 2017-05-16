@@ -161,6 +161,10 @@
     <value>Êtes-vous sûr de vouloir supprimer le rôle</value>
     <comment>Вы действительно хотите удалить роль</comment>
   </data>
+  <data name="DepartmentName" xml:space="preserve">
+    <value>Nom du département</value>
+    <comment>Наименование подразделения</comment>
+  </data>
   <data name="DeselectAll" xml:space="preserve">
     <value>Tout déselectionner</value>
     <comment>Снять выделение</comment>

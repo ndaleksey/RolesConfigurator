@@ -268,4 +268,8 @@
     <value>Вышестоящий</value>
     <comment>Вышестоящий</comment>
   </data>
+  <data name="DepartmentName" xml:space="preserve">
+    <value>Наименование подразделения</value>
+    <comment>Наименование подразделения</comment>
+  </data>
 </root>
