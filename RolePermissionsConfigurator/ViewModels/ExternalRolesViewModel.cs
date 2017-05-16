@@ -1,6 +1,6 @@
 ﻿namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 {
-	public class ExternalRolesViewModel : CustomViewModel
+	public class ExternalRolesViewModel : RolesViewModel
 	{
 
 	}

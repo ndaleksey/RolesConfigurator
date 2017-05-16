@@ -23,7 +23,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 
 		#region Methods
 		
-		public static string GetDescriptionBySqlState(string state)
+		public static string GetPostgresErrorDescriptionBySqlState(string state)
 		{
 			if (string.IsNullOrEmpty(state)) return "Sql Error is null or empty";
 

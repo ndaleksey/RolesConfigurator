@@ -146,6 +146,7 @@
     <Compile Include="ViewModels\Items\PluginPermissionValue.cs" />
     <Compile Include="ViewModels\Items\SubsystemPermission.cs" />
     <Compile Include="ViewModels\RoleSettingsViewModel.cs" />
+    <Compile Include="ViewModels\RolesViewModel.cs" />
     <Compile Include="Views\AccountsSelectionView.xaml.cs">
       <DependentUpon>AccountsSelectionView.xaml</DependentUpon>
     </Compile>

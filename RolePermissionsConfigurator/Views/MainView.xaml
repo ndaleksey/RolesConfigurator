@@ -6,10 +6,8 @@
 		xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
 		xmlns:viewModels="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.ViewModels"
 		xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-		xmlns:converters="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Converters"
-		xmlns:views="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Views"
-		xmlns:items="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items"
-		xmlns:properties="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Properties"
+        xmlns:views="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Views"
+        xmlns:properties="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Properties"
 		dx:ThemeManager.ThemeName="Office2010Blue"
         mc:Ignorable="d"
         Title="{Binding Path=AppTitle}" Height="600" Width="800" 
@@ -20,46 +18,6 @@
 		<viewModels:MainViewModel/>
 	</Window.DataContext>
 	
-	<dxmvvm:Interaction.Behaviors>
-
-		<dx:DialogService x:Name="RoleSettingsService" >
-			<dx:DialogService.ViewTemplate>
-				<DataTemplate>
-					<views:RoleSettingsView/>
-				</DataTemplate>
-			</dx:DialogService.ViewTemplate>
-
-			<dx:DialogService.DialogStyle>
-				<Style TargetType="dx:DXDialogWindow">
-					<Setter Property="Icon" Value="/Resources/Images/main_icon.ico"/>
-					<Setter Property="Width" Value="600"/>
-					<Setter Property="Height" Value="650"/>
-					<Setter Property="ShowInTaskbar" Value="False"/>
-					<Setter Property="ResizeMode" Value="NoResize"/>
-					<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
-				</Style>
-			</dx:DialogService.DialogStyle>
-		</dx:DialogService>
-
-		<dx:DialogService x:Name="AccountsSelectionService" >
-			<dx:DialogService.ViewTemplate>
-				<DataTemplate>
-					<views:AccountsSelectionView/>
-				</DataTemplate>
-			</dx:DialogService.ViewTemplate>
-
-			<dx:DialogService.DialogStyle>
-				<Style TargetType="dx:DXDialogWindow">
-
-					<Setter Property="Width" Value="500"/>
-					<Setter Property="Height" Value="650"/>
-					<Setter Property="ShowInTaskbar" Value="False"/>
-					<Setter Property="ResizeMode" Value="NoResize"/>
-					<Setter Property="WindowStyle" Value="SingleBorderWindow"/>
-				</Style>
-			</dx:DialogService.DialogStyle>
-		</dx:DialogService>
-	</dxmvvm:Interaction.Behaviors>
 
 	<Window.Resources>
 		<ResourceDictionary>
@@ -69,19 +27,55 @@
 		</ResourceDictionary>
 	</Window.Resources>
 
-	<TabControl>
-		<TabControl.Items>
-			<TabItem Header="Внутренние абоненты">
-				<views:InternalRolesView DataContext="{Binding Path=InternalRolesViewModel}"/>
-			</TabItem>
+	<DockPanel LastChildFill="True">
+		<DockPanel.Resources>
+			<Style x:Key="ToolBarBtnStyle" TargetType="Button">
+				<Setter Property="Width" Value="24"/>
+				<Setter Property="Height" Value="24"/>
+				<Setter Property="Margin" Value="5, 3"/>
+			</Style>
+		</DockPanel.Resources>
+		
+		<ToolBar DockPanel.Dock="Top" AllowDrop="False" TabIndex="{Binding Path=TabIndex}">
 
-			<TabItem Header="Внешние абоненты">
-				<views:ExternalRolesView DataContext="{x:Type viewModels:ExternalRolesViewModel}"/>
-			</TabItem>
+			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=AddRoleCommand}">
+				<Button.ToolTip>
+					<ToolTip Content="{x:Static properties:Resources.Add}"/>
+				</Button.ToolTip>
+				<Image Source="/Resources/Images/add.ico"/>
+			</Button>
 
-			<TabItem Header="Кластера">
-				<views:DepartmentClustersView DataContext="{x:Type viewModels:DepartmentClustersViewModel}"/>
-			</TabItem>
-		</TabControl.Items>
-	</TabControl>
+			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ModifyRoleCommand}">
+				<Button.ToolTip>
+					<ToolTip Content="{x:Static properties:Resources.Edit}"/>
+				</Button.ToolTip>
+				<Image Source="/Resources/Images/edit.ico"/>
+			</Button>
+
+			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=DeleteRoleCommand}">
+				<Button.ToolTip>
+					<ToolTip Content="{x:Static properties:Resources.Delete}"/>
+				</Button.ToolTip>
+				<Image Source="/Resources/Images/delete.ico"/>
+			</Button>
+
+			<!--					<Button Content="Копировать как"/>-->
+		</ToolBar>
+
+		<TabControl DockPanel.Dock="Bottom" TabIndex="{Binding Path=TabIndex}">
+			<TabControl.Items>
+				<TabItem Header="Внутренние абоненты">
+					<views:InternalRolesView DataContext="{Binding Path=InternalRolesViewModel}"/>
+				</TabItem>
+
+				<TabItem Header="Внешние абоненты">
+					<views:ExternalRolesView DataContext="{Binding Path=ExternalRolesViewModel}"/>
+				</TabItem>
+
+				<TabItem Header="Кластера">
+					<views:DepartmentClustersView DataContext="{x:Type viewModels:DepartmentClustersViewModel}"/>
+				</TabItem>
+			</TabControl.Items>
+		</TabControl>
+	</DockPanel>
 </Window>

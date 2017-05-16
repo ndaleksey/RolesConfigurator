@@ -181,7 +181,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			{
 				Debug.WriteLine(dbe);
 
-				var e = Helper.GetDescriptionBySqlState(dbe.SqlState);
+				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 				Helper.Logger.Error(ELogMessageType.Process, e);
 				Helper.Logger.Error(ELogMessageType.Process, dbe);
 

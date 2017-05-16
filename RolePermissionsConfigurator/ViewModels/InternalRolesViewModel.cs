@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using System.Xml.Serialization;
 using DevExpress.Mvvm;
 using Npgsql;
@@ -20,69 +19,31 @@ using Swsu.Lignis.Workstation.Contract.Permissions.Metadata;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 {
-	public class InternalRolesViewModel : CustomViewModel
+	public class InternalRolesViewModel : RolesViewModel
 	{
 		#region Fields
 
 		private readonly Guid _clusterId;
-		private Role _selectedRole;
-		private Account _selectedAccount;
-		private Subsystem _selectedSubsystem;
 		private readonly List<Plugin> _pluginsFromConfig;
 
 		#endregion
 
 		#region Properties
-
 		
-		public Role SelectedRole
-		{
-			get { return _selectedRole; }
-			set { SetProperty(ref _selectedRole, value, nameof(SelectedRole)); }
-		}
-
-		public Account SelectedAccount
-		{
-			get { return _selectedAccount; }
-			set { SetProperty(ref _selectedAccount, value, nameof(SelectedAccount)); }
-		}
-
-		public Subsystem SelectedSubsystem
-		{
-			get { return _selectedSubsystem; }
-			set { SetProperty(ref _selectedSubsystem, value, nameof(SelectedSubsystem)); }
-		}
-
-		public ObservableCollection<Role> Roles { get; }
 		public ObservableCollection<Account> Accounts { get; }
 		public ObservableCollection<Subsystem> Subsystems { get; }
 
 		#endregion
-
-		#region Commands
-
-		public ICommand AddRoleCommand { get; }
-		public ICommand ModifyRoleCommand { get; }
-		public ICommand DeleteRoleCommand { get; }
 		
-
-		#endregion
-
 		#region Constructors
 
 		public InternalRolesViewModel(Guid clusterId)
 		{
 			_clusterId = clusterId;
-//			WorkflowType = EWorkflowType.NormalWork;
 			_pluginsFromConfig = new List<Plugin>();
-			Roles = new ObservableCollection<Role>();
 			Accounts = new ObservableCollection<Account>();
 			Subsystems = new ObservableCollection<Subsystem>();
-
-			AddRoleCommand = new DelegateCommand(AddRole, CanAddRole);
-			ModifyRoleCommand = new DelegateCommand(ModifyRole, CanModifyRole);
-			DeleteRoleCommand = new DelegateCommand(DeleteRole, CanDeleteRole);
-
+			
 			Initialization();
 		}
 
@@ -90,12 +51,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Commands methods
 
-		private bool CanAddRole()
+		public override bool CanAddRole()
 		{
 			return true;
 		}
 
-		private void AddRole()
+		public override void AddRole()
 		{
 			try
 			{
@@ -134,12 +95,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 		}
 
-		private bool CanModifyRole()
+		public override bool CanModifyRole()
 		{
 			return SelectedRole != null;
 		}
 
-		private void ModifyRole()
+		public override void ModifyRole()
 		{
 			try
 			{
@@ -152,7 +113,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			{
 				Debug.WriteLine(dbe);
 
-				var e = Helper.GetDescriptionBySqlState(dbe.SqlState);
+				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 				Helper.Logger.Error(ELogMessageType.Process, e);
 				Helper.Logger.Error(ELogMessageType.Process, dbe);
 
@@ -170,12 +131,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 		}
 
-		private bool CanDeleteRole()
+		public override bool CanDeleteRole()
 		{
 			return SelectedRole != null;
 		}
 
-		private async void DeleteRole()
+		public override async void DeleteRole()
 		{
 			try
 			{
@@ -243,7 +204,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			{
 				Debug.WriteLine(dbe);
 
-				var e = Helper.GetDescriptionBySqlState(dbe.SqlState);
+				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 				Helper.Logger.Error(ELogMessageType.Process, e);
 				Helper.Logger.Error(ELogMessageType.Process, dbe);
 

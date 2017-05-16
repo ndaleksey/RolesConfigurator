@@ -3,7 +3,7 @@ using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 {
-	public class CustomViewModel : ViewModelBase
+	public abstract class CustomViewModel : ViewModelBase
 	{
 		#region Fields
 

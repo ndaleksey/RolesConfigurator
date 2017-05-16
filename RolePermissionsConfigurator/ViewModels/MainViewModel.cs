@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using DevExpress.Mvvm;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
@@ -18,6 +20,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		#endregion
 
 		#region Properties
+		public int TabIndex { get; set; }
+
 		public string AppTitle
 		{
 			get { return _appTitle; }
@@ -43,18 +47,82 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		}
 		#endregion
 
+		#region Commands
+
+		public ICommand AddRoleCommand { get; }
+		public ICommand ModifyRoleCommand { get; }
+		public ICommand DeleteRoleCommand { get; }
+
+		#endregion
+
 		#region Construction
 
 		public MainViewModel()
 		{
 			AppTitle = string.Empty;
+			AddRoleCommand = new DelegateCommand(AddRole, CanAddRole);
+			ModifyRoleCommand = new DelegateCommand(ModifyRole, CanModifyRole);
+			DeleteRoleCommand = new DelegateCommand(DeleteRole, CanDeleteRole);
+
 			Initialization();
 		}
+		
+		#endregion
 
+		private RolesViewModel GetActiveRolesViewModel()
+		{
+			switch (TabIndex)
+			{
+				case 0:
+					return InternalRolesViewModel;
+				case 1:
+					return ExternalRolesViewModel;
+				default:
+					return null;
+			}
+		}
+
+		#region Commands' methods
+		private bool CanAddRole()
+		{
+			var vm = GetActiveRolesViewModel();
+
+			return vm != null && vm.CanAddRole();
+		}
+
+		private void AddRole()
+		{
+			GetActiveRolesViewModel()?.AddRole();
+		}
+
+		private bool CanModifyRole()
+		{
+			var vm = GetActiveRolesViewModel();
+
+			return vm != null && vm.CanModifyRole();
+		}
+
+		private void ModifyRole()
+		{
+			GetActiveRolesViewModel()?.ModifyRole();
+		}
+
+		private bool CanDeleteRole()
+		{
+			var vm = GetActiveRolesViewModel();
+
+			return vm != null && vm.CanDeleteRole();
+		}
+
+		private void DeleteRole()
+		{
+			GetActiveRolesViewModel().DeleteRole();
+		}
 		#endregion
 
 		#region Methods
-		protected sealed override async void Initialization()
+
+		protected new async void Initialization()
 		{
 			try
 			{
@@ -75,7 +143,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (Exception e)
 			{
-				//TODO: использовать систему логирования
+				//TODO: обработать логгером
 				Debug.WriteLine(e);
 			}
 		}
@@ -95,6 +163,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			if (!string.IsNullOrEmpty(depratment))
 				AppTitle += $"  ( {depratment} )";
 		}
+
 		#endregion
 	}
 }
