@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -22,26 +21,20 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	public class InternalRolesViewModel : RolesViewModel
 	{
 		#region Fields
-
-		private readonly List<Plugin> _pluginsFromConfig;
-
+		private readonly string _currentDepartment;
+		private readonly List<Plugin> _pluginsFromConfig = new List<Plugin>();
+		private List<Account> _accounts;
 		#endregion
 
 		#region Properties
-		
-		public ObservableCollection<Account> Accounts { get; }
-		public ObservableCollection<Subsystem> Subsystems { get; }
 
 		#endregion
-		
+
 		#region Constructors
 
-		public InternalRolesViewModel(Guid currentClusterId):base(currentClusterId)
+		public InternalRolesViewModel(Guid currentClusterId, string currentDepartment):base(currentClusterId)
 		{
-			_pluginsFromConfig = new List<Plugin>();
-			Accounts = new ObservableCollection<Account>();
-			Subsystems = new ObservableCollection<Subsystem>();
-			
+			_currentDepartment = currentDepartment;
 			Initialization();
 		}
 
@@ -62,7 +55,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				var maxNumber = Roles.Count > 0 ? Roles.Max(r => r.Number) + 1 : 1;
 				var newRole = new Role(Guid.NewGuid(), CurrentClusterId, maxNumber,
-					$"{Properties.Resources.NewRole} {maxNumber}", string.Empty);
+					$"{Properties.Resources.NewRole} {maxNumber}", string.Empty, _currentDepartment);
 
 				foreach (var subsystem in Subsystems)
 					newRole.SubsystemPermissions.Add(new SubsystemPermission(newRole, subsystem));
@@ -77,9 +70,9 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				GetService<IDialogService>("RoleSettingsService")
 					.ShowDialog(null, Properties.Resources.RoleAddition, null,
-						new RoleSettingsViewModel(newRole, Roles, Accounts, EDialogOpenMode.Insert));
+						new InternalRoleSettingsViewModel(newRole, Roles, _accounts, EDialogOpenMode.Insert));
 
-				SelectedRole = newRole;
+//				SelectedRole = newRole;
 			}
 			catch (Exception e)
 			{
@@ -105,7 +98,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				WorkflowType = EWorkflowType.WorkWithDb;
 				GetService<IDialogService>("RoleSettingsService")
 					.ShowDialog(null, Properties.Resources.RoleModification, null,
-						new RoleSettingsViewModel(SelectedRole, Roles, Accounts, EDialogOpenMode.Update));
+						new InternalRoleSettingsViewModel(SelectedRole, Roles, _accounts, EDialogOpenMode.Update));
 			}
 			catch (PostgresException dbe)
 			{
@@ -152,7 +145,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				}
 
 				foreach (var account in SelectedRole.Accounts)
-					foreach (var a in Accounts.Where(a => a.Login == account.Login))
+					foreach (var a in _accounts.Where(a => a.Login == account.Login))
 						a.Role = null;
 
 				SelectedRole.Accounts.Clear();
@@ -232,8 +225,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		private async Task LoadFullRolesInfoAsync()
 		{
 			List<Role> roles;
-			List<Account> accounts;
-			List<Subsystem> subsystems;
 			List<Tuple<int, Guid>> subsystemsPermissions;
 			List<Tuple<Guid, string>> plugins;
 			List<Tuple<Guid, string, string, short>> pluginsPermissions;
@@ -241,8 +232,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			using (var t = new Transaction())
 			{
 				roles = await DbService.GetRolesByClusterIdAsync(t.Connection, CurrentClusterId);
-				accounts = await DbService.GetAccountsAsync(t.Connection);
-				subsystems = await DbService.GetSubsystemsAsync(t.Connection);
+				_accounts = await DbService.GetAccountsAsync(t.Connection);
 				subsystemsPermissions = await DbService.GetSubsystemsPermissionsAsTuppleAsync(t.Connection);
 				plugins = await DbService.GetRolePluginsAsTuppleAsync(t.Connection);
 				pluginsPermissions = await DbService.GetPluginsPermissionsAsTuppleAsync(t.Connection);
@@ -282,7 +272,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				}
 
 				role.SubsystemPermissions.Clear();
-				foreach (var subsystem in subsystems)
+				foreach (var subsystem in Subsystems)
 				{
 					var isSet = subsystemsPermissions.Any(p => p.Item1 == subsystem.Number && p.Item2 == role.Id);
 					role.SubsystemPermissions.Add(new SubsystemPermission(role, subsystem) { IsSet = isSet });
@@ -293,24 +283,13 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 						plugin.IsSet = true;
 
 				role.Accounts.Clear();
-				foreach (var acc in accounts.Where(a => a.Role != null && a.Role.Id == role.Id))
+				foreach (var acc in _accounts.Where(a => a.Role != null && a.Role.Id == role.Id))
 				{
 					acc.Role = role;
 					role.Accounts.Add(acc);
 				}
 				Roles.Add(role);
 			}
-
-			Accounts.Clear();
-
-			foreach (var account in accounts)
-				Accounts.Add(account);
-
-			Subsystems.Clear();
-
-			foreach (var subsystem in subsystems)
-				Subsystems.Add(subsystem);
-
 		}
 
 		/// <summary>

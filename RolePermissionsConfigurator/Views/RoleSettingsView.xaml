@@ -35,16 +35,18 @@
 		</Grid.ColumnDefinitions>
 
 		<TextBlock Text="{x:Static properties:Resources.Number}" Margin="0, 5"/>
-		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=ModifiedRole.Number}" 
+		<TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=TempRole.Number}" 
 				 PreviewTextInput="UIElement_OnPreviewTextInput" Margin="0, 5"/>
 
 		<TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.Name}" Margin="0, 5"/>
-		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=ModifiedRole.Name}" Margin="0, 5"/>
+		<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=TempRole.Name}" Margin="0, 5"/>
 
 		<TextBlock Grid.Row="2" Grid.Column="0" Text="{x:Static properties:Resources.Summary}" Margin="0, 5"/>
-		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=ModifiedRole.Description}" Margin="0, 5"/>
+		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=TempRole.Description}" Margin="0, 5"/>
 
 		<TabControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="0, 10, 0, 0" SelectedIndex="0">
+			
+			<!--		Пользователи	-->
 			<TabItem Header="{x:Static properties:Resources.Accounts}">
 				<ListView ItemsSource="{Binding Path=Accounts}">
 					<ListView.View>
@@ -72,7 +74,7 @@
 				<DockPanel LastChildFill="True">
 					<CheckBox DockPanel.Dock="Top" Style="{StaticResource PluginSelectionStatusCheckBoxStyle}"
 							  IsChecked="{Binding Path=PluginSelectionStatus}" Command="{Binding Path=SelectAllPluginsCommand}"/>
-					<DataGrid ItemsSource="{Binding Path=ModifiedRole.Plugins}" CanUserAddRows="False">
+					<DataGrid ItemsSource="{Binding Path=TempRole.Plugins}" CanUserAddRows="False">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="{x:Static properties:Resources.Name}" Binding="{Binding Path=Name}" MinWidth="150" IsReadOnly="True"/>
 							<DataGridCheckBoxColumn Header="{x:Static properties:Resources.Permission}" Binding="{Binding Path=IsSet}" MinWidth="100"/>
@@ -83,7 +85,7 @@
 
 			<!-- 	Настройка плагинов    -->
 			<TabItem Header="{x:Static properties:Resources.PluginsSettings}">
-				<ListBox ItemsSource="{Binding Path=ModifiedRole.Plugins}">
+				<ListBox ItemsSource="{Binding Path=TempRole.Plugins}">
 					<ListBox.ItemTemplate>
 						<DataTemplate DataType="{x:Type items:Plugin}">
 							<Expander Header="{Binding Path=Name}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -125,7 +127,7 @@
 				<DockPanel LastChildFill="True">
 					<CheckBox DockPanel.Dock="Top" Style="{StaticResource SubsystemSelectionStatusCheckBoxStyle}"
 							  IsChecked="{Binding Path=SubsystemSelectionStatus}" Command="{Binding Path=SelectAllSubsystemsCommand}"/>
-					<DataGrid x:Name="PermissionsGrid" ItemsSource="{Binding Path=ModifiedRole.SubsystemPermissions}" 
+					<DataGrid x:Name="PermissionsGrid" ItemsSource="{Binding Path=TempRole.SubsystemPermissions}" 
 							  CanUserAddRows="False">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="{x:Static properties:Resources.Code}" Binding="{Binding Path=Subsystem.Number}" MinWidth="80" IsReadOnly="True"/>

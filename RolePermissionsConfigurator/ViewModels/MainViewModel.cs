@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
+using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 {
@@ -24,6 +26,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		#endregion
 
 		#region Properties
+		public string CurrentDepartment {get; private set; }
 
 		public int TabIndex
 		{
@@ -147,13 +150,24 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					return;
 				}
 
-				await CreateApplicationTitleAsync();
+				await InitializeApplicationTitleAsync();
 
-				InternalRolesViewModel = new InternalRolesViewModel(_currentClusterId.Value);
+				List<Subsystem> subsystems;
+
+				using (var t = new Transaction())
+					subsystems = await DbService.GetSubsystemsAsync(t.Connection);
+
+				InternalRolesViewModel = new InternalRolesViewModel(_currentClusterId.Value, CurrentDepartment);
+				InternalRolesViewModel.Subsystems.Clear();
+				InternalRolesViewModel.Subsystems.AddRange(subsystems);
+
 				ExternalRolesViewModel = new ExternalRolesViewModel(_currentClusterId.Value);
+				ExternalRolesViewModel.Subsystems.Clear();
+				ExternalRolesViewModel.Subsystems.AddRange(subsystems);
+
 				DepartmentClustersViewModel = new DepartmentClustersViewModel();
 
-				TabIndex = 0;
+				SelectedTab = InternalRolesViewModel;
 			}
 			catch (Exception e)
 			{
@@ -162,20 +176,19 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 		}
 
-		private async Task CreateApplicationTitleAsync()
+		private async Task InitializeApplicationTitleAsync()
 		{
 			if (!_currentClusterId.HasValue)
 				throw new NullReferenceException(Properties.Resources.ClusterInitializationException);
-
-			string depratment;
+			
 
 			using (var t = new Transaction())
-				depratment = await DbService.GetDepartmentNameByClusterIdAsync(t.Connection, _currentClusterId.Value);
+				CurrentDepartment = await DbService.GetDepartmentNameByClusterIdAsync(t.Connection, _currentClusterId.Value);
 
 			AppTitle = Properties.Resources.ApplicationName;
 
-			if (!string.IsNullOrEmpty(depratment))
-				AppTitle += $"  ( {depratment} )";
+			if (!string.IsNullOrEmpty(CurrentDepartment))
+				AppTitle += $"  ( {CurrentDepartment} )";
 		}
 
 		#endregion

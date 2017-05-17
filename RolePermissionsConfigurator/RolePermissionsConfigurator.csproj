@@ -138,6 +138,7 @@
     <Compile Include="ViewModels\CustomViewModel.cs" />
     <Compile Include="ViewModels\DepartmentClustersViewModel.cs" />
     <Compile Include="ViewModels\ExternalRolesViewModel.cs" />
+    <Compile Include="ViewModels\InternalRoleSettingsViewModel.cs" />
     <Compile Include="ViewModels\InternalRolesViewModel.cs" />
     <Compile Include="ViewModels\Items\MilitaryUnit.cs" />
     <Compile Include="ViewModels\Items\MilitaryUnitItem.cs" />

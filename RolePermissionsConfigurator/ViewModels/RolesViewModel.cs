@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DevExpress.Mvvm;
@@ -23,6 +24,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			set { SetProperty(ref _selectedRole, value, nameof(SelectedRole)); }
 		}
 
+		public List<Subsystem> Subsystems { get; } = new List<Subsystem>();
 		public ObservableCollection<Role> Roles { get; } = new ObservableCollection<Role>();
 
 		#endregion

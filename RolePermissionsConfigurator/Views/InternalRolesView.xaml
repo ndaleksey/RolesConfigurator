@@ -34,10 +34,6 @@
 	</dxmvvm:Interaction.Behaviors>
 
 	<Grid>
-		<Grid.Resources>
-			<converters:YesNoBoolValueConverter x:Key="YesNoBoolValueConverter"/>
-		</Grid.Resources>
-
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
@@ -48,7 +44,7 @@
 			<DockPanel Grid.Row="0" LastChildFill="True">
 				<!--		Роли	-->
 				<DataGrid x:Name="RolesDataGrid" DockPanel.Dock="Top" IsReadOnly="True"
-						  ItemsSource="{Binding Path=Roles}" SelectedItem="{Binding Path=SelectedRole}" 
+						  ItemsSource="{Binding Path=Roles}" SelectedItem="{Binding Path=SelectedRole, UpdateSourceTrigger=PropertyChanged}" 
 						  CanUserReorderColumns="False">
 					<DataGrid.Resources>
 						<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="DarkGray"/>

@@ -75,7 +75,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 
 		public static Role GetCopyFrom(Role role)
 		{
-			var newRole = new Role(role.Id, role.ClusterId, role.Number, role.Name, role.Description);
+			var newRole = new Role(role.Id, role.ClusterId, role.Number, role.Name, role.Description, role.Department);
 
 			foreach (var account in role.Accounts)
 				newRole.Accounts.Add(account);
@@ -95,6 +95,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 			Number = role.Number;
 			Name = role.Name;
 			Description = role.Description;
+			Department = role.Department;
 
 			Accounts.Clear();
 
