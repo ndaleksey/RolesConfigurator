@@ -13,6 +13,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	public class MainViewModel : CustomViewModel
 	{
 		#region Fields
+
 		private Guid? _currentClusterId;
 		private string _appTitle;
 
@@ -23,10 +24,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		private RolesViewModel _selectedTab;
 		private int _tabIndex;
+
 		#endregion
 
 		#region Properties
-		public string CurrentDepartment {get; private set; }
+
+		public string CurrentDepartment { get; private set; }
 
 		public int TabIndex
 		{
@@ -63,6 +66,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			get { return _selectedTab; }
 			set { SetProperty(ref _selectedTab, value, nameof(SelectedTab)); }
 		}
+
 		#endregion
 
 		#region Commands
@@ -104,6 +108,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		}
 
 		#region Commands' methods
+
 		private bool CanAddRole()
 		{
 			return SelectedTab != null && SelectedTab.CanAddRole();
@@ -133,6 +138,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		{
 			SelectedTab.DeleteRole();
 		}
+
 		#endregion
 
 		#region Methods
@@ -180,7 +186,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		{
 			if (!_currentClusterId.HasValue)
 				throw new NullReferenceException(Properties.Resources.ClusterInitializationException);
-			
+
 
 			using (var t = new Transaction())
 				CurrentDepartment = await DbService.GetDepartmentNameByClusterIdAsync(t.Connection, _currentClusterId.Value);

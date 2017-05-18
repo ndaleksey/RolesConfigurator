@@ -137,11 +137,12 @@
     </Compile>
     <Compile Include="ViewModels\CustomViewModel.cs" />
     <Compile Include="ViewModels\DepartmentClustersViewModel.cs" />
+    <Compile Include="ViewModels\ExternalRoleSettingsViewModel.cs" />
     <Compile Include="ViewModels\ExternalRolesViewModel.cs" />
     <Compile Include="ViewModels\InternalRoleSettingsViewModel.cs" />
     <Compile Include="ViewModels\InternalRolesViewModel.cs" />
-    <Compile Include="ViewModels\Items\MilitaryUnit.cs" />
-    <Compile Include="ViewModels\Items\MilitaryUnitItem.cs" />
+    <Compile Include="ViewModels\Items\Department.cs" />
+    <Compile Include="ViewModels\Items\DepartmentItem.cs" />
     <Compile Include="ViewModels\Items\Plugin.cs" />
     <Compile Include="ViewModels\Items\PluginPermission.cs" />
     <Compile Include="ViewModels\Items\PluginPermissionType.cs" />
@@ -155,14 +156,17 @@
     <Compile Include="Views\DepartmentClustersView.xaml.cs">
       <DependentUpon>DepartmentClustersView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExternalRoleSettingsView.xaml.cs">
+      <DependentUpon>ExternalRoleSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExternalRolesView.xaml.cs">
       <DependentUpon>ExternalRolesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InternalRolesView.xaml.cs">
       <DependentUpon>InternalRolesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RoleSettingsView.xaml.cs">
-      <DependentUpon>RoleSettingsView.xaml</DependentUpon>
+    <Compile Include="Views\InternalRoleSettingsView.xaml.cs">
+      <DependentUpon>InternalRoleSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkflowView.xaml.cs">
       <DependentUpon>WorkflowView.xaml</DependentUpon>
@@ -176,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DepartmentClustersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExternalRoleSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,7 +216,7 @@
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\RoleSettingsView.xaml">
+    <Page Include="Views\InternalRoleSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

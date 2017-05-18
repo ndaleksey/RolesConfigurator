@@ -17,12 +17,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	public class InternalRoleSettingsViewModel : RoleSettingsViewModel
 	{
 		#region Properties
+
 		public ObservableCollection<Account> Accounts { get; }
 
 		#endregion
 
 		#region Commands
+
 		public ICommand SelectAllPluginsCommand { get; }
+
 		#endregion
 
 		#region Constructors
@@ -170,7 +173,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				SubsystemSelectionStatus = false;
 			else
 				SubsystemSelectionStatus = null;
-			
+
 			foreach (var account in Accounts)
 			{
 				// если пользователь занят
@@ -301,6 +304,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				TempRole.Accounts.Remove(acc);
 			}
 		}
+
 		#endregion
 	}
 }

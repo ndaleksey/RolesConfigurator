@@ -27,7 +27,7 @@
 		<dx:DialogService x:Name="RoleSettingsService" DialogStyle="{StaticResource ResourceKey=RoleSettingsWindowStyle}">
 			<dx:DialogService.ViewTemplate>
 				<DataTemplate>
-					<local:RoleSettingsView/>
+					<local:InternalRoleSettingsView/>
 				</DataTemplate>
 			</dx:DialogService.ViewTemplate>
 		</dx:DialogService>
@@ -77,6 +77,7 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="{x:Static properties:Resources.AbonentNumber}" Binding="{Binding Path=Number}"/>
 						<DataGridTextColumn Header="{x:Static properties:Resources.RoleName}" Binding="{Binding Path=Name}"/>
+						<DataGridTextColumn Header="{x:Static properties:Resources.Summary}" Binding="{Binding Path=Description}" MinWidth="200"/>
 						<DataGridTextColumn Header="{x:Static properties:Resources.DepartmentName}" Binding="{Binding Path=Department}"/>
 					</DataGrid.Columns>
 				</DataGrid>

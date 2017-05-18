@@ -10,6 +10,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	public abstract class RolesViewModel : CustomViewModel
 	{
 		#region Fields
+
 		private Role _selectedRole;
 
 		#endregion

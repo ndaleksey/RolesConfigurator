@@ -16,7 +16,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Properties
 
-		public ObservableCollection<MilitaryUnitItem> MilitaryUnits { get; } = new ObservableCollection<MilitaryUnitItem>();
+		public ObservableCollection<DepartmentItem> MilitaryUnits { get; } = new ObservableCollection<DepartmentItem>();
 
 		#endregion
 
@@ -56,9 +56,9 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					await DbService.GetMilitaryUnitsByGroupingNameAsync(t.Connection, "permission.interacting_grouping");
 
 
-				var interactingRoot = new MilitaryUnitItem("1", "0", Properties.Resources.Interacting, null);
-				var inferiorRoot = new MilitaryUnitItem("2", "0", Properties.Resources.Inferior, null);
-				var superiorRoot = new MilitaryUnitItem("3", "0", Properties.Resources.Superior, null);
+				var interactingRoot = new DepartmentItem("1", "0", Properties.Resources.Interacting, null);
+				var inferiorRoot = new DepartmentItem("2", "0", Properties.Resources.Inferior, null);
+				var superiorRoot = new DepartmentItem("3", "0", Properties.Resources.Superior, null);
 
 				var intRoot = interactingUnits.FirstOrDefault(u => u.ParentId == Guid.Empty.ToString());
 				if (intRoot != null)

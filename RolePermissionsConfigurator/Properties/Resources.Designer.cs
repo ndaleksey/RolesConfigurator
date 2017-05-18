@@ -169,6 +169,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Подразделение.
+        /// </summary>
+        public static string Department {
+            get {
+                return ResourceManager.GetString("Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Наименование подразделения.
         /// </summary>
         public static string DepartmentName {

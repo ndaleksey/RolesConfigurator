@@ -21,9 +21,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	public class InternalRolesViewModel : RolesViewModel
 	{
 		#region Fields
+
 		private readonly string _currentDepartment;
 		private readonly List<Plugin> _pluginsFromConfig = new List<Plugin>();
 		private List<Account> _accounts;
+
 		#endregion
 
 		#region Properties
@@ -32,7 +34,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Constructors
 
-		public InternalRolesViewModel(Guid currentClusterId, string currentDepartment):base(currentClusterId)
+		public InternalRolesViewModel(Guid currentClusterId, string currentDepartment) : base(currentClusterId)
 		{
 			_currentDepartment = currentDepartment;
 			Initialization();
@@ -71,8 +73,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				GetService<IDialogService>("RoleSettingsService")
 					.ShowDialog(null, Properties.Resources.RoleAddition, null,
 						new InternalRoleSettingsViewModel(newRole, Roles, _accounts, EDialogOpenMode.Insert));
-
-//				SelectedRole = newRole;
 			}
 			catch (Exception e)
 			{
@@ -178,7 +178,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			try
 			{
 				WorkflowType = EWorkflowType.LoadFromDb;
-				
+
 				try
 				{
 					LoadPluginsFromPluginsConfig();
@@ -212,7 +212,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				WorkflowType = EWorkflowType.NormalWork;
 			}
 		}
-		
+
+		/// <summary>
+		/// Метод синхронизирет пользователей СУБД и пользователей в таблице permission.account
+		/// </summary>
+		/// <returns>Возвращает Task</returns>
 		private async Task SynchronizeAssountsAndUsersInDbAsync()
 		{
 			using (var t = new Transaction())
@@ -275,7 +279,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				foreach (var subsystem in Subsystems)
 				{
 					var isSet = subsystemsPermissions.Any(p => p.Item1 == subsystem.Number && p.Item2 == role.Id);
-					role.SubsystemPermissions.Add(new SubsystemPermission(role, subsystem) { IsSet = isSet });
+					role.SubsystemPermissions.Add(new SubsystemPermission(role, subsystem) {IsSet = isSet});
 				}
 
 				foreach (var plugin in role.Plugins)
@@ -300,11 +304,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			_pluginsFromConfig.Clear();
 
 			PluginsCatalog pluginsCatalog;
-			var serializer = new XmlSerializer(typeof(PluginsCatalog));
+			var serializer = new XmlSerializer(typeof (PluginsCatalog));
 
 			using (var stream = new FileStream(Settings.Default.PluginsCatalog, FileMode.OpenOrCreate))
 			{
-				pluginsCatalog = (PluginsCatalog)serializer.Deserialize(stream);
+				pluginsCatalog = (PluginsCatalog) serializer.Deserialize(stream);
 				stream.Close();
 			}
 
@@ -321,7 +325,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 						var type = new PluginPermissionType();
 
 						foreach (var permissionValue in permission.Type.Values)
-							type.Values.Add(new PluginPermissionValue(permissionValue.Value, permissionValue.DisplayName, permissionValue.Summary));
+							type.Values.Add(new PluginPermissionValue(permissionValue.Value, permissionValue.DisplayName,
+								permissionValue.Summary));
 
 						plugin.Permissions.Add(new PluginPermission(plugin, permission.InvariantName, permission.DisplayName, type,
 							permission.Summary));

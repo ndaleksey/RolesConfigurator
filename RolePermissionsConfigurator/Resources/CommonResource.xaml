@@ -93,6 +93,10 @@
 		<Setter Property="SelectionMode" Value="Single"/>
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader">
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+	</Style>
+
 	<Style x:Key="DataGridTextBoxStyle" TargetType="TextBox" >
 		<Setter Property="SelectionBrush" Value="Transparent"/>
 		<Setter Property="BorderBrush" Value="Transparent"/>

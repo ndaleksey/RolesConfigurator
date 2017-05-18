@@ -272,4 +272,8 @@
     <value>Наименование подразделения</value>
     <comment>Наименование подразделения</comment>
   </data>
+  <data name="Department" xml:space="preserve">
+    <value>Подразделение</value>
+    <comment>Подразделение</comment>
+  </data>
 </root>

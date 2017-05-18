@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
-using DevExpress.Xpf.Utils;
 using Npgsql;
 using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
 
@@ -84,10 +82,10 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 			using (var cmd = connection.CreateCommand())
 			{
 				cmd.Connection = connection;
-				cmd.CommandText = "SELECT r.id, r.number, r.name, r.description, mu.name " +
+				cmd.CommandText = "SELECT r.id, r.number, r.name, r.description, mu.id, mu.name " +
 				                  "FROM permission.role r JOIN dynamic.military_unit mu " +
 				                  "ON r.cluster_id = mu.id " +
-								  $"WHERE cluster_id {eq} @cluster_id " +
+				                  $"WHERE cluster_id {eq} @cluster_id " +
 				                  "ORDER BY number";
 				cmd.Parameters.Add(cmd.CreateParameter("cluster_id", DbType.Guid, clusterId));
 				using (var reader = cmd.ExecuteReader())
@@ -100,9 +98,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 						var number = reader.GetInt32(1);
 						var name = reader.GetString(2);
 						var description = reader.IsDBNull(3) ? string.Empty : reader.GetString(3);
-						var department = reader.IsDBNull(4) ? string.Empty : reader.GetString(4);
+						var clId = reader.GetGuid(4);
+						var department = reader.IsDBNull(5) ? string.Empty : reader.GetString(5);
 
-						roles.Add(new Role(id, clusterId, number, name, description, department));
+
+						roles.Add(new Role(id, clId, number, name, description, department));
 					}
 				}
 			}
@@ -683,15 +683,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 			}
 		}
 
-		public static Task<List<MilitaryUnitItem>> GetMilitaryUnitsByGroupingNameAsync(DbConnection connection,
+		public static Task<List<DepartmentItem>> GetMilitaryUnitsByGroupingNameAsync(DbConnection connection,
 			string groupingName)
 		{
 			return Task.Run(() => GetGroupingUnitsByGroupingName(connection, groupingName));
 		}
 
-		public static List<MilitaryUnitItem> GetGroupingUnitsByGroupingName(DbConnection connection, string groupingName)
+		public static List<DepartmentItem> GetGroupingUnitsByGroupingName(DbConnection connection, string groupingName)
 		{
-			var units = new List<MilitaryUnitItem>();
+			var units = new List<DepartmentItem>();
 
 			var sql = "SELECT g.id, g.parent_id, g.name, c.number AS cluster " +
 			          $"FROM {groupingName} g " +
@@ -716,11 +716,42 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 						var name = reader.IsDBNull(2) ? string.Empty : reader.GetString(2);
 						var cluster = reader.IsDBNull(3) ? (int?) null : reader.GetInt32(3);
 
-						units.Add(new MilitaryUnitItem(id, parentId, name, cluster));
+						units.Add(new DepartmentItem(id, parentId, name, cluster));
 					}
 				}
 			}
 			return units;
+		}
+
+		public static Task<List<Department>> GetDepartmentsWithClusterAsync(DbConnection connection)
+		{
+			return Task.Run(() => GetDepartmentsWithCluster(connection));
+		}
+
+		private static List<Department> GetDepartmentsWithCluster(DbConnection connection)
+		{
+			var departments = new List<Department>();
+
+			using (var cmd = connection.CreateCommand())
+			{
+				cmd.Connection = connection;
+				cmd.CommandText = "SELECT mu.id, mu.name FROM dynamic.military_unit mu " +
+				                  "JOIN permission.cluster c ON mu.id = c.id";
+
+				using (var reader = cmd.ExecuteReader())
+				{
+					if (!reader.HasRows) return departments;
+
+					while (reader.Read())
+					{
+						var id = reader.GetGuid(0);
+						var name = reader.IsDBNull(1) ? string.Empty : reader.GetString(1);
+						departments.Add(new Department(id, name));
+					}
+				}
+			}
+
+			return departments;
 		}
 	}
 }
