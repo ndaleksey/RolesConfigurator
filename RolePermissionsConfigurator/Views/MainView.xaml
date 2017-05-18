@@ -73,7 +73,7 @@
 				</TabItem>
 
 				<TabItem Header="Кластера">
-					<views:DepartmentClustersView DataContext="{x:Type viewModels:DepartmentClustersViewModel}"/>
+					<views:DepartmentClustersView DataContext="{Binding Path=DepartmentClustersViewModel}"/>
 				</TabItem>
 			</TabControl.Items>
 		</TabControl>

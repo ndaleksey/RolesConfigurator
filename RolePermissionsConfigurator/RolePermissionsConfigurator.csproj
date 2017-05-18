@@ -113,12 +113,15 @@
     <Compile Include="Converters\SubsystemConverter.cs" />
     <Compile Include="Converters\YesNoBoolValueConverter.cs" />
     <Compile Include="Infrastructure\BindableBaseExtanded.cs" />
+    <Compile Include="Infrastructure\DepartmentEqualityComparer.cs" />
     <Compile Include="Infrastructure\ELogMessageType.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Helpers\MethodsExtensionsClass.cs" />
     <Compile Include="Helpers\PluginMetaData.cs" />
     <Compile Include="Helpers\PluginsCatalog.cs" />
     <Compile Include="Infrastructure\EDialogOpenMode.cs" />
+    <Compile Include="Infrastructure\ESubordinate.cs" />
+    <Compile Include="Infrastructure\ValidationParameters.cs" />
     <Compile Include="Infrastructure\ViewModelBaseExtended.cs" />
     <Compile Include="Resources\LogMessages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -147,6 +150,7 @@
     <Compile Include="ViewModels\Items\PluginPermission.cs" />
     <Compile Include="ViewModels\Items\PluginPermissionType.cs" />
     <Compile Include="ViewModels\Items\PluginPermissionValue.cs" />
+    <Compile Include="ViewModels\Items\SubordinateItem.cs" />
     <Compile Include="ViewModels\Items\SubsystemPermission.cs" />
     <Compile Include="ViewModels\RoleSettingsViewModel.cs" />
     <Compile Include="ViewModels\RolesViewModel.cs" />

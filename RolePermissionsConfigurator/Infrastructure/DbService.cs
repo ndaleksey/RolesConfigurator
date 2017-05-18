@@ -683,7 +683,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 			}
 		}
 
-		public static Task<List<DepartmentItem>> GetMilitaryUnitsByGroupingNameAsync(DbConnection connection,
+		/*public static Task<List<DepartmentItem>> GetMilitaryUnitsByGroupingNameAsync(DbConnection connection,
 			string groupingName)
 		{
 			return Task.Run(() => GetGroupingUnitsByGroupingName(connection, groupingName));
@@ -721,7 +721,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 				}
 			}
 			return units;
-		}
+		}*/
 
 		public static Task<List<Department>> GetDepartmentsWithClusterAsync(DbConnection connection)
 		{

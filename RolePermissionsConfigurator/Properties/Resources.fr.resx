@@ -245,6 +245,10 @@
     <value>Cet utilisateur est enregistré sous un rôle inexistant. Programme de travail futur ne peut pas être</value>
     <comment>Данный пользователь вошел под несуществующей ролью. Дальнейшая работа программы невозможна</comment>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Appliquer</value>
+    <comment>Сохранить</comment>
+  </data>
   <data name="SelectAll" xml:space="preserve">
     <value>Tout sélectionner</value>
     <comment>Выделить всё</comment>

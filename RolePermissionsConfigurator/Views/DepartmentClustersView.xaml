@@ -16,49 +16,49 @@
 		</Grid.RowDefinitions>
 
 		<dxg:GridControl x:Name="Grid"
-                                  Grid.Row="0" 
-                                  EnableSmartColumnsGeneration="True"
-                                  SelectedItem="{Binding Path=SelectedGroupingItem, UpdateSourceTrigger=PropertyChanged}"
-                                  ItemsSource="{Binding Path=MilitaryUnits}"
-                                  Margin="3"
-                                  MinWidth="300">
+                                Grid.Row="0" 
+                                EnableSmartColumnsGeneration="True"
+                                SelectedItem="{Binding Path=SelectedDepartment, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding Path=Departments}"
+                                Margin="3"
+                                MinWidth="300">
 
 			<dxg:GridControl.Columns>
 				<dxg:GridColumn Header="{x:Static properties:Resources.Grouping}" 
-                                    FieldName="Name" 
-                                    ReadOnly="True"
-                                    MinWidth="100"
-                                    HorizontalHeaderContentAlignment="Center"/>
+                                FieldName="Name" 
+                                ReadOnly="True"
+                                MinWidth="100"
+                                HorizontalHeaderContentAlignment="Center"/>
 
-				<dxg:GridColumn FieldName="ClusterNumber"
-                                        HorizontalHeaderContentAlignment="Center"
-                                        FixedWidth="True"
-                                        Width="150"
-                                        MinWidth="150"
-                                        ReadOnly="False"
-                                        Header="{x:Static properties:Resources.ClusterNumber}">
+				<dxg:GridColumn Header="{x:Static properties:Resources.ClusterNumber}" 
+								FieldName="Cluster"
+                                HorizontalHeaderContentAlignment="Center"
+                                FixedWidth="True"
+                                Width="150"
+                                MinWidth="150"
+                                ReadOnly="False">
 
 					<dxg:GridColumn.CellTemplate>
 						<DataTemplate>
-							<dxe:TextEdit  EditValue="{Binding Path=RowData.Row.ClusterNumber, 
-                                                   RelativeSource={RelativeSource TemplatedParent},
-                                                   Mode=TwoWay,
-                                                   UpdateSourceTrigger=PropertyChanged}"  
-                                                   InvalidValueBehavior="AllowLeaveEditor"                                     
-                                                   MaskType="RegEx" 
-                                                   Mask="[1-9]\d*"/>
+							<dxe:TextEdit EditValue="{Binding Path=RowData.Row.Cluster, 
+								RelativeSource={RelativeSource TemplatedParent},
+                                Mode=TwoWay,
+                                UpdateSourceTrigger=PropertyChanged}"  
+                                InvalidValueBehavior="AllowLeaveEditor"                                     
+                                MaskType="RegEx" 
+                                Mask="[1-9]\d*"/>
 						</DataTemplate>
 					</dxg:GridColumn.CellTemplate>
 
 				</dxg:GridColumn>
 
-				<dxg:GridColumn FieldName="Subordinate" 
-                                        HorizontalHeaderContentAlignment="Center"
-                                        FixedWidth="True"
-                                        Width="150"
-                                        MinWidth="150"
-                                        ReadOnly="False"
-                                        Header="{x:Static properties:Resources.Subordination}">
+				<dxg:GridColumn Header="{x:Static properties:Resources.Subordination}"
+								FieldName="Subordinate" 
+								HorizontalHeaderContentAlignment="Center"
+                                FixedWidth="True"
+                                Width="150"
+                                MinWidth="150"
+                                ReadOnly="False">
 
 					<dxg:GridColumn.EditSettings>
 						<dxe:ComboBoxEditSettings ItemsSource="{Binding SubordinationTypes}" 
@@ -73,18 +73,24 @@
 			</dxg:GridControl.Columns>
 
 			<dxg:GridControl.View>
-				<dxg:TreeListView  AllowPerPixelScrolling="True"
-                                           ShowTotalSummary="True"
-                                           AutoWidth="True"
-                                           AllowEditing="True"
-                                           KeyFieldName="Id" 
-                                           ParentFieldName="ParentId"
-                                           AllowCommitOnValidationAttributeError="True" 
-                                           ItemsSourceErrorInfoShowMode="RowAndCell">
-
+				<dxg:TreeListView  AllowPerPixelScrolling="True" 
+								   ShowTotalSummary="True"
+                                   AutoWidth="True"
+                                   AllowEditing="True"
+                                   KeyFieldName="Id" 
+                                   ParentFieldName="ParentId"
+                                   AllowCommitOnValidationAttributeError="True" 
+                                   ItemsSourceErrorInfoShowMode="RowAndCell">
 				</dxg:TreeListView>
 			</dxg:GridControl.View>
 		</dxg:GridControl>
+
+		<Button Grid.Row="1" Height="30" Margin="5" HorizontalAlignment="Right" Command="{Binding Path=ChangeRecordCommand}">
+			<StackPanel Orientation="Horizontal">
+				<Image Source="/Resources/Images/save.ico" Margin="0,2,3,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				<TextBlock Text="{x:Static properties:Resources.Save}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			</StackPanel>
+		</Button>
 
 	</Grid>
 </UserControl>

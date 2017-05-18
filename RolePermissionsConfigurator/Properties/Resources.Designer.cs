@@ -358,6 +358,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сохранить.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Выделить всё.
         /// </summary>
         public static string SelectAll {

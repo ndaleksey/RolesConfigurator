@@ -276,4 +276,8 @@
     <value>Подразделение</value>
     <comment>Подразделение</comment>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+    <comment>Сохранить</comment>
+  </data>
 </root>
