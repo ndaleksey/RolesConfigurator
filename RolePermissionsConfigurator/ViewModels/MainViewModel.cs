@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DevExpress.Mvvm;
+using Npgsql;
+using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
+using Swsu.Lignis.RolePermissionsConfigurator.Resources;
 using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
@@ -136,7 +139,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		private void DeleteRole()
 		{
-			SelectedTab.DeleteRole();
+			SelectedTab?.DeleteRole();
 		}
 
 		#endregion
@@ -175,10 +178,21 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				SelectedTab = InternalRolesViewModel;
 			}
+			catch (PostgresException dbe)
+			{
+				Debug.WriteLine(dbe);
+
+				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
+				MessageBox.Show(e, LogMessages.ReadFromDB);
+
+				Helper.Logger.Error(ELogMessageType.Process, e);
+				Helper.Logger.Error(ELogMessageType.Process, dbe);
+			}
 			catch (Exception e)
 			{
-				//TODO: обработать логгером
 				Debug.WriteLine(e);
+				MessageBox.Show(e.Message);
+				Helper.Logger.Error(ELogMessageType.Process, e);
 			}
 		}
 

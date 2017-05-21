@@ -181,12 +181,12 @@
     <comment>Разрешение</comment>
   </data>
   <data name="PluginsSettings" xml:space="preserve">
-    <value>Настройки плагинов</value>
-    <comment>Настройки плагинов</comment>
+    <value>Настройки модулей</value>
+    <comment>Настройки модулей</comment>
   </data>
   <data name="PluginsStartup" xml:space="preserve">
-    <value>Запуск плагинов</value>
-    <comment>Запуск плагинов</comment>
+    <value>Настройка запуска модулей</value>
+    <comment>Настройка запуска модулей</comment>
   </data>
   <data name="RoleAddition" xml:space="preserve">
     <value>Добавление роли</value>

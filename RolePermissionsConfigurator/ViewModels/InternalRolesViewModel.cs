@@ -74,11 +74,22 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					.ShowDialog(null, Properties.Resources.RoleAddition, null,
 						new InternalRoleSettingsViewModel(newRole, Roles, _accounts, EDialogOpenMode.Insert));
 			}
+			catch (PostgresException dbe)
+			{
+				Debug.WriteLine(dbe);
+
+				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
+				
+				MessageBox.Show(e, LogMessages.ReadFromDB);
+
+				Helper.Logger.Error(ELogMessageType.Process, e);
+				Helper.Logger.Error(ELogMessageType.Process, dbe);
+			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
-				Helper.Logger.Error(ELogMessageType.Process, e);
 				MessageBox.Show(e.Message);
+				Helper.Logger.Error(ELogMessageType.Process, e);
 			}
 			finally
 			{

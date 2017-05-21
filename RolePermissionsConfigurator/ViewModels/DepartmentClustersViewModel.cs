@@ -13,6 +13,7 @@ using NpgsqlTypes;
 using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
 using Swsu.Lignis.RolePermissionsConfigurator.Properties;
+using Swsu.Lignis.RolePermissionsConfigurator.Resources;
 using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
@@ -59,7 +60,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		public DepartmentClustersViewModel()
 		{
 			ChangeRecordCommand = new DelegateCommand(ChangeRecordAsync);
-			ValidateClusterCommand = new DelegateCommand<ValidationParameters>(ValidateCode);
 			Initialization();
 		}
 
@@ -76,11 +76,23 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				await ChangeRecord();
 				MessageBox.Show("Изменение записи", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
+			catch (PostgresException dbe)
+			{
+				Debug.WriteLine(dbe);
+
+				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
+
+				MessageBox.Show(e, LogMessages.ReadFromDB);
+
+				Helper.Logger.Error(ELogMessageType.Process, e);
+				Helper.Logger.Error(ELogMessageType.Process, dbe);
+			}
 			catch (Exception e)
 			{
+				Debug.WriteLine(e);
 				MessageBox.Show("Не возможно осуществить запись", "Внимание", MessageBoxButton.OK,
 					MessageBoxImage.Information);
-				Debug.WriteLine(e);
+				Helper.Logger.Error(ELogMessageType.Process, e);
 			}
 			finally
 			{
@@ -95,11 +107,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			{
 				var cmp = new DepartmentEqualityComparer();
 
-				var itemsWithCluster = Departments.Where(i => i.Cluster.HasValue).ToList();
-				var itemsWithDistinctCluster = itemsWithCluster.Distinct(cmp).ToList();
+				var depsWithCluster = Departments.Where(i => i.Cluster.HasValue).ToList();
+				var depsWithDistinctCluster = depsWithCluster.Distinct(cmp).ToList();
 
 				// если есть повторяющиеся значения кластера
-				if (itemsWithCluster.Count != itemsWithDistinctCluster.Count)
+				if (depsWithCluster.Count != depsWithDistinctCluster.Count)
 					throw new ApplicationException("Есть повторяющиеся значения номера кластера");
 
 				using (var connection = new NpgsqlConnection(Settings.Default.ConnectionString))
@@ -136,12 +148,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			});
 		}
 
-		public void ValidateCode(ValidationParameters p)
-		{
-			var res = Departments.FirstOrDefault(x => Equals(x.Cluster, p.Value));
-			p.Msg = res == null ? string.Empty : $"Value {p.Value} already exits.";
-		}
-
 		#endregion
 
 
@@ -155,10 +161,22 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				await LoadGroupingAsync();
 			}
+			catch (PostgresException dbe)
+			{
+				Debug.WriteLine(dbe);
+
+				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
+
+				MessageBox.Show(e, LogMessages.ReadFromDB);
+
+				Helper.Logger.Error(ELogMessageType.Process, e);
+				Helper.Logger.Error(ELogMessageType.Process, dbe);
+			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
-				Helper.Logger.Error(ELogMessageType.ReadFromDb, e);
+				MessageBox.Show(e.Message, "Ошибка во вкладке \"Кластера\"");
+				Helper.Logger.Error(ELogMessageType.Process, e);
 			}
 			finally
 			{

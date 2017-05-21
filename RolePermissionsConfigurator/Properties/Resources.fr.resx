@@ -223,11 +223,11 @@
   </data>
   <data name="PluginsSettings" xml:space="preserve">
     <value>Paramètres des plugins</value>
-    <comment>Настройки плагинов</comment>
+    <comment>Настройки модулей</comment>
   </data>
   <data name="PluginsStartup" xml:space="preserve">
     <value>Mise en route des plugins</value>
-    <comment>Запуск плагинов</comment>
+    <comment>Настройка запуска модулей</comment>
   </data>
   <data name="RoleAddition" xml:space="preserve">
     <value>Addition de rôle</value>

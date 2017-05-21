@@ -12,10 +12,16 @@ namespace Swsu.Lignis.RolePermissionsConfigurator
 	/// </summary>
 	public partial class App : Application
 	{
+		private Mutex _mutex;
+
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			base.OnStartup(e);
-			
+			bool createdNew;
+			_mutex = new Mutex(true, "Programme", out createdNew);
+
+			if (!createdNew)
+				Shutdown();
+
 			Thread.CurrentThread.CurrentCulture = Settings.Default.Culture;
 			Thread.CurrentThread.CurrentUICulture = Settings.Default.Culture;
 

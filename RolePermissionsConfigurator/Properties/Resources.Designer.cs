@@ -304,7 +304,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Настройки плагинов.
+        ///   Ищет локализованную строку, похожую на Настройки модулей.
         /// </summary>
         public static string PluginsSettings {
             get {
@@ -313,7 +313,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Запуск плагинов.
+        ///   Ищет локализованную строку, похожую на Настройка запуска модулей.
         /// </summary>
         public static string PluginsStartup {
             get {
