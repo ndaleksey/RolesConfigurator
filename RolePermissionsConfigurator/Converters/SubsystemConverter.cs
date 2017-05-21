@@ -11,8 +11,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-
-			var subs = value as List<object>;
 			var subsystems = value as ObservableCollection<object>;
 
 			if (subsystems == null) return value;

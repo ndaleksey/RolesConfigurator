@@ -88,6 +88,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на разрешён.
+        /// </summary>
+        public static string allowed {
+            get {
+                return ResourceManager.GetString("allowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Конфигуратор задач оболочки приложений.
         /// </summary>
         public static string ApplicationName {
@@ -201,6 +210,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на запрещён.
+        /// </summary>
+        public static string forbidden {
+            get {
+                return ResourceManager.GetString("forbidden", resourceCulture);
             }
         }
         

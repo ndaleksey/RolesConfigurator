@@ -129,6 +129,10 @@
     <value>Ajouter</value>
     <comment>Добавить</comment>
   </data>
+  <data name="allowed" xml:space="preserve">
+    <value>permis</value>
+    <comment>разрешён</comment>
+  </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Shell tâches d'application du configurateur</value>
     <comment>Конфигуратор задач оболочки приложений</comment>
@@ -176,6 +180,10 @@
   <data name="Edit" xml:space="preserve">
     <value>Modifier</value>
     <comment>Изменить</comment>
+  </data>
+  <data name="forbidden" xml:space="preserve">
+    <value>interdit</value>
+    <comment>запрещён</comment>
   </data>
   <data name="Grouping" xml:space="preserve">
     <value>Regroupement</value>

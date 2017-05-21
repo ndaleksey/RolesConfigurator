@@ -280,4 +280,12 @@
     <value>Сохранить</value>
     <comment>Сохранить</comment>
   </data>
+  <data name="allowed" xml:space="preserve">
+    <value>разрешён</value>
+    <comment>разрешён</comment>
+  </data>
+  <data name="forbidden" xml:space="preserve">
+    <value>запрещён</value>
+    <comment>запрещён</comment>
+  </data>
 </root>

@@ -8,8 +8,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			if (value == null) return "нет";
-			return value is bool && (bool) value ? "есть" : "нет";
+			if (value == null) return Properties.Resources.forbidden;
+			return value is bool && (bool) value ? Properties.Resources.allowed : Properties.Resources.forbidden;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
