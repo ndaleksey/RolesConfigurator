@@ -119,7 +119,7 @@
 					<ListBox ItemsSource="{Binding Path=SelectedRole.Plugins}">
 						<ListBox.ItemTemplate>
 							<DataTemplate DataType="{x:Type items:Plugin}">
-								<Expander Header="{Binding Path=Name}" IsExpanded="True">
+								<Expander Header="{Binding Path=Name}" IsExpanded="False">
 									<Expander.HeaderTemplate>
 										<DataTemplate>
 											<TextBlock Text="{Binding}" FontWeight="Bold"/>

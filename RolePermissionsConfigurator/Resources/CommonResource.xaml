@@ -25,6 +25,16 @@
 		</Style.Triggers>
 	</Style>
 
+	<Style TargetType="Expander">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Path=Permissions.Count}" Value="0">
+				<DataTrigger.Setters>
+					<Setter Property="IsEnabled" Value="False"/>
+				</DataTrigger.Setters>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+	
 	<Style TargetType="ListBoxItem">
 		<Setter Property="HorizontalAlignment" Value="Stretch"/>
 		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
