@@ -7,7 +7,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 	public static class Helper
 	{
 		#region Properties
-
 		public static AppLogger Logger { get; }
 
 		#endregion

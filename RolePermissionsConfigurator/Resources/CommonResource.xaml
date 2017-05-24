@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:properties="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Properties"
 					xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-					xmlns:converters="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Converters">
+					xmlns:converters="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Converters"
+					xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
 
 	<converters:YesNoBoolValueConverter x:Key="YesNoBoolValueConverter"/>
 	
@@ -25,6 +26,22 @@
 		</Style.Triggers>
 	</Style>
 
+	<Style x:Key="FlagIconStyle" TargetType="Image">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Path=CultureName}" Value="ru-RU">
+				<DataTrigger.Setters>
+					<Setter Property="Source" Value="./Images/flag_russia.ico"/>
+				</DataTrigger.Setters>
+			</DataTrigger>
+
+			<DataTrigger Binding="{Binding Path=CultureName}" Value="fr-FR">
+				<DataTrigger.Setters>
+					<Setter Property="Source" Value="./Images/flag_france.ico"/>
+				</DataTrigger.Setters>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+	
 	<Style TargetType="Expander">
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding Path=Permissions.Count}" Value="0">
@@ -116,19 +133,19 @@
 
 	<Style x:Key="DataGridTextBoxWithEventsStyle" TargetType="TextBox" BasedOn="{StaticResource DataGridTextBoxStyle}">
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding HasDuplicate}" Value="True" >
+			<DataTrigger Binding="{Binding Path=HasDuplicate}" Value="True" >
 				<DataTrigger.Setters>
 					<Setter Property="BorderBrush" Value="Red"/>
 				</DataTrigger.Setters>
 			</DataTrigger>
 
-			<DataTrigger Binding="{Binding IsExistedInDb}" Value="False" >
+			<DataTrigger Binding="{Binding Path=IsExistedInDb}" Value="False" >
 				<DataTrigger.Setters>
 					<Setter Property="FontStyle" Value="Italic"/>
 				</DataTrigger.Setters>
 			</DataTrigger>
 
-			<DataTrigger Binding="{Binding IsEdited}" Value="True" >
+			<DataTrigger Binding="{Binding Path=IsEdited}" Value="True" >
 				<DataTrigger.Setters>
 					<Setter Property="FontStyle" Value="Italic"/>
 				</DataTrigger.Setters>
@@ -142,4 +159,15 @@
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
+
+	<Style x:Key="ClusterTextEditStyle" TargetType="dxe:TextEdit">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Path=RowData.Row.HasCluster}" Value="false">
+				<DataTrigger.Setters>
+					<Setter Property="IsEnabled" Value="False"/>
+				</DataTrigger.Setters>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 </ResourceDictionary>

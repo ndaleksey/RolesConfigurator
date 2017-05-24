@@ -288,4 +288,48 @@
     <value>запрещён</value>
     <comment>запрещён</comment>
   </data>
+  <data name="Clusters" xml:space="preserve">
+    <value>Кластера</value>
+    <comment>Кластера</comment>
+  </data>
+  <data name="ExternalAbonents" xml:space="preserve">
+    <value>Внешние абоненты</value>
+    <comment>Внешние абоненты</comment>
+  </data>
+  <data name="InternalAbonents" xml:space="preserve">
+    <value>Внутренние абоненты</value>
+    <comment>Внутренние абоненты</comment>
+  </data>
+  <data name="ChangeLanguageRequest" xml:space="preserve">
+    <value>Вы действительно хотите сменить язык? Внимание: приложение будет перезапущено</value>
+    <comment>Сообщение при смене языка</comment>
+  </data>
+  <data name="LanguageChanging" xml:space="preserve">
+    <value>Смена языка</value>
+    <comment>Смена языка</comment>
+  </data>
+  <data name="ClusterAppointmentComplete" xml:space="preserve">
+    <value>Кластер назначен для подразделения</value>
+    <comment>Кластер назначен для подразделения</comment>
+  </data>
+  <data name="ClusterAppointmentError" xml:space="preserve">
+    <value>Ошибка назначения кластера</value>
+    <comment>Ошибка назначения кластера</comment>
+  </data>
+  <data name="ClusterDuplicationMessage" xml:space="preserve">
+    <value>Указанный кластер уже назначен для другого подразделения</value>
+    <comment>Указанный кластер уже назначен для другого подразделения</comment>
+  </data>
+  <data name="ClusterModification" xml:space="preserve">
+    <value>Изменение кластера</value>
+    <comment>Изменение кластера</comment>
+  </data>
+  <data name="ClusterNumberMustBeUnique" xml:space="preserve">
+    <value>Номер кластера должен быть уникальным</value>
+    <comment>Номер кластера должен быть уникальным</comment>
+  </data>
+  <data name="LoadGroupingError" xml:space="preserve">
+    <value>Ошибка загрузки группировки подразделений</value>
+    <comment>Ошибка загрузки группировки подразделений</comment>
+  </data>
 </root>

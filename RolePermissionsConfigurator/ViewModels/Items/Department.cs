@@ -20,7 +20,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 			get { return _name; }
 			set { SetProperty(ref _name, value, nameof(Name)); }
 		}
-
+		
 		#endregion
 
 		#region Constructions
@@ -28,7 +28,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 		public Department(Guid id, string name)
 		{
 			Id = id;
-			_name = name;
+			Name = name;
 		}
 
 		#endregion

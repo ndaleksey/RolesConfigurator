@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -8,6 +10,7 @@ using DevExpress.Mvvm;
 using Npgsql;
 using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
+using Swsu.Lignis.RolePermissionsConfigurator.Properties;
 using Swsu.Lignis.RolePermissionsConfigurator.Resources;
 using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
 
@@ -27,12 +30,21 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		private RolesViewModel _selectedTab;
 		private int _tabIndex;
+		private string _cultureName;
 
 		#endregion
 
 		#region Properties
+		
+		public static bool IsCultureChanged { get; private set; }
 
 		public string CurrentDepartment { get; private set; }
+
+		public string CultureName
+		{
+			get { return _cultureName;}
+			set { SetProperty(ref _cultureName, value, nameof(CultureName)); }
+		}
 
 		public int TabIndex
 		{
@@ -77,6 +89,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		public ICommand AddRoleCommand { get; }
 		public ICommand ModifyRoleCommand { get; }
 		public ICommand DeleteRoleCommand { get; }
+		public ICommand ChangeCultureCommand { get; }
 
 		#endregion
 
@@ -89,26 +102,14 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			ModifyRoleCommand = new DelegateCommand(ModifyRole, CanModifyRole);
 			DeleteRoleCommand = new DelegateCommand(DeleteRole, CanDeleteRole);
 
+			ChangeCultureCommand = new DelegateCommand(ChangeCulture, CanChangeCulture);
+
+			CultureName = Thread.CurrentThread.CurrentUICulture.Name;
+
 			Initialization();
 		}
 
 		#endregion
-
-		private void SetActiveRolesViewModel()
-		{
-			switch (TabIndex)
-			{
-				case 0:
-					SelectedTab = InternalRolesViewModel;
-					break;
-				case 1:
-					SelectedTab = ExternalRolesViewModel;
-					break;
-				default:
-					SelectedTab = null;
-					break;
-			}
-		}
 
 		#region Commands' methods
 
@@ -142,10 +143,32 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			SelectedTab?.DeleteRole();
 		}
 
+		private bool CanChangeCulture()
+		{
+			return true;
+		}
+
+		private void ChangeCulture()
+		{
+			if (
+				MessageBox.Show(Properties.Resources.ChangeLanguageRequest, Properties.Resources.LanguageChanging,
+					MessageBoxButton.YesNo) == MessageBoxResult.No)
+				return;
+
+			Settings.Default.Culture = Settings.Default.Culture.Name == "ru-RU"
+				? new CultureInfo("fr-FR")
+				: new CultureInfo("ru-RU");
+
+			Settings.Default.Save();
+
+			IsCultureChanged = true;
+			Application.Current.Shutdown(1);
+		}
+
 		#endregion
 
 		#region Methods
-
+		
 		protected new async void Initialization()
 		{
 			try
@@ -193,6 +216,22 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				Debug.WriteLine(e);
 				MessageBox.Show(e.Message);
 				Helper.Logger.Error(ELogMessageType.Process, e);
+			}
+		}
+
+		private void SetActiveRolesViewModel()
+		{
+			switch (TabIndex)
+			{
+				case 0:
+					SelectedTab = InternalRolesViewModel;
+					break;
+				case 1:
+					SelectedTab = ExternalRolesViewModel;
+					break;
+				default:
+					SelectedTab = null;
+					break;
 			}
 		}
 

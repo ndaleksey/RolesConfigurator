@@ -4,11 +4,14 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
 using DevExpress.Mvvm;
+using NLog.Internal;
 using Npgsql;
+using Swsu.Lignis.RolePermissionsConfigurator.Configuration;
 using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
 using Swsu.Lignis.RolePermissionsConfigurator.Properties;
@@ -259,7 +262,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				foreach (var p in _pluginsFromConfig)
 				{
-					var rolePlugin = new Plugin(p.Name, role);
+					var rolePlugin = new Plugin(p.Name, role) {DisplayName = p.DisplayName, Summary = p.Summary};
 
 					foreach (var permission in p.Permissions)
 					{
@@ -312,7 +315,46 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		/// </summary>
 		private void LoadPluginsFromPluginsConfig()
 		{
+			var section = (PlugInsSection) System.Configuration.ConfigurationManager.GetSection("plugIns");
+
 			_pluginsFromConfig.Clear();
+
+			foreach (var item in section.Items)
+			{
+				var displayName = item.GetDisplayName(Thread.CurrentThread.CurrentUICulture);
+
+				var plugin = new Plugin(item.Name)
+				{
+					DisplayName = string.IsNullOrEmpty(displayName) ? item.Name : displayName,
+					Summary = string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description
+				};
+
+				try
+				{
+					var table = PermissionTable.Load(item.Assembly, CultureInfo.CurrentUICulture);
+
+					foreach (var permission in table.Permissions)
+					{
+						var type = new PluginPermissionType();
+
+						foreach (var permissionValue in permission.Type.Values)
+							type.Values.Add(new PluginPermissionValue(permissionValue.Value, permissionValue.DisplayName,
+								permissionValue.Summary));
+
+						plugin.Permissions.Add(new PluginPermission(plugin, permission.InvariantName, permission.DisplayName, type,
+							permission.Summary));
+					}
+				}
+				catch (Exception e)
+				{
+//					Debug.WriteLine(e);
+//					Helper.Logger.Error(ELogMessageType.ReadFromFile, e);
+				}
+
+				_pluginsFromConfig.Add(plugin);
+			}
+			
+			/*_pluginsFromConfig.Clear();
 
 			PluginsCatalog pluginsCatalog;
 			var serializer = new XmlSerializer(typeof (PluginsCatalog));
@@ -348,7 +390,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					// ignored
 				}
 				_pluginsFromConfig.Add(plugin);
-			}
+			}*/
 		}
 
 		#endregion

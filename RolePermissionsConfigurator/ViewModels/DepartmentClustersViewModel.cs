@@ -18,11 +18,15 @@ using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 {
+
 	public class DepartmentClustersViewModel : CustomViewModel
 	{
 		#region Fields
 
 		private DepartmentItem _selectedDepartment;
+
+		private readonly Dictionary<int, HashSet<DepartmentItem>> _departmentItemsByClusterNumber
+			= new Dictionary<int, HashSet<DepartmentItem>>();
 
 		#endregion
 
@@ -34,7 +38,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			set { SetProperty(ref _selectedDepartment, value, nameof(SelectedDepartment)); }
 		}
 
-		public ObservableCollection<DepartmentItem> Departments { get; } = new ObservableCollection<DepartmentItem>();
+		public ObservableCollection<DepartmentItem> Departments { get; }
 
 		public ObservableCollection<SubordinateItem> SubordinationTypes { get; } =
 			new ObservableCollection<SubordinateItem>(
@@ -59,6 +63,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		public DepartmentClustersViewModel()
 		{
+			Departments = new DepartmentItemCollection(this);
 			ChangeRecordCommand = new DelegateCommand(ChangeRecordAsync);
 			Initialization();
 		}
@@ -74,7 +79,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			{
 				WorkflowType = EWorkflowType.SaveToDb;
 				await ChangeRecord();
-				MessageBox.Show("Изменение записи", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+				MessageBox.Show(Properties.Resources.ClusterAppointmentComplete, Properties.Resources.ClusterModification,
+					MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 			catch (PostgresException dbe)
 			{
@@ -82,16 +88,23 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
-				MessageBox.Show(e, LogMessages.ReadFromDB);
+				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 
 				Helper.Logger.Error(ELogMessageType.Process, e);
 				Helper.Logger.Error(ELogMessageType.Process, dbe);
 			}
+			catch (ApplicationException e)
+			{
+				Debug.WriteLine(e);
+				MessageBox.Show(e.Message, Properties.Resources.ClusterAppointmentError, MessageBoxButton.OK,
+					MessageBoxImage.Error);
+				Helper.Logger.Error(ELogMessageType.Process, e);
+			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
-				MessageBox.Show("Не возможно осуществить запись", "Внимание", MessageBoxButton.OK,
-					MessageBoxImage.Information);
+				MessageBox.Show(e.Message, Properties.Resources.ClusterAppointmentError, MessageBoxButton.OK,
+					MessageBoxImage.Error);
 				Helper.Logger.Error(ELogMessageType.Process, e);
 			}
 			finally
@@ -112,7 +125,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				// если есть повторяющиеся значения кластера
 				if (depsWithCluster.Count != depsWithDistinctCluster.Count)
-					throw new ApplicationException("Есть повторяющиеся значения номера кластера");
+					throw new ApplicationException(Properties.Resources.ClusterDuplicationMessage);
 
 				using (var connection = new NpgsqlConnection(Settings.Default.ConnectionString))
 				{
@@ -131,8 +144,9 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 								cmd.Parameters.AddWithValue("priority", NpgsqlDbType.Integer,
 									i.Subordinate == ESubordinate.Superior
 										? 1
-										: i.Subordinate == ESubordinate.Inferior 
-											? 2 : i.Subordinate == ESubordinate.Interacting ? 3 : 0);
+										: i.Subordinate == ESubordinate.Inferior
+											? 2
+											: i.Subordinate == ESubordinate.Interacting ? 3 : 0);
 								cmd.Parameters.AddWithValue("cluster", NpgsqlDbType.Integer,
 									i.Cluster.HasValue ? (object) i.Cluster.Value : DBNull.Value);
 								cmd.CommandText = i.Cluster.HasValue
@@ -167,7 +181,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
-				MessageBox.Show(e, LogMessages.ReadFromDB);
+				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 
 				Helper.Logger.Error(ELogMessageType.Process, e);
 				Helper.Logger.Error(ELogMessageType.Process, dbe);
@@ -175,7 +189,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
-				MessageBox.Show(e.Message, "Ошибка во вкладке \"Кластера\"");
+				MessageBox.Show(e.Message, Properties.Resources.LoadGroupingError, MessageBoxButton.OK, MessageBoxImage.Error);
 				Helper.Logger.Error(ELogMessageType.Process, e);
 			}
 			finally
@@ -192,17 +206,17 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			Departments.Clear();
 			//                items.ForEach(i =>{Items.Add(i);});
 
-			var inferiorParent = new DepartmentItem
+			var inferiorParent = new DepartmentItem(false)
 			{
 				Id = Guid.NewGuid(),
 				Name = Properties.Resources.Inferior //"Нижестоящие"
 			};
-			var superiorParent = new DepartmentItem
+			var superiorParent = new DepartmentItem(false)
 			{
 				Id = Guid.NewGuid(),
 				Name = Properties.Resources.Superior //"Вышестоящие"
 			};
-			var interatingPerent = new DepartmentItem
+			var interatingPerent = new DepartmentItem(false)
 			{
 				Id = Guid.NewGuid(),
 				Name = Properties.Resources.Interacting // "Взаимодействующие"
@@ -267,7 +281,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 								var cluster = reader.IsDBNull(3) ? null : (int?) reader.GetInt32(3);
 								var sub = reader.IsDBNull(4) ? 0 : reader.GetByte(4);
 
-								items.Add(new DepartmentItem
+								items.Add(new DepartmentItem(true)
 								{
 									Id = id,
 									ParentId = parentId,
@@ -286,6 +300,141 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				}
 				return items;
 			});
+		}
+
+		private void OnDepartmentItemClusterNumberChanged(object sender, PropertyValueChangedEventArgs<int?> e)
+		{
+			var item = (DepartmentItem) sender;
+
+			if (e.OldValue.HasValue)
+				UnregisterClusterNumber(e.OldValue.Value, item);
+
+			if (e.NewValue.HasValue)
+				RegisterClusterNumber(e.NewValue.Value, item);
+		}
+
+		private void OnDepartmentItemRemoving(DepartmentItem item)
+		{
+			item.ClusterNumberChanged -= OnDepartmentItemClusterNumberChanged;
+
+			if (item.Cluster.HasValue)
+				UnregisterClusterNumber(item.Cluster.Value, item);
+		}
+
+		private void OnDepartmentItemAdded(DepartmentItem item)
+		{
+			if (item.Cluster.HasValue)
+				RegisterClusterNumber(item.Cluster.Value, item);
+
+			item.ClusterNumberChanged += OnDepartmentItemClusterNumberChanged;
+		}
+
+		private void RegisterClusterNumber(int value, DepartmentItem item)
+		{
+			HashSet<DepartmentItem> groupingItems;
+
+			if (!_departmentItemsByClusterNumber.TryGetValue(value, out groupingItems))
+				_departmentItemsByClusterNumber.Add(value, groupingItems = new HashSet<DepartmentItem>());
+
+			switch (groupingItems.Count)
+			{
+				case 0:
+					break;
+
+				case 1:
+					foreach (var i in groupingItems)
+						i.ClusterIsNotUnique = true;
+
+					goto default;
+
+				default:
+					item.ClusterIsNotUnique = true;
+					break;
+			}
+
+			if (!groupingItems.Add(item))
+				return; // Should never happen.
+		}
+
+		private void UnregisterClusterNumber(int value, DepartmentItem item)
+		{
+			HashSet<DepartmentItem> groupingItems;
+
+			if (!_departmentItemsByClusterNumber.TryGetValue(value, out groupingItems))
+				return; // Should never happen.
+
+			if (!groupingItems.Remove(item))
+				return; // Should never happen.
+
+			switch (groupingItems.Count)
+			{
+				case 0:
+					_departmentItemsByClusterNumber.Remove(value);
+					break;
+
+				case 1:
+					foreach (var i in groupingItems)
+						i.ClusterIsNotUnique = false;
+
+					goto default;
+
+				default:
+					item.ClusterIsNotUnique = false;
+					break;
+			}
+		}
+
+		#endregion
+
+		#region Nested Types
+
+		public class DepartmentItemCollection : ObservableCollection<DepartmentItem>
+		{
+			#region Fields
+
+			private readonly DepartmentClustersViewModel _outer;
+
+			#endregion
+
+			#region Constructors
+
+			public DepartmentItemCollection(DepartmentClustersViewModel outer)
+			{
+				_outer = outer;
+			}
+
+			#endregion
+
+			#region Methods
+
+			protected override void ClearItems()
+			{
+				foreach (var item in Items)
+					_outer.OnDepartmentItemRemoving(item);
+
+				base.ClearItems();
+			}
+
+			protected override void InsertItem(int index, DepartmentItem item)
+			{
+				base.InsertItem(index, item);
+				_outer.OnDepartmentItemAdded(item);
+			}
+
+			protected override void RemoveItem(int index)
+			{
+				_outer.OnDepartmentItemRemoving(Items[index]);
+				base.RemoveItem(index);
+			}
+
+			protected override void SetItem(int index, DepartmentItem item)
+			{
+				_outer.OnDepartmentItemRemoving(Items[index]);
+				base.SetItem(index, item);
+				_outer.OnDepartmentItemAdded(item);
+			}
+
+			#endregion
 		}
 
 		#endregion

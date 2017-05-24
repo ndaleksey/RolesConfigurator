@@ -35,44 +35,58 @@
 				<Setter Property="Margin" Value="5, 3"/>
 			</Style>
 		</DockPanel.Resources>
-		
-		<ToolBar DockPanel.Dock="Top" AllowDrop="False" TabIndex="{Binding Path=TabIndex}">
 
-			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=AddRoleCommand}">
+		<Grid DockPanel.Dock="Top" Background="LightBlue">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<ToolBar AllowDrop="False" TabIndex="{Binding Path=TabIndex}" HorizontalAlignment="Stretch">
+
+				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=AddRoleCommand}">
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static properties:Resources.Add}"/>
+					</Button.ToolTip>
+					<Image Source="/Resources/Images/add.ico"/>
+				</Button>
+
+				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ModifyRoleCommand}">
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static properties:Resources.Edit}"/>
+					</Button.ToolTip>
+					<Image Source="/Resources/Images/edit.ico"/>
+				</Button>
+
+				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=DeleteRoleCommand}">
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static properties:Resources.Delete}"/>
+					</Button.ToolTip>
+					<Image Source="/Resources/Images/delete.ico"/>
+				</Button>
+			</ToolBar>
+
+			<Button Grid.Column="1" 
+					Width="48" Height="32" Padding="0" Margin="2, 2"
+					Command="{Binding Path=ChangeCultureCommand}">
 				<Button.ToolTip>
-					<ToolTip Content="{x:Static properties:Resources.Add}"/>
+					<ToolTip Content="{x:Static properties:Resources.LanguageChanging}"/>
 				</Button.ToolTip>
-				<Image Source="/Resources/Images/add.ico"/>
+				<Image Style="{StaticResource FlagIconStyle}" Margin="0, 2, 0, 0"/>
 			</Button>
-
-			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ModifyRoleCommand}">
-				<Button.ToolTip>
-					<ToolTip Content="{x:Static properties:Resources.Edit}"/>
-				</Button.ToolTip>
-				<Image Source="/Resources/Images/edit.ico"/>
-			</Button>
-
-			<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=DeleteRoleCommand}">
-				<Button.ToolTip>
-					<ToolTip Content="{x:Static properties:Resources.Delete}"/>
-				</Button.ToolTip>
-				<Image Source="/Resources/Images/delete.ico"/>
-			</Button>
-
-			<!--					<Button Content="Копировать как"/>-->
-		</ToolBar>
+		</Grid>
 
 		<TabControl DockPanel.Dock="Bottom" SelectedIndex="{Binding Path=TabIndex, UpdateSourceTrigger=PropertyChanged}">
 			<TabControl.Items>
-				<TabItem Header="Внутренние абоненты">
+				<TabItem Header="{x:Static properties:Resources.InternalAbonents}">
 					<views:InternalRolesView DataContext="{Binding Path=InternalRolesViewModel}"/>
 				</TabItem>
 
-				<TabItem Header="Внешние абоненты">
+				<TabItem Header="{x:Static properties:Resources.ExternalAbonents}">
 					<views:ExternalRolesView DataContext="{Binding Path=ExternalRolesViewModel}"/>
 				</TabItem>
 
-				<TabItem Header="Кластера">
+				<TabItem Header="{x:Static properties:Resources.Clusters}">
 					<views:DepartmentClustersView DataContext="{Binding Path=DepartmentClustersViewModel}"/>
 				</TabItem>
 			</TabControl.Items>

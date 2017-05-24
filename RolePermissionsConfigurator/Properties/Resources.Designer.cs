@@ -133,6 +133,42 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы действительно хотите сменить язык? Внимание: приложение будет перезапущено.
+        /// </summary>
+        public static string ChangeLanguageRequest {
+            get {
+                return ResourceManager.GetString("ChangeLanguageRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Кластер назначен для подразделения.
+        /// </summary>
+        public static string ClusterAppointmentComplete {
+            get {
+                return ResourceManager.GetString("ClusterAppointmentComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка назначения кластера.
+        /// </summary>
+        public static string ClusterAppointmentError {
+            get {
+                return ResourceManager.GetString("ClusterAppointmentError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Указанный кластер уже назначен для другого подразделения.
+        /// </summary>
+        public static string ClusterDuplicationMessage {
+            get {
+                return ResourceManager.GetString("ClusterDuplicationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка инициализации кластера подразделения.
         /// </summary>
         public static string ClusterInitializationException {
@@ -142,11 +178,38 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменение кластера.
+        /// </summary>
+        public static string ClusterModification {
+            get {
+                return ResourceManager.GetString("ClusterModification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Номер кластера.
         /// </summary>
         public static string ClusterNumber {
             get {
                 return ResourceManager.GetString("ClusterNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Номер кластера должен быть уникальным.
+        /// </summary>
+        public static string ClusterNumberMustBeUnique {
+            get {
+                return ResourceManager.GetString("ClusterNumberMustBeUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Кластера.
+        /// </summary>
+        public static string Clusters {
+            get {
+                return ResourceManager.GetString("Clusters", resourceCulture);
             }
         }
         
@@ -214,6 +277,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Внешние абоненты.
+        /// </summary>
+        public static string ExternalAbonents {
+            get {
+                return ResourceManager.GetString("ExternalAbonents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на запрещён.
         /// </summary>
         public static string forbidden {
@@ -246,6 +318,33 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         public static string Interacting {
             get {
                 return ResourceManager.GetString("Interacting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Внутренние абоненты.
+        /// </summary>
+        public static string InternalAbonents {
+            get {
+                return ResourceManager.GetString("InternalAbonents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Смена языка.
+        /// </summary>
+        public static string LanguageChanging {
+            get {
+                return ResourceManager.GetString("LanguageChanging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка загрузки группировки подразделений.
+        /// </summary>
+        public static string LoadGroupingError {
+            get {
+                return ResourceManager.GetString("LoadGroupingError", resourceCulture);
             }
         }
         

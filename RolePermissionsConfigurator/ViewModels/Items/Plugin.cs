@@ -9,6 +9,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 		#region Fields
 
 		private string _name;
+		private string _displayName;
 		private string _summary;
 		private string _value;
 		private Role _role;
@@ -22,6 +23,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 		{
 			get { return _name; }
 			set { SetProperty(ref _name, value, nameof(Name)); }
+		}
+
+		public string DisplayName
+		{
+			get { return _displayName; }
+			set { SetProperty(ref _displayName, value, nameof(DisplayName)); }
 		}
 
 		public string Summary

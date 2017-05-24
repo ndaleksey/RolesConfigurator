@@ -110,6 +110,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Configuration\ElementCollectionBase.cs" />
+    <Compile Include="Configuration\PlugInElement.cs" />
+    <Compile Include="Configuration\PlugInElementCollection.cs" />
+    <Compile Include="Configuration\PlugInLocalizationElement.cs" />
+    <Compile Include="Configuration\PlugInLocalizationElementCollection.cs" />
+    <Compile Include="Configuration\PlugInsSection.cs" />
     <Compile Include="Converters\SubsystemConverter.cs" />
     <Compile Include="Converters\YesNoBoolValueConverter.cs" />
     <Compile Include="Infrastructure\BindableBaseExtanded.cs" />
@@ -238,6 +244,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="PlugIns.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -297,6 +306,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\main_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\flag_france.ico" />
+    <Resource Include="Resources\Images\flag_russia.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -285,4 +285,48 @@
     <value>Valeur</value>
     <comment>Значение</comment>
   </data>
+  <data name="Clusters" xml:space="preserve">
+    <value>Clusters</value>
+    <comment>Кластера</comment>
+  </data>
+  <data name="ExternalAbonents" xml:space="preserve">
+    <value>Abonents externes</value>
+    <comment>Внешние абоненты</comment>
+  </data>
+  <data name="InternalAbonents" xml:space="preserve">
+    <value>Abonents internes</value>
+    <comment>Внутренние абоненты</comment>
+  </data>
+  <data name="ChangeLanguageRequest" xml:space="preserve">
+    <value>Voulez-vous vraiment changer la langue? Note: L'application redémarre</value>
+    <comment>Сообщение при смене языка</comment>
+  </data>
+  <data name="LanguageChanging" xml:space="preserve">
+    <value>Changement de langue</value>
+    <comment>Смена языка</comment>
+  </data>
+  <data name="ClusterAppointmentComplete" xml:space="preserve">
+    <value>Rendez-vous en clôture complet</value>
+    <comment>Кластер назначен для подразделения</comment>
+  </data>
+  <data name="ClusterAppointmentError" xml:space="preserve">
+    <value>Erreur de rendez-vous de cluster</value>
+    <comment>Ошибка назначения кластера</comment>
+  </data>
+  <data name="ClusterDuplicationMessage" xml:space="preserve">
+    <value>Le cluster spécifié est déjà attribué à une autre division</value>
+    <comment>Указанный кластер уже назначен для другого подразделения</comment>
+  </data>
+  <data name="ClusterModification" xml:space="preserve">
+    <value>Modification de grappe</value>
+    <comment>Изменение кластера</comment>
+  </data>
+  <data name="ClusterNumberMustBeUnique" xml:space="preserve">
+    <value>Numéro de groupe doit être unique</value>
+    <comment>Номер кластера должен быть уникальным</comment>
+  </data>
+  <data name="LoadGroupingError" xml:space="preserve">
+    <value>Failed to load the grouping of departments</value>
+    <comment>Ошибка загрузки группировки подразделений</comment>
+  </data>
 </root>
