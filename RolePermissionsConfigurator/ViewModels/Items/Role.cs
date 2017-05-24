@@ -62,7 +62,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 			SubsystemPermissions = new ObservableCollection<SubsystemPermission>();
 		}
 
-		public Role(Guid id, Guid clusterId, int number, string name, string description = null, string department = null)
+		public Role(Guid id, Guid clusterId, int number, string name, string description = "", string department = "")
 			: this(number, name, description, department)
 		{
 			Id = id;

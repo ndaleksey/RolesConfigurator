@@ -61,9 +61,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 
 		#region Constructors
 
-		public Plugin(string name)
+		public Plugin(string name, string displayName = "", string summary = "")
 		{
 			Name = name;
+			DisplayName = displayName;
+			Summary = summary;
 			Permissions = new ObservableCollection<PluginPermission>();
 		}
 
@@ -77,7 +79,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items
 		#region Methods
 		public static Plugin GetCopyFrom(Plugin plugin)
 		{
-			var newPlugin = new Plugin(plugin.Name, plugin.Role) {IsSet = plugin.IsSet};
+			var newPlugin = new Plugin(plugin.Name, plugin.DisplayName, plugin.Summary) {IsSet = plugin.IsSet};
 			foreach (var newPermission in plugin.Permissions.Select(PluginPermission.GetCopyFrom))
 			{
 				newPermission.Plugin.Role = plugin.Role;

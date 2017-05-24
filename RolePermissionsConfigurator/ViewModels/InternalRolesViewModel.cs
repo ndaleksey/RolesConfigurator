@@ -323,11 +323,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			{
 				var displayName = item.GetDisplayName(Thread.CurrentThread.CurrentUICulture);
 
-				var plugin = new Plugin(item.Name)
-				{
-					DisplayName = string.IsNullOrEmpty(displayName) ? item.Name : displayName,
-					Summary = string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description
-				};
+				var plugin = new Plugin(item.Name, string.IsNullOrEmpty(displayName) ? item.Name : displayName,
+					string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description);
 
 				try
 				{

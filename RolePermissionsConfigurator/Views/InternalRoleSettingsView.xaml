@@ -76,7 +76,7 @@
 							  IsChecked="{Binding Path=PluginSelectionStatus}" Command="{Binding Path=SelectAllPluginsCommand}"/>
 					<DataGrid ItemsSource="{Binding Path=TempRole.Plugins}" CanUserAddRows="False">
 						<DataGrid.Columns>
-							<DataGridTextColumn Header="{x:Static properties:Resources.Name}" Binding="{Binding Path=Name}" MinWidth="150" IsReadOnly="True"/>
+							<DataGridTextColumn Header="{x:Static properties:Resources.Name}" Binding="{Binding Path=DisplayName}" MinWidth="150" IsReadOnly="True"/>
 							<DataGridCheckBoxColumn Header="{x:Static properties:Resources.Permission}" Binding="{Binding Path=IsSet}" MinWidth="100"/>
 						</DataGrid.Columns>
 					</DataGrid>
@@ -88,7 +88,7 @@
 				<ListBox ItemsSource="{Binding Path=TempRole.Plugins}">
 					<ListBox.ItemTemplate>
 						<DataTemplate DataType="{x:Type items:Plugin}">
-							<Expander Header="{Binding Path=Name}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+							<Expander Header="{Binding Path=DisplayName}" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
 								<Expander.HeaderTemplate>
 									<DataTemplate>
 										<TextBlock Text="{Binding}" FontWeight="Bold"/>
