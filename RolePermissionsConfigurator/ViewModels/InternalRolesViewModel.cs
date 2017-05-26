@@ -315,43 +315,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		/// </summary>
 		private void LoadPluginsFromPluginsConfig()
 		{
-			var section = (PlugInsSection) System.Configuration.ConfigurationManager.GetSection("plugIns");
-
 			_pluginsFromConfig.Clear();
-
-			foreach (var item in section.Items)
-			{
-				var displayName = item.GetDisplayName(Thread.CurrentThread.CurrentUICulture);
-
-				var plugin = new Plugin(item.Name, string.IsNullOrEmpty(displayName) ? item.Name : displayName,
-					string.IsNullOrEmpty(item.Description) ? string.Empty : item.Description);
-
-				try
-				{
-					var table = PermissionTable.Load(item.Assembly, CultureInfo.CurrentUICulture);
-
-					foreach (var permission in table.Permissions)
-					{
-						var type = new PluginPermissionType();
-
-						foreach (var permissionValue in permission.Type.Values)
-							type.Values.Add(new PluginPermissionValue(permissionValue.Value, permissionValue.DisplayName,
-								permissionValue.Summary));
-
-						plugin.Permissions.Add(new PluginPermission(plugin, permission.InvariantName, permission.DisplayName, type,
-							permission.Summary));
-					}
-				}
-				catch (Exception e)
-				{
-//					Debug.WriteLine(e);
-//					Helper.Logger.Error(ELogMessageType.ReadFromFile, e);
-				}
-
-				_pluginsFromConfig.Add(plugin);
-			}
-			
-			/*_pluginsFromConfig.Clear();
 
 			PluginsCatalog pluginsCatalog;
 			var serializer = new XmlSerializer(typeof (PluginsCatalog));
@@ -361,10 +325,10 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				pluginsCatalog = (PluginsCatalog) serializer.Deserialize(stream);
 				stream.Close();
 			}
-
-			foreach (var p in pluginsCatalog)
+			
+			foreach (var p in pluginsCatalog.Adds)
 			{
-				var plugin = new Plugin(p.Name);
+				var plugin = new Plugin(p.Name, p.GetDisplayName(CultureInfo.CurrentUICulture), p.GetDescription(CultureInfo.CurrentUICulture));
 
 				try
 				{
@@ -387,7 +351,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					// ignored
 				}
 				_pluginsFromConfig.Add(plugin);
-			}*/
+			}
 		}
 
 		#endregion

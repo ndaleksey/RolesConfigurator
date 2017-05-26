@@ -25,7 +25,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("d:\\PlugIns.config")]
+        [global::System.Configuration.DefaultSettingValueAttribute("D:\\2017-05-23\\PlugIns.config")]
         public string PluginsCatalog {
             get {
                 return ((string)(this["PluginsCatalog"]));
@@ -50,8 +50,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Host=127.0.0.1;Port=5432;Database=los_db;SearchPath=public;Username=postgres;Pass" +
-            "word=postgres;Persist Security Info=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Host=10.6.7.103;Port=5432;Database=los_db;SearchPath=public;Username=postgres;Pas" +
+            "sword=rjynbytyn;Persist Security Info=True")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

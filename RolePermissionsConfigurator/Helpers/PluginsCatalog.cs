@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 {
 	[XmlRoot(ElementName = "plugIns", IsNullable = false)]
-	public class PluginsCatalog : ICollection<PluginMetaData>
+	public class PluginsCatalog /*: ICollection<PluginMetaData>*/
 	{
+		[XmlElement("add")]
+		public Collection<PluginMetaData> Adds { get; } = new Collection<PluginMetaData>();
+
+		/*
 		private readonly List<PluginMetaData> _plugins;
 
 		public PluginsCatalog()
@@ -57,5 +62,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 		{
 			return _plugins.GetEnumerator();
 		}
+		*/
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
+using System.Linq;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.Configuration
 {
@@ -101,7 +102,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Configuration
 			}
 
 			return getInvariant(this);
-		}
+		}		
 
 		#endregion
 	}
