@@ -1,6 +1,8 @@
 ﻿DROP SCHEMA IF EXISTS permission CASCADE;
 CREATE SCHEMA permission;
 
+COMMENT ON SCHEMA permission IS 'Схема для разграничения прав доступа ролей и пользователей к плагинам (модулям) оболочки приложений, их функционалу, подсистемам КСА, а также для хранения кластеров подразделений';
+
 set search_path to 'permission';
 
 -- список подсистем
@@ -10,6 +12,10 @@ CREATE TABLE subsystem (
 
 	PRIMARY KEY (number)
 );
+
+COMMENT ON TABLE subsystem IS 'Таблица подсистем КСА, разрешённые для использования ролью';
+COMMENT ON COLUMN subsystem.number IS 'Номер подсистемы';
+COMMENT ON COLUMN subsystem.name IS 'Наименование подсистемы';
 
 -- собственно, его величество "КЛАСТЕР" =)
 CREATE TABLE cluster (
@@ -22,7 +28,11 @@ CREATE TABLE cluster (
 	FOREIGN KEY (id) REFERENCES dynamic.mu_own_bb_obj(id) ON DELETE CASCADE
 );
 
-COMMENT ON COLUMN cluster.id is 'ID элемента группировки';
+COMMENT ON TABLE cluster IS 'Таблица подсистем КСА, разрешённые для использования ролью';
+COMMENT ON COLUMN cluster.id IS 'Идентификатор элемента группировки (подразделения)';
+COMMENT ON COLUMN cluster.number IS 'Номер кластера';
+COMMENT ON COLUMN cluster.priority IS 'Приоритет (вышестоящие/нижестоящие)';
+
 
 -- роли пользователей (внутр. абонент)
 CREATE TABLE role (
@@ -36,7 +46,11 @@ CREATE TABLE role (
 	UNIQUE (number)
 );
 
-COMMENT ON COLUMN role.number is 'Номер абонента';
+COMMENT ON TABLE role IS 'Таблица ролей пользователей (внутренние абоненты)';
+COMMENT ON COLUMN role.id IS 'Идентификатор';
+COMMENT ON COLUMN role.name IS 'Наименование';
+COMMENT ON COLUMN role.description IS 'Описание';
+COMMENT ON COLUMN role.number IS 'Номер';
 
 -- пользователи (БД или в будущем домена Windows)
 CREATE TABLE account (
@@ -50,6 +64,12 @@ CREATE TABLE account (
 	FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL
 );
 
+COMMENT ON TABLE account IS 'Таблица пользователей (пользователи СУБД)';
+COMMENT ON COLUMN account.login IS 'Логин';
+COMMENT ON COLUMN account.name IS 'Имя';
+COMMENT ON COLUMN account.description IS 'Описание';
+COMMENT ON COLUMN account.role_id IS 'Идентификатор роли, которой принадлежит данный пользователь';
+
 CREATE TABLE role_plugin (
 	role_id uuid NOT NULL,
 	plugin_name TEXT NOT NULL,
@@ -57,6 +77,11 @@ CREATE TABLE role_plugin (
 	PRIMARY KEY (role_id, plugin_name),
 	FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );
+
+COMMENT ON TABLE role_plugin IS 'Таблица связи ролей и плагинов';
+COMMENT ON COLUMN role_plugin.role_id IS 'Идентификатор роли';
+COMMENT ON COLUMN role_plugin.plugin_name IS 'Наименование плагина';
+
 
 -- разрешения на ф-цонал плагина для роли
 CREATE TABLE role_plugin_permission (
@@ -69,6 +94,12 @@ CREATE TABLE role_plugin_permission (
 	FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );
 
+COMMENT ON TABLE role_plugin_permission IS 'Таблица связи ролей и разрешений модулей (функционала)';
+COMMENT ON COLUMN role_plugin_permission.role_id IS 'Идентификатор роли';
+COMMENT ON COLUMN role_plugin_permission.plugin_name IS 'Наименование плагина';
+COMMENT ON COLUMN role_plugin_permission.permission_name IS 'Наименование разрешения';
+COMMENT ON COLUMN role_plugin_permission.permission_value IS 'Значение разрешения';
+
 -- разрешения на тип подсистем внутренних абонентов
 CREATE TABLE role_subsystem_permission (
 	subsystem_number INTEGER NOT NULL,
@@ -78,6 +109,10 @@ CREATE TABLE role_subsystem_permission (
 	FOREIGN KEY (role_id) REFERENCES role(id) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY (subsystem_number) REFERENCES subsystem(number) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+COMMENT ON TABLE role_subsystem_permission IS 'Таблица связи ролей и разрешений подсистем КСА';
+COMMENT ON COLUMN role_subsystem_permission.subsystem_number IS 'Номер подсистемы КСА';
+COMMENT ON COLUMN role_subsystem_permission.role_id IS 'Идентификатор роли';
 
 -- внешние абоненты
 CREATE TABLE external_abonent (
@@ -89,6 +124,9 @@ CREATE TABLE external_abonent (
 	PRIMARY KEY (cluster_number, number),
 	UNIQUE (name)
 );
+
+COMMENT ON TABLE role_subsystem_permission IS 'Таблица внешних абонентов';
+COMMENT ON COLUMN role_subsystem_permission.subsystem_number IS 'Номер подсистемы КСА';
 
 -- разрешения на тип подсистем внешних абонентов
 CREATE TABLE external_abonent_subsystem_permission (

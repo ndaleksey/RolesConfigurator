@@ -33,9 +33,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator
 			Thread.CurrentThread.CurrentCulture = Settings.Default.Culture;
 			Thread.CurrentThread.CurrentUICulture = Settings.Default.Culture;
 
+			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 			AppDomain.CurrentDomain.ProcessExit += OnCurrentDomainProcessExit;
 
 			Helper.Logger.Info(ELogMessageType.ApplicationStart, LogMessages.StartApplication);
+		}
+
+		private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs args)
+		{
+			Helper.Logger.Error(ELogMessageType.Process, ((Exception) args.ExceptionObject));
 		}
 
 		private void OnCurrentDomainProcessExit(object sender, EventArgs e)
