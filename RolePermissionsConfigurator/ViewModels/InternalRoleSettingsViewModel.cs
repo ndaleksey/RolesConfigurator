@@ -212,6 +212,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				{
 					var oldPermission = oldPlugin.Permissions[j];
 					var newPermission = newPlugin.Permissions[j];
+					newPermission.Plugin.Role = TempRole;
 
 					if (oldPermission.Value == null && newPermission.Value != null)
 					{
