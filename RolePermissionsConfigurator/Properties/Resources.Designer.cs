@@ -205,7 +205,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Кластера.
+        ///   Ищет локализованную строку, похожую на Кластеры.
         /// </summary>
         public static string Clusters {
             get {

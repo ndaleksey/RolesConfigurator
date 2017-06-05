@@ -346,9 +346,9 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 							permission.Summary));
 					}
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
-					// ignored
+					Helper.Logger.Error(ELogMessageType.ReadFromFile, e);
 				}
 				_pluginsFromConfig.Add(plugin);
 			}
