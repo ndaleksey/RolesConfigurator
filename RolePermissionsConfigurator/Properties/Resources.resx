@@ -289,8 +289,8 @@
     <comment>запрещён</comment>
   </data>
   <data name="Clusters" xml:space="preserve">
-    <value>Кластера</value>
-    <comment>Кластера</comment>
+    <value>Кластеры</value>
+    <comment>Кластеры</comment>
   </data>
   <data name="ExternalAbonents" xml:space="preserve">
     <value>Внешние абоненты</value>
