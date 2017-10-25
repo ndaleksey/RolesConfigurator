@@ -68,21 +68,17 @@
       <HintPath>..\packages\Npgsql.3.1.10\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Swsu.Lignis.Logger.AppLogger, Version=1.2.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swsu.Lignis.Logger.PrtAgent.1.6.1.11\lib\net45\Swsu.Lignis.Logger.AppLogger.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Swsu.Lignis.Logger.AppLogger, Version=1.2.1.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swsu.Lignis.Logger.PrtAgent.1.7.1.9\lib\net45\Swsu.Lignis.Logger.AppLogger.dll</HintPath>
     </Reference>
-    <Reference Include="Swsu.Lignis.Logger.NodLogger, Version=1.5.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swsu.Lignis.Logger.PrtAgent.1.6.1.11\lib\net45\Swsu.Lignis.Logger.NodLogger.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Swsu.Lignis.Logger.NodLogger, Version=1.5.1.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swsu.Lignis.Logger.PrtAgent.1.7.1.9\lib\net45\Swsu.Lignis.Logger.NodLogger.dll</HintPath>
     </Reference>
-    <Reference Include="Swsu.Lignis.Logger.PrtAgent, Version=1.6.1.11, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swsu.Lignis.Logger.PrtAgent.1.6.1.11\lib\net45\Swsu.Lignis.Logger.PrtAgent.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Swsu.Lignis.Logger.PrtAgent, Version=1.7.1.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swsu.Lignis.Logger.PrtAgent.1.7.1.9\lib\net45\Swsu.Lignis.Logger.PrtAgent.dll</HintPath>
     </Reference>
-    <Reference Include="Swsu.Lignis.MiddleWare.Common, Version=1.6.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Swsu.Lignis.MiddleWare.Common.1.6.1.2\lib\net45\Swsu.Lignis.MiddleWare.Common.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Swsu.Lignis.MiddleWare.Common, Version=1.6.1.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swsu.Lignis.MiddleWare.Common.1.6.1.6\lib\net45\Swsu.Lignis.MiddleWare.Common.dll</HintPath>
     </Reference>
     <Reference Include="Swsu.Lignis.Workstation.Contract, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Swsu.Lignis.Workstation.Contract.1.0.0-alpha\lib\net45\Swsu.Lignis.Workstation.Contract.dll</HintPath>

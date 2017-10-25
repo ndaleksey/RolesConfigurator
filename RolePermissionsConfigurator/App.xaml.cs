@@ -22,7 +22,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			bool createdNew;
-			_mutex = new Mutex(true, "Programme", out createdNew);
+			_mutex = new Mutex(true, "RolePermissionProgramme", out createdNew);
 
 			if (!createdNew)
 				Shutdown();
