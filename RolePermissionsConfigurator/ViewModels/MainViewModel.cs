@@ -20,7 +20,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	{
 		#region Fields
 
-		private Guid? _currentClusterId;
+		private Guid? _currentRoleClusterId;
 		private string _appTitle;
 
 		private InternalRolesViewModel _internalRolesViewModel;
@@ -174,11 +174,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			try
 			{
 				using (var t = new Transaction())
-					_currentClusterId = await DbService.GetCurrentRoleClusterAsync(t.Connection);
+					_currentRoleClusterId = await DbService.GetCurrentRoleClusterAsync(t.Connection);
 
-				if (_currentClusterId == null)
+				if (_currentRoleClusterId == null)
 				{
 					MessageBox.Show(Properties.Resources.RoleNotExistsException);
+					Helper.Logger.Error(Properties.Resources.LogSource, Properties.Resources.RoleNotExistsException);
 					return;
 				}
 
@@ -189,11 +190,14 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				using (var t = new Transaction())
 					subsystems = await DbService.GetSubsystemsAsync(t.Connection);
 
-				InternalRolesViewModel = new InternalRolesViewModel(_currentClusterId.Value, CurrentDepartment);
-				InternalRolesViewModel.Subsystems.Clear();
-				InternalRolesViewModel.Subsystems.AddRange(subsystems);
+				if (_currentRoleClusterId != null)
+				{
+					InternalRolesViewModel = new InternalRolesViewModel(_currentRoleClusterId.Value, CurrentDepartment);
+					InternalRolesViewModel.Subsystems.Clear();
+					InternalRolesViewModel.Subsystems.AddRange(subsystems);
 
-				ExternalRolesViewModel = new ExternalRolesViewModel(_currentClusterId.Value);
+					ExternalRolesViewModel = new ExternalRolesViewModel(_currentRoleClusterId.Value);
+				}
 				ExternalRolesViewModel.Subsystems.Clear();
 				ExternalRolesViewModel.Subsystems.AddRange(subsystems);
 
@@ -206,16 +210,17 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				Debug.WriteLine(dbe);
 
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
-				MessageBox.Show(e, LogMessages.ReadFromDB);
+				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 
-				Helper.Logger.Error(ELogMessageType.Process, e);
-				Helper.Logger.Error(ELogMessageType.Process, dbe);
+				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
+				Helper.ModuleScmf.AddError(dbe.Message);
 			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
-				MessageBox.Show(e.Message);
-				Helper.Logger.Error(ELogMessageType.Process, e);
+//				MessageBox.Show(e.Message);
+				Helper.Logger.Error(Properties.Resources.LogSource, e);
+				Helper.ModuleScmf.AddError(e.Message);
 			}
 		}
 
@@ -237,12 +242,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		private async Task InitializeApplicationTitleAsync()
 		{
-			if (!_currentClusterId.HasValue)
+			if (!_currentRoleClusterId.HasValue)
 				throw new NullReferenceException(Properties.Resources.ClusterInitializationException);
 
 
 			using (var t = new Transaction())
-				CurrentDepartment = await DbService.GetDepartmentNameByClusterIdAsync(t.Connection, _currentClusterId.Value);
+				CurrentDepartment = await DbService.GetDepartmentNameByClusterIdAsync(t.Connection, _currentRoleClusterId.Value);
 
 			AppTitle = Properties.Resources.ApplicationName;
 

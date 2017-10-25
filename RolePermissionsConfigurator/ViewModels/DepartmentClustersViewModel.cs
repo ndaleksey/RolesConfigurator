@@ -88,24 +88,24 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
-				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
+				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
+				Helper.ModuleScmf.AddError(e);
 
-				Helper.Logger.Error(ELogMessageType.Process, e);
-				Helper.Logger.Error(ELogMessageType.Process, dbe);
+				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 			catch (ApplicationException e)
 			{
 				Debug.WriteLine(e);
 				MessageBox.Show(e.Message, Properties.Resources.ClusterAppointmentError, MessageBoxButton.OK,
 					MessageBoxImage.Error);
-				Helper.Logger.Error(ELogMessageType.Process, e);
+				Helper.Logger.Error(Properties.Resources.LogSource, Properties.Resources.ClusterAppointmentError, e);
 			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
 				MessageBox.Show(e.Message, Properties.Resources.ClusterAppointmentError, MessageBoxButton.OK,
 					MessageBoxImage.Error);
-				Helper.Logger.Error(ELogMessageType.Process, e);
+				Helper.Logger.Error(Properties.Resources.LogSource, Properties.Resources.ClusterAppointmentError, e);
 			}
 			finally
 			{
@@ -180,17 +180,19 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				Debug.WriteLine(dbe);
 
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
+				
+				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
+				Helper.ModuleScmf.AddError(e);
 
 				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 
-				Helper.Logger.Error(ELogMessageType.Process, e);
-				Helper.Logger.Error(ELogMessageType.Process, dbe);
 			}
 			catch (Exception e)
 			{
 				Debug.WriteLine(e);
 				MessageBox.Show(e.Message, Properties.Resources.LoadGroupingError, MessageBoxButton.OK, MessageBoxImage.Error);
-				Helper.Logger.Error(ELogMessageType.Process, e);
+				Helper.Logger.Error(Properties.Resources.LogSource, e);
+				Helper.ModuleScmf.AddError(e.Message);
 			}
 			finally
 			{

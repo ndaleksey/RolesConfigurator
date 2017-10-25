@@ -1,13 +1,17 @@
-﻿using System;
+﻿using System.Diagnostics;
+using System.Reflection;
 using Swsu.Lignis.Logger.PrtAgent;
 using Swsu.Lignis.RolePermissionsConfigurator.Resources;
+using Swsu.Lignis.SCMF.ModuleSCMF;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 {
 	public static class Helper
 	{
 		#region Properties
+
 		public static AppLogger Logger { get; }
+		public static ModuleSCMF ModuleScmf { get; }
 
 		#endregion
 
@@ -15,13 +19,16 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 
 		static Helper()
 		{
-			Logger = new AppLogger(null, Properties.Resources.AppName, -1);
+
+			var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			ModuleScmf = new ModuleSCMF(Properties.Resources.ApplicationName, version);
+			Logger = new AppLogger(null, Process.GetCurrentProcess().ProcessName, -1);
 		}
 
 		#endregion
 
 		#region Methods
-		
+
 		public static string GetPostgresErrorDescriptionBySqlState(string state)
 		{
 			if (string.IsNullOrEmpty(state)) return "Sql Error is null or empty";
@@ -59,6 +66,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 
 			return $"Unspecified error (Code: {code})";
 		}
+
 		#endregion
 	}
 }

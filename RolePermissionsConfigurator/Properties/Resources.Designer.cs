@@ -358,6 +358,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Application.
+        /// </summary>
+        public static string LogSource {
+            get {
+                return ResourceManager.GetString("LogSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Изменение роли.
         /// </summary>
         public static string ModifyRole {

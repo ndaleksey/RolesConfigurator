@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Threading;
 using System.Windows;
 using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
-using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
 using Swsu.Lignis.RolePermissionsConfigurator.Properties;
 using Swsu.Lignis.RolePermissionsConfigurator.Resources;
 using Swsu.Lignis.RolePermissionsConfigurator.ViewModels;
@@ -36,12 +35,14 @@ namespace Swsu.Lignis.RolePermissionsConfigurator
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 			AppDomain.CurrentDomain.ProcessExit += OnCurrentDomainProcessExit;
 
-			Helper.Logger.Info(ELogMessageType.ApplicationStart, LogMessages.StartApplication);
+			Helper.Logger.Info(RolePermissionsConfigurator.Properties.Resources.LogSource, LogMessages.StartApplication);
 		}
 
 		private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs args)
 		{
-			Helper.Logger.Error(ELogMessageType.Process, ((Exception) args.ExceptionObject));
+			var e = (Exception) args.ExceptionObject;
+			Helper.Logger.Error(RolePermissionsConfigurator.Properties.Resources.LogSource, e.Message);
+			Helper.ModuleScmf.AddFatalError(e.Message);
 		}
 
 		private void OnCurrentDomainProcessExit(object sender, EventArgs e)
@@ -57,8 +58,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator
 		protected override void OnExit(ExitEventArgs e)
 		{
 			base.OnExit(e);
-			Helper.Logger.Info(ELogMessageType.ApplicationStop, LogMessages.StopApplication);
+			Helper.Logger.Info(RolePermissionsConfigurator.Properties.Resources.LogSource, LogMessages.StopApplication);
 		}
-		
+
 	}
 }

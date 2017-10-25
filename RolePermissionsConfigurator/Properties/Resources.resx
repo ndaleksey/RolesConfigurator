@@ -332,4 +332,7 @@
     <value>Ошибка загрузки группировки подразделений</value>
     <comment>Ошибка загрузки группировки подразделений</comment>
   </data>
+  <data name="LogSource" xml:space="preserve">
+    <value>Application</value>
+  </data>
 </root>
