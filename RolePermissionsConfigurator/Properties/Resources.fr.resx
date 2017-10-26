@@ -329,4 +329,12 @@
     <value>Failed to load the grouping of departments</value>
     <comment>Ошибка загрузки группировки подразделений</comment>
   </data>
+  <data name="ReloadData" xml:space="preserve">
+    <value>Recharger les données</value>
+    <comment>Перезагрузить данные</comment>
+  </data>
+  <data name="SetServerConnection" xml:space="preserve">
+    <value>Définir la connexion au serveur</value>
+    <comment>Установить соединение с сервером</comment>
+  </data>
 </root>

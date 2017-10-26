@@ -4,14 +4,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Xml.Serialization;
 using DevExpress.Mvvm;
-using NLog.Internal;
 using Npgsql;
-using Swsu.Lignis.RolePermissionsConfigurator.Configuration;
 using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
 using Swsu.Lignis.RolePermissionsConfigurator.Properties;
@@ -25,21 +22,25 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	{
 		#region Fields
 
-		private readonly string _currentDepartment;
 		private readonly List<Plugin> _pluginsFromConfig = new List<Plugin>();
 		private List<Account> _accounts;
 
 		#endregion
 
 		#region Properties
+		public string CurrentDepartment { get; set; }
 
 		#endregion
 
 		#region Constructors
 
+		public InternalRolesViewModel()
+		{
+		}
+
 		public InternalRolesViewModel(Guid currentClusterId, string currentDepartment) : base(currentClusterId)
 		{
-			_currentDepartment = currentDepartment;
+			CurrentDepartment = currentDepartment;
 			Initialization();
 		}
 
@@ -60,7 +61,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				var maxNumber = Roles.Count > 0 ? Roles.Max(r => r.Number) + 1 : 1;
 				var newRole = new Role(Guid.NewGuid(), CurrentClusterId, maxNumber,
-					$"{Properties.Resources.NewRole} {maxNumber}", string.Empty, _currentDepartment);
+					$"{Properties.Resources.NewRole} {maxNumber}", string.Empty, CurrentDepartment);
 
 				foreach (var subsystem in Subsystems)
 					newRole.SubsystemPermissions.Add(new SubsystemPermission(newRole, subsystem));
@@ -82,7 +83,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				Debug.WriteLine(dbe);
 
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
-				
+
 				MessageBox.Show(e, LogMessages.ReadFromDB);
 
 				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
@@ -150,8 +151,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			try
 			{
 				if (MessageBox.Show($"{Properties.Resources.DeleteRoleAcquirement} \"{SelectedRole.Name}\"?",
-					Properties.Resources.RoleDeleting,
-					MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+					    Properties.Resources.RoleDeleting,
+					    MessageBoxButton.YesNo) != MessageBoxResult.Yes)
 					return;
 
 				WorkflowType = EWorkflowType.WorkWithDb;
@@ -163,8 +164,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				}
 
 				foreach (var account in SelectedRole.Accounts)
-					foreach (var a in _accounts.Where(a => a.Login == account.Login))
-						a.Role = null;
+				foreach (var a in _accounts.Where(a => a.Login == account.Login))
+					a.Role = null;
 
 				SelectedRole.Accounts.Clear();
 				Roles.Remove(SelectedRole);
@@ -194,7 +195,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Methods
 
-		protected sealed override async void Initialization()
+		public sealed override async void Initialization()
 		{
 			try
 			{
@@ -266,6 +267,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				pluginsPermissions = await DbService.GetPluginsPermissionsAsTuppleAsync(t.Connection);
 			}
 
+			Roles.Clear();
+
 			foreach (var role in roles)
 			{
 				role.Plugins.Clear();
@@ -287,7 +290,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 						foreach (var permissionValue in permission.Type.Values)
 							type.Values.Add(new PluginPermissionValue(permissionValue.Value, permissionValue.DisplayName));
 
-						rolePlugin.Permissions.Add(new PluginPermission(rolePlugin, permission.InvariantName, permission.DisplayName, type,
+						rolePlugin.Permissions.Add(new PluginPermission(rolePlugin, permission.InvariantName, permission.DisplayName,
+							type,
 							permission.Summary)
 						{
 							Value = pluginPermission == null
@@ -328,17 +332,18 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			_pluginsFromConfig.Clear();
 
 			PluginsCatalog pluginsCatalog;
-			var serializer = new XmlSerializer(typeof (PluginsCatalog));
+			var serializer = new XmlSerializer(typeof(PluginsCatalog));
 
 			using (var stream = new FileStream(Settings.Default.PluginsCatalog, FileMode.OpenOrCreate))
 			{
 				pluginsCatalog = (PluginsCatalog) serializer.Deserialize(stream);
 				stream.Close();
 			}
-			
+
 			foreach (var p in pluginsCatalog.Adds)
 			{
-				var plugin = new Plugin(p.Name, p.GetDisplayName(CultureInfo.CurrentUICulture), p.GetDescription(CultureInfo.CurrentUICulture));
+				var plugin = new Plugin(p.Name, p.GetDisplayName(CultureInfo.CurrentUICulture),
+					p.GetDescription(CultureInfo.CurrentUICulture));
 
 				try
 				{

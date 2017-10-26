@@ -430,6 +430,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Перезагрузить данные.
+        /// </summary>
+        public static string ReloadData {
+            get {
+                return ResourceManager.GetString("ReloadData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Добавление роли.
         /// </summary>
         public static string RoleAddition {
@@ -498,6 +507,15 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         public static string SelectAll {
             get {
                 return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Установить соединение с сервером.
+        /// </summary>
+        public static string SetServerConnection {
+            get {
+                return ResourceManager.GetString("SetServerConnection", resourceCulture);
             }
         }
         

@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using Npgsql;
+using Swsu.Lignis.MiddleWare.Common.Extensions;
 using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
+using Swsu.Lignis.RolePermissionsConfigurator.Model;
 using Swsu.Lignis.RolePermissionsConfigurator.Properties;
 using Swsu.Lignis.RolePermissionsConfigurator.Resources;
 using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
@@ -22,6 +26,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		private Guid? _currentRoleClusterId;
 		private string _appTitle;
+		private string _currentDepartment;
+		private bool? _isConnectionInitialized;
 
 		private InternalRolesViewModel _internalRolesViewModel;
 		private ExternalRolesViewModel _externalRolesViewModel;
@@ -35,14 +41,26 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		#endregion
 
 		#region Properties
-		
+
 		public static bool IsCultureChanged { get; private set; }
 
-		public string CurrentDepartment { get; private set; }
+		public string CurrentDepartment
+		{
+			get { return _currentDepartment; }
+			set
+			{
+				if (string.Equals(value, _currentDepartment)) return;
+
+				_currentDepartment = value;
+
+				if (!string.IsNullOrEmpty(CurrentDepartment))
+					AppTitle = Properties.Resources.ApplicationName + $"  ( {CurrentDepartment} )";
+			}
+		}
 
 		public string CultureName
 		{
-			get { return _cultureName;}
+			get { return _cultureName; }
 			set { SetProperty(ref _cultureName, value, nameof(CultureName)); }
 		}
 
@@ -50,6 +68,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		{
 			get { return _tabIndex; }
 			set { SetProperty(ref _tabIndex, value, nameof(TabIndex), SetActiveRolesViewModel); }
+		}
+
+		public bool? IsConnectionInitialized
+		{
+			get { return _isConnectionInitialized; }
+			set { SetProperty(ref _isConnectionInitialized, value, nameof(IsConnectionInitialized)); }
 		}
 
 		public string AppTitle
@@ -90,7 +114,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		public ICommand ModifyRoleCommand { get; }
 		public ICommand DeleteRoleCommand { get; }
 		public ICommand ChangeCultureCommand { get; }
-		public AsyncCommand ReloadDataCommand { get; }
+		public ICommand InitializeCommand { get; }
+		public ICommand ReloadDataCommand { get; }
 
 		#endregion
 
@@ -104,21 +129,29 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			DeleteRoleCommand = new DelegateCommand(DeleteRole, CanDeleteRole);
 
 			ChangeCultureCommand = new DelegateCommand(ChangeCulture, CanChangeCulture);
+			InitializeCommand = new DelegateCommand(Initialize);
+			ReloadDataCommand = new DelegateCommand(ReloadDataAsync, CanReloadData);
 
-			ReloadDataCommand = new AsyncCommand(ReloadDataAsync, CanReloadData);
+			InternalRolesViewModel = new InternalRolesViewModel();
+			ExternalRolesViewModel = new ExternalRolesViewModel();
+
+			DepartmentClustersViewModel = new DepartmentClustersViewModel();
+
+			SelectedTab = InternalRolesViewModel;
 
 			CultureName = Thread.CurrentThread.CurrentUICulture.Name;
 
-			Initialization();
+//			Initialization();
 		}
-		
+
 		#endregion
 
 		#region Commands' methods
 
 		private bool CanAddRole()
 		{
-			return SelectedTab != null && SelectedTab.CanAddRole();
+			return IsConnectionInitialized.HasValue && IsConnectionInitialized.Value && SelectedTab != null &&
+			       SelectedTab.CanAddRole();
 		}
 
 		private void AddRole()
@@ -173,50 +206,70 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			return true;
 		}
 
-		private Task ReloadDataAsync()
+		private void ReloadDataAsync()
 		{
-			return Task.Run(() => ReloadData());
+			Initialize();
 		}
-		
+
 		#endregion
 
 		#region Methods
 
-		protected new async void Initialization()
+		private async void Initialize()
 		{
+			IsConnectionInitialized = null;
+			WorkflowType = EWorkflowType.LoadFromDb;
+
 			try
 			{
 				using (var t = new Transaction())
+				{
 					_currentRoleClusterId = await DbService.GetCurrentRoleClusterAsync(t.Connection);
 
-				if (_currentRoleClusterId == null)
-					throw new RoleNotExistsException(Properties.Resources.RoleNotExistsException);
+					if (_currentRoleClusterId == null)
+						throw new RoleNotExistsException(Properties.Resources.RoleNotExistsException);
 
-				var roleClusterId = _currentRoleClusterId.Value;
+					CurrentDepartment = await DbService.GetDepartmentNameByClusterIdAsync(t.Connection, _currentRoleClusterId.Value);
 
-				await InitializeApplicationTitleAsync();
+					var subsystems = await DbService.GetSubsystemsAsync(t.Connection);
 
-				List<Subsystem> subsystems;
+					if (subsystems.Any())
+					{
+						InternalRolesViewModel.Subsystems.Clear();
+						ExternalRolesViewModel.Subsystems.Clear();
+					}
 
-				using (var t = new Transaction())
-					subsystems = await DbService.GetSubsystemsAsync(t.Connection);
+					InternalRolesViewModel.Subsystems.AddRange(subsystems);
+					ExternalRolesViewModel.Subsystems.AddRange(subsystems);
+				}
 
-				InternalRolesViewModel = new InternalRolesViewModel(roleClusterId, CurrentDepartment);
-				InternalRolesViewModel.Subsystems.Clear();
-				InternalRolesViewModel.Subsystems.AddRange(subsystems);
+				InternalRolesViewModel.CurrentClusterId = _currentRoleClusterId.Value;
+				ExternalRolesViewModel.CurrentClusterId = _currentRoleClusterId.Value;
+				InternalRolesViewModel.CurrentDepartment = CurrentDepartment;
 
-				ExternalRolesViewModel = new ExternalRolesViewModel(roleClusterId);
-				ExternalRolesViewModel.Subsystems.Clear();
-				ExternalRolesViewModel.Subsystems.AddRange(subsystems);
+				InternalRolesViewModel.Initialization();
+				ExternalRolesViewModel.Initialization();
+				DepartmentClustersViewModel.Initialization();
+				DepartmentClustersViewModel.Initialization();
 
-				DepartmentClustersViewModel = new DepartmentClustersViewModel();
+				IsConnectionInitialized = true;
+			}
+			catch (SocketException se)
+			{
+				Debug.WriteLine(se);
+				Helper.Logger.Fatal(Properties.Resources.LogSource, se);
+				Helper.ModuleScmf.AddFatalError(se.Message);
+				MessageBox.Show(se.Message, LogMessages.LoadRolesError, MessageBoxButton.OK, MessageBoxImage.Stop);
 
-				SelectedTab = InternalRolesViewModel;
+				AppTitle = Properties.Resources.ApplicationName;
+
+				IsConnectionInitialized = false;
 			}
 			catch (RoleNotExistsException re)
 			{
 				Debug.WriteLine(re);
-				Helper.Logger.Error(Properties.Resources.LogSource, re.Message);
+				Helper.Logger.Fatal(Properties.Resources.LogSource, re.Message);
+				Helper.ModuleScmf.AddFatalError(re.Message);
 				MessageBox.Show(re.Message, LogMessages.LoadRolesError, MessageBoxButton.OK, MessageBoxImage.Stop);
 				Application.Current.Shutdown(0);
 			}
@@ -229,6 +282,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
 				Helper.ModuleScmf.AddError(dbe.Message);
 				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
+
+				IsConnectionInitialized = false;
 			}
 			catch (Exception e)
 			{
@@ -236,6 +291,10 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 //				MessageBox.Show(e.Message);
 				Helper.Logger.Error(Properties.Resources.LogSource, e);
 				Helper.ModuleScmf.AddError(e.Message);
+			}
+			finally
+			{
+				WorkflowType = EWorkflowType.NormalWork;
 			}
 		}
 
@@ -254,27 +313,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					break;
 			}
 		}
-
-		private async Task InitializeApplicationTitleAsync()
-		{
-			if (!_currentRoleClusterId.HasValue)
-				throw new NullReferenceException(Properties.Resources.ClusterInitializationException);
-
-
-			using (var t = new Transaction())
-				CurrentDepartment = await DbService.GetDepartmentNameByClusterIdAsync(t.Connection, _currentRoleClusterId.Value);
-
-			AppTitle = Properties.Resources.ApplicationName;
-
-			if (!string.IsNullOrEmpty(CurrentDepartment))
-				AppTitle += $"  ( {CurrentDepartment} )";
-		}
-
-		private void ReloadData()
-		{
-			
-		}
-
+		
 		#endregion
 	}
 }

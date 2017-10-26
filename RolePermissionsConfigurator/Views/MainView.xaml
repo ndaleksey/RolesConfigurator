@@ -7,7 +7,8 @@
 		xmlns:viewModels="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.ViewModels"
         xmlns:views="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Views"
         xmlns:properties="clr-namespace:Swsu.Lignis.RolePermissionsConfigurator.Properties"
-		dx:ThemeManager.ThemeName="Office2010Blue"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        dx:ThemeManager.ThemeName="Office2010Blue"
         mc:Ignorable="d"
         Title="{Binding Path=AppTitle}" Height="600" Width="800" 
 		WindowStartupLocation="CenterScreen" WindowState="Maximized"
@@ -16,7 +17,10 @@
 	<Window.DataContext>
 		<viewModels:MainViewModel/>
 	</Window.DataContext>
-	
+
+	<dxmvvm:Interaction.Behaviors>
+		<dxmvvm:EventToCommand EventName="Loaded" Command="{Binding Path=InitializeCommand}"/>
+	</dxmvvm:Interaction.Behaviors>
 
 	<Window.Resources>
 		<ResourceDictionary>
@@ -26,76 +30,108 @@
 		</ResourceDictionary>
 	</Window.Resources>
 
-	<DockPanel LastChildFill="True">
-		<DockPanel.Resources>
-			<Style x:Key="ToolBarBtnStyle" TargetType="Button">
-				<Setter Property="Width" Value="24"/>
-				<Setter Property="Height" Value="24"/>
-				<Setter Property="Margin" Value="5, 3"/>
-			</Style>
-		</DockPanel.Resources>
+	<Grid>
+		<DockPanel LastChildFill="True">
+			<DockPanel.Resources>
+				
+				<Style x:Key="ToolBarBtnStyle" TargetType="Button">
+					<Setter Property="Width" Value="24"/>
+					<Setter Property="Height" Value="24"/>
+					<Setter Property="Margin" Value="5, 3"/>
+				</Style>
+			</DockPanel.Resources>
 
-		<Grid DockPanel.Dock="Top" Background="LightBlue">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
+			<Grid DockPanel.Dock="Top" Background="LightBlue">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
 
-			<ToolBar AllowDrop="False" TabIndex="{Binding Path=TabIndex}" HorizontalAlignment="Stretch">
+				<ToolBar AllowDrop="False" TabIndex="{Binding Path=TabIndex}" HorizontalAlignment="Stretch">
 
-				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=AddRoleCommand}">
+					<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=AddRoleCommand}">
+						<Button.ToolTip>
+							<ToolTip Content="{x:Static properties:Resources.Add}"/>
+						</Button.ToolTip>
+						<Image Source="/Resources/Images/add.ico"/>
+					</Button>
+
+					<!--<infr:IconButton ToolTip="{x:Static properties:Resources.Add}" Command="{Binding Path=AddRoleCommand}">
+						<infr:Icon Template="{StaticResource AddIconTemplate}"/>
+					</infr:IconButton>-->
+
+					<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ModifyRoleCommand}">
+						<Button.ToolTip>
+							<ToolTip Content="{x:Static properties:Resources.Edit}"/>
+						</Button.ToolTip>
+						<Image Source="/Resources/Images/edit.ico"/>
+					</Button>
+
+					<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=DeleteRoleCommand}">
+						<!--<Button.ToolTip>
+							<ToolTip Content="{x:Static properties:Resources.Delete}"/>
+						</Button.ToolTip>
+						<Image Name="BtnImage" Source="/Resources/Images/delete.ico"/>-->
+						<Button.Template>
+							<ControlTemplate TargetType="{x:Type Button}">
+								<Image Name="_image" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
+									<Image.Style>
+										<Style TargetType="Image">
+											<Setter Property="Source" Value="/Resources/Images/delete.ico" />
+										</Style>
+									</Image.Style>
+								</Image>
+								<ControlTemplate.Triggers>
+									<Trigger Property="IsEnabled" Value="False">
+										<Setter Property="Source" Value="/Resources/Images/delete_dis.ico" TargetName="_image"/>
+									</Trigger>
+								</ControlTemplate.Triggers>
+							</ControlTemplate>
+
+						</Button.Template>
+					</Button>
+
+					<Separator/>
+
+					<Button Style="{StaticResource ToolBarBtnStyle}" Margin="20, 0, 0, 0" Command="{Binding Path=ReloadDataCommand}">
+						<Button.ToolTip>
+							<ToolTip Content="{x:Static properties:Resources.ReloadData}"/>
+						</Button.ToolTip>
+						<Image Source="/Resources/Images/refresh.ico"/>
+					</Button>
+				</ToolBar>
+
+				<Button Grid.Column="1" 
+				        Width="48" Height="32" Padding="0" Margin="2, 2"
+				        Command="{Binding Path=ChangeCultureCommand}">
 					<Button.ToolTip>
-						<ToolTip Content="{x:Static properties:Resources.Add}"/>
+						<ToolTip Content="{x:Static properties:Resources.LanguageChanging}"/>
 					</Button.ToolTip>
-					<Image Source="/Resources/Images/add.ico"/>
+					<Image Style="{StaticResource FlagIconStyle}" Margin="0, 2, 0, 0"/>
 				</Button>
+			</Grid>
 
-				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ModifyRoleCommand}">
-					<Button.ToolTip>
-						<ToolTip Content="{x:Static properties:Resources.Edit}"/>
-					</Button.ToolTip>
-					<Image Source="/Resources/Images/edit.ico"/>
-				</Button>
+			<TabControl DockPanel.Dock="Bottom" SelectedIndex="{Binding Path=TabIndex, UpdateSourceTrigger=PropertyChanged}">
+				<TabControl.Items>
+					<TabItem Header="{x:Static properties:Resources.InternalAbonents}">
+						<views:InternalRolesView DataContext="{Binding Path=InternalRolesViewModel}"/>
+					</TabItem>
 
-				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=DeleteRoleCommand}">
-					<Button.ToolTip>
-						<ToolTip Content="{x:Static properties:Resources.Delete}"/>
-					</Button.ToolTip>
-					<Image Source="/Resources/Images/delete.ico"/>
-				</Button>
+					<TabItem Header="{x:Static properties:Resources.ExternalAbonents}">
+						<views:ExternalRolesView DataContext="{Binding Path=ExternalRolesViewModel}"/>
+					</TabItem>
 
-				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ReloadDataCommand}">
-					<Button.ToolTip>
-						<ToolTip Content="{x:Static properties:Resources.Delete}"/>
-					</Button.ToolTip>
-					<Image Source="/Resources/Images/delete.ico"/>
-				</Button>
-			</ToolBar>
-
-			<Button Grid.Column="1" 
-					Width="48" Height="32" Padding="0" Margin="2, 2"
-					Command="{Binding Path=ChangeCultureCommand}">
-				<Button.ToolTip>
-					<ToolTip Content="{x:Static properties:Resources.LanguageChanging}"/>
-				</Button.ToolTip>
-				<Image Style="{StaticResource FlagIconStyle}" Margin="0, 2, 0, 0"/>
-			</Button>
-		</Grid>
-
-		<TabControl DockPanel.Dock="Bottom" SelectedIndex="{Binding Path=TabIndex, UpdateSourceTrigger=PropertyChanged}">
-			<TabControl.Items>
-				<TabItem Header="{x:Static properties:Resources.InternalAbonents}">
-					<views:InternalRolesView DataContext="{Binding Path=InternalRolesViewModel}"/>
-				</TabItem>
-
-				<TabItem Header="{x:Static properties:Resources.ExternalAbonents}">
-					<views:ExternalRolesView DataContext="{Binding Path=ExternalRolesViewModel}"/>
-				</TabItem>
-
-				<TabItem Header="{x:Static properties:Resources.Clusters}">
-					<views:DepartmentClustersView DataContext="{Binding Path=DepartmentClustersViewModel}"/>
-				</TabItem>
-			</TabControl.Items>
-		</TabControl>
-	</DockPanel>
+					<TabItem Header="{x:Static properties:Resources.Clusters}">
+						<views:DepartmentClustersView DataContext="{Binding Path=DepartmentClustersViewModel}"/>
+					</TabItem>
+				</TabControl.Items>
+			</TabControl>
+		</DockPanel>
+		
+		<views:WorkflowView/>
+		
+		<views:ReloadScreenView/>
+		
+	</Grid>
 </Window>
+

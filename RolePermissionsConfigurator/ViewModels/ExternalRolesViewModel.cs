@@ -14,10 +14,16 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 	public class ExternalRolesViewModel : RolesViewModel
 	{
 		#region Constructors
+
+		public ExternalRolesViewModel()
+		{
+		}
+
 		public ExternalRolesViewModel(Guid currentClusterId) : base(currentClusterId)
 		{
 			Initialization();
 		}
+
 		#endregion
 
 		#region Commands' methods
@@ -39,7 +45,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				foreach (var subsystem in Subsystems)
 					newRole.SubsystemPermissions.Add(new SubsystemPermission(newRole, subsystem));
-				
+
 				GetService<IDialogService>("RoleSettingsService")
 					.ShowDialog(null, Properties.Resources.RoleAddition, null,
 						new ExternalRoleSettingsViewModel(newRole, Roles, EDialogOpenMode.Insert));
@@ -107,8 +113,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			try
 			{
 				if (MessageBox.Show($"{Properties.Resources.DeleteRoleAcquirement} \"{SelectedRole.Name}\"?",
-					Properties.Resources.RoleDeleting,
-					MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+					    Properties.Resources.RoleDeleting,
+					    MessageBoxButton.YesNo) != MessageBoxResult.Yes)
 					return;
 
 				WorkflowType = EWorkflowType.WorkWithDb;
@@ -118,7 +124,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					await DbService.DeleteRoleAsync(t.Connection, SelectedRole);
 					t.Commit();
 				}
-				
+
 				Roles.Remove(SelectedRole);
 			}
 			catch (PostgresException dbe)
@@ -145,7 +151,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		#endregion
 
 		#region Methods
-		protected sealed override async void Initialization()
+
+		public sealed override async void Initialization()
 		{
 			try
 			{
@@ -179,6 +186,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				WorkflowType = EWorkflowType.NormalWork;
 			}
 		}
+
 		#endregion
 	}
 }

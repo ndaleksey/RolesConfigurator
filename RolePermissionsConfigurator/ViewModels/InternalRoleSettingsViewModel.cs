@@ -158,7 +158,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Methods
 
-		protected sealed override void Initialization()
+		public sealed override void Initialization()
 		{
 			if (TempRole == null) throw new NullReferenceException();
 

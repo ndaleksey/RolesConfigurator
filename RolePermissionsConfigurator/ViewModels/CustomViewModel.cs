@@ -23,7 +23,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Methods
 
-		protected virtual void Initialization()
+		public virtual void Initialization()
 		{
 
 		}

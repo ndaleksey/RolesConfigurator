@@ -119,7 +119,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Methods
 
-		protected sealed override async void Initialization()
+		public sealed override async void Initialization()
 		{
 			using (var t = new Transaction())
 			{

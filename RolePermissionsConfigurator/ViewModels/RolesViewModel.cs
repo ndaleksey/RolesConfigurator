@@ -17,7 +17,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Properties
 
-		protected Guid CurrentClusterId { get; }
+		public Guid CurrentClusterId { get; set; }
 
 		public Role SelectedRole
 		{
@@ -39,6 +39,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		#endregion
 
 		#region Constructors
+		protected RolesViewModel() { }
 
 		protected RolesViewModel(Guid currentClusterId)
 		{

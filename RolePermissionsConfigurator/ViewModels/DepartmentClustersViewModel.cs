@@ -65,7 +65,6 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		{
 			Departments = new DepartmentItemCollection(this);
 			ChangeRecordCommand = new DelegateCommand(ChangeRecordAsync);
-			Initialization();
 		}
 
 		#endregion
@@ -167,7 +166,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 		#region Methods
 
-		protected sealed override async void Initialization()
+		public sealed override async void Initialization()
 		{
 			try
 			{

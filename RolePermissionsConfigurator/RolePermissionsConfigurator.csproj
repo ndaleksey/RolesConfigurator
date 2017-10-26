@@ -124,6 +124,8 @@
     <Compile Include="Configuration\PlugInsSection.cs" />
     <Compile Include="Converters\SubsystemConverter.cs" />
     <Compile Include="Converters\YesNoBoolValueConverter.cs" />
+    <Compile Include="Infrastructure\Icon.cs" />
+    <Compile Include="Infrastructure\IconButton.cs" />
     <Compile Include="Infrastructure\RoleNotExistsException.cs" />
     <Compile Include="Helpers\PluginLocalizationMetaData.cs" />
     <Compile Include="Infrastructure\BindableBaseExtanded.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Infrastructure\ESubordinate.cs" />
     <Compile Include="Infrastructure\ValidationParameters.cs" />
     <Compile Include="Infrastructure\ViewModelBaseExtended.cs" />
+    <Compile Include="Model\ConnectionState.cs" />
     <Compile Include="Resources\LogMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,6 +186,9 @@
     </Compile>
     <Compile Include="Views\InternalRoleSettingsView.xaml.cs">
       <DependentUpon>InternalRoleSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReloadScreenView.xaml.cs">
+      <DependentUpon>ReloadScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkflowView.xaml.cs">
       <DependentUpon>WorkflowView.xaml</DependentUpon>
@@ -233,6 +239,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\InternalRoleSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReloadScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -316,6 +326,15 @@
   <ItemGroup>
     <Resource Include="Resources\Images\flag_france.ico" />
     <Resource Include="Resources\Images\flag_russia.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\refresh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\add_dis.ico" />
+    <Resource Include="Resources\Images\delete_dis.ico" />
+    <Resource Include="Resources\Images\edit_dis.ico" />
+    <Resource Include="Resources\Images\refresh_dis.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

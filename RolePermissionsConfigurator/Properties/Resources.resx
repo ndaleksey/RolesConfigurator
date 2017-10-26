@@ -334,4 +334,10 @@
   <data name="LogSource" xml:space="preserve">
     <value>Application</value>
   </data>
+  <data name="ReloadData" xml:space="preserve">
+    <value>Перезагрузить данные</value>
+  </data>
+  <data name="SetServerConnection" xml:space="preserve">
+    <value>Установить соединение с сервером</value>
+  </data>
 </root>
