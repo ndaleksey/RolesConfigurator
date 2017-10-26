@@ -250,7 +250,7 @@
     <comment>Номер или имя роли должны быть уникальными</comment>
   </data>
   <data name="RoleNotExistsException" xml:space="preserve">
-    <value>Cet utilisateur est enregistré sous un rôle inexistant. Programme de travail futur ne peut pas être</value>
+    <value>Cet utilisateur est enregistré sous un rôle inexistant. Programme de travail futur ne peut pas être. L'application sera arrêtée</value>
     <comment>Данный пользователь вошел под несуществующей ролью. Дальнейшая работа программы невозможна</comment>
   </data>
   <data name="Save" xml:space="preserve">

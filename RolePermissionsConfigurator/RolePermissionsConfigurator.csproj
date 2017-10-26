@@ -124,6 +124,7 @@
     <Compile Include="Configuration\PlugInsSection.cs" />
     <Compile Include="Converters\SubsystemConverter.cs" />
     <Compile Include="Converters\YesNoBoolValueConverter.cs" />
+    <Compile Include="Infrastructure\RoleNotExistsException.cs" />
     <Compile Include="Helpers\PluginLocalizationMetaData.cs" />
     <Compile Include="Infrastructure\BindableBaseExtanded.cs" />
     <Compile Include="Infrastructure\DepartmentEqualityComparer.cs" />

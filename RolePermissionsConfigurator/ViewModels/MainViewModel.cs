@@ -90,6 +90,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		public ICommand ModifyRoleCommand { get; }
 		public ICommand DeleteRoleCommand { get; }
 		public ICommand ChangeCultureCommand { get; }
+		public AsyncCommand ReloadDataCommand { get; }
 
 		#endregion
 
@@ -104,11 +105,13 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 			ChangeCultureCommand = new DelegateCommand(ChangeCulture, CanChangeCulture);
 
+			ReloadDataCommand = new AsyncCommand(ReloadDataAsync, CanReloadData);
+
 			CultureName = Thread.CurrentThread.CurrentUICulture.Name;
 
 			Initialization();
 		}
-
+		
 		#endregion
 
 		#region Commands' methods
@@ -165,10 +168,20 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			Application.Current.Shutdown(1);
 		}
 
+		private bool CanReloadData()
+		{
+			return true;
+		}
+
+		private Task ReloadDataAsync()
+		{
+			return Task.Run(() => ReloadData());
+		}
+		
 		#endregion
 
 		#region Methods
-		
+
 		protected new async void Initialization()
 		{
 			try
@@ -177,11 +190,9 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 					_currentRoleClusterId = await DbService.GetCurrentRoleClusterAsync(t.Connection);
 
 				if (_currentRoleClusterId == null)
-				{
-					MessageBox.Show(Properties.Resources.RoleNotExistsException);
-					Helper.Logger.Error(Properties.Resources.LogSource, Properties.Resources.RoleNotExistsException);
-					return;
-				}
+					throw new RoleNotExistsException(Properties.Resources.RoleNotExistsException);
+
+				var roleClusterId = _currentRoleClusterId.Value;
 
 				await InitializeApplicationTitleAsync();
 
@@ -190,14 +201,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				using (var t = new Transaction())
 					subsystems = await DbService.GetSubsystemsAsync(t.Connection);
 
-				if (_currentRoleClusterId != null)
-				{
-					InternalRolesViewModel = new InternalRolesViewModel(_currentRoleClusterId.Value, CurrentDepartment);
-					InternalRolesViewModel.Subsystems.Clear();
-					InternalRolesViewModel.Subsystems.AddRange(subsystems);
+				InternalRolesViewModel = new InternalRolesViewModel(roleClusterId, CurrentDepartment);
+				InternalRolesViewModel.Subsystems.Clear();
+				InternalRolesViewModel.Subsystems.AddRange(subsystems);
 
-					ExternalRolesViewModel = new ExternalRolesViewModel(_currentRoleClusterId.Value);
-				}
+				ExternalRolesViewModel = new ExternalRolesViewModel(roleClusterId);
 				ExternalRolesViewModel.Subsystems.Clear();
 				ExternalRolesViewModel.Subsystems.AddRange(subsystems);
 
@@ -205,15 +213,22 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 				SelectedTab = InternalRolesViewModel;
 			}
+			catch (RoleNotExistsException re)
+			{
+				Debug.WriteLine(re);
+				Helper.Logger.Error(Properties.Resources.LogSource, re.Message);
+				MessageBox.Show(re.Message, LogMessages.LoadRolesError, MessageBoxButton.OK, MessageBoxImage.Stop);
+				Application.Current.Shutdown(0);
+			}
 			catch (PostgresException dbe)
 			{
 				Debug.WriteLine(dbe);
 
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
-				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 
 				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
 				Helper.ModuleScmf.AddError(dbe.Message);
+				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 			catch (Exception e)
 			{
@@ -253,6 +268,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 
 			if (!string.IsNullOrEmpty(CurrentDepartment))
 				AppTitle += $"  ( {CurrentDepartment} )";
+		}
+
+		private void ReloadData()
+		{
+			
 		}
 
 		#endregion

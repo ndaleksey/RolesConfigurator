@@ -6,11 +6,11 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Infrastructure
 	public enum EWorkflowType
 	{
 		[Description("Нормальная работа")]
-		NormalWork = 0,
+		NormalWork,
 
 		[Description("Работа с БД")]
-		WorkWithDb = 1,
-		LoadFromDb = 2,
-		SaveToDb = 3
+		WorkWithDb,
+		LoadFromDb,
+		SaveToDb
 	}
 }

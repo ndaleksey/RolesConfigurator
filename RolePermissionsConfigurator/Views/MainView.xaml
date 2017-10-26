@@ -63,6 +63,13 @@
 					</Button.ToolTip>
 					<Image Source="/Resources/Images/delete.ico"/>
 				</Button>
+
+				<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ReloadDataCommand}">
+					<Button.ToolTip>
+						<ToolTip Content="{x:Static properties:Resources.Delete}"/>
+					</Button.ToolTip>
+					<Image Source="/Resources/Images/delete.ico"/>
+				</Button>
 			</ToolBar>
 
 			<Button Grid.Column="1" 
