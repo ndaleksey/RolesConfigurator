@@ -33,7 +33,6 @@
 	<Grid>
 		<DockPanel LastChildFill="True">
 			<DockPanel.Resources>
-				
 				<Style x:Key="ToolBarBtnStyle" TargetType="Button">
 					<Setter Property="Width" Value="24"/>
 					<Setter Property="Height" Value="24"/>
@@ -48,47 +47,59 @@
 				</Grid.ColumnDefinitions>
 
 				<ToolBar AllowDrop="False" TabIndex="{Binding Path=TabIndex}" HorizontalAlignment="Stretch">
-
 					<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=AddRoleCommand}">
 						<Button.ToolTip>
 							<ToolTip Content="{x:Static properties:Resources.Add}"/>
 						</Button.ToolTip>
-						<Image Source="/Resources/Images/add.ico"/>
-					</Button>
 
-					<!--<infr:IconButton ToolTip="{x:Static properties:Resources.Add}" Command="{Binding Path=AddRoleCommand}">
-						<infr:Icon Template="{StaticResource AddIconTemplate}"/>
-					</infr:IconButton>-->
+						<Button.ContentTemplate>
+							<DataTemplate>
+								<Image Name="AddBtnImage" HorizontalAlignment="Center" VerticalAlignment="Center" 
+								       Source="/Resources/Images/add.ico"/>
+
+								<DataTemplate.Triggers>
+									<Trigger Property="Control.IsEnabled" Value="False">
+										<Setter TargetName="AddBtnImage" Property="Source" Value="/Resources/Images/add_dis.ico" />
+									</Trigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</Button.ContentTemplate>
+					</Button>
 
 					<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=ModifyRoleCommand}">
 						<Button.ToolTip>
 							<ToolTip Content="{x:Static properties:Resources.Edit}"/>
 						</Button.ToolTip>
-						<Image Source="/Resources/Images/edit.ico"/>
+
+						<Button.ContentTemplate>
+							<DataTemplate>
+								<Image Name="EditBtnImage" HorizontalAlignment="Center" VerticalAlignment="Center" 
+								       Source="/Resources/Images/edit.ico"/>
+								<DataTemplate.Triggers>
+									<Trigger Property="Control.IsEnabled" Value="False">
+										<Setter TargetName="EditBtnImage" Property="Source" Value="/Resources/Images/edit_dis.ico" />
+									</Trigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</Button.ContentTemplate>
 					</Button>
 
 					<Button Style="{StaticResource ToolBarBtnStyle}" Command="{Binding Path=DeleteRoleCommand}">
-						<!--<Button.ToolTip>
+						<Button.ToolTip>
 							<ToolTip Content="{x:Static properties:Resources.Delete}"/>
 						</Button.ToolTip>
-						<Image Name="BtnImage" Source="/Resources/Images/delete.ico"/>-->
-						<Button.Template>
-							<ControlTemplate TargetType="{x:Type Button}">
-								<Image Name="_image" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
-									<Image.Style>
-										<Style TargetType="Image">
-											<Setter Property="Source" Value="/Resources/Images/delete.ico" />
-										</Style>
-									</Image.Style>
-								</Image>
-								<ControlTemplate.Triggers>
-									<Trigger Property="IsEnabled" Value="False">
-										<Setter Property="Source" Value="/Resources/Images/delete_dis.ico" TargetName="_image"/>
-									</Trigger>
-								</ControlTemplate.Triggers>
-							</ControlTemplate>
 
-						</Button.Template>
+						<Button.ContentTemplate>
+							<DataTemplate>
+								<Image Name="DeleteBtnImage" HorizontalAlignment="Center" VerticalAlignment="Center" 
+									       Source="/Resources/Images/delete.ico"/>
+								<DataTemplate.Triggers>
+									<Trigger Property="Control.IsEnabled" Value="False">
+										<Setter TargetName="DeleteBtnImage" Property="Source" Value="/Resources/Images/delete_dis.ico" />
+									</Trigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</Button.ContentTemplate>
 					</Button>
 
 					<Separator/>
@@ -97,7 +108,11 @@
 						<Button.ToolTip>
 							<ToolTip Content="{x:Static properties:Resources.ReloadData}"/>
 						</Button.ToolTip>
-						<Image Source="/Resources/Images/refresh.ico"/>
+						<Button.Template>
+							<ControlTemplate>
+								<Image Source="/Resources/Images/refresh.ico"/>
+							</ControlTemplate>
+						</Button.Template>
 					</Button>
 				</ToolBar>
 
@@ -131,7 +146,20 @@
 		<views:WorkflowView/>
 		
 		<views:ReloadScreenView/>
-		
 	</Grid>
 </Window>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

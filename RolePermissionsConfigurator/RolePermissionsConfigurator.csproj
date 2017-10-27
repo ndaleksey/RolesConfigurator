@@ -276,7 +276,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\add.ico" />
     <Resource Include="Resources\Images\delete.ico" />
-    <Resource Include="Resources\Images\edit.ico" />
+    <Resource Include="Resources\Images\edit_old.ico" />
     <Resource Include="Resources\Images\save.ico" />
     <Resource Include="Resources\Images\wp.ico" />
   </ItemGroup>
@@ -335,6 +335,9 @@
     <Resource Include="Resources\Images\delete_dis.ico" />
     <Resource Include="Resources\Images\edit_dis.ico" />
     <Resource Include="Resources\Images\refresh_dis.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\edit.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
