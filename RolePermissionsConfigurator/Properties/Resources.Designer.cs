@@ -511,7 +511,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Установить соединение с сервером.
+        ///   Ищет локализованную строку, похожую на Повторить попытку соединения с сервером БД.
         /// </summary>
         public static string SetServerConnection {
             get {

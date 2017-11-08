@@ -1,22 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using DevExpress.Mvvm;
 using Npgsql;
-using Swsu.Lignis.MiddleWare.Common.Extensions;
 using Swsu.Lignis.RolePermissionsConfigurator.Helpers;
 using Swsu.Lignis.RolePermissionsConfigurator.Infrastructure;
-using Swsu.Lignis.RolePermissionsConfigurator.Model;
 using Swsu.Lignis.RolePermissionsConfigurator.Properties;
 using Swsu.Lignis.RolePermissionsConfigurator.Resources;
-using Swsu.Lignis.RolePermissionsConfigurator.ViewModels.Items;
 
 namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 {
@@ -256,9 +250,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (SocketException se)
 			{
-				Debug.WriteLine(se);
-				Helper.Logger.Fatal(Properties.Resources.LogSource, se);
-				Helper.ModuleScmf.AddFatalError(se.Message);
+				Helper.LogFatal(se);
 				MessageBox.Show(se.Message, LogMessages.LoadRolesError, MessageBoxButton.OK, MessageBoxImage.Stop);
 
 				AppTitle = Properties.Resources.ApplicationName;
@@ -267,30 +259,23 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (RoleNotExistsException re)
 			{
-				Debug.WriteLine(re);
-				Helper.Logger.Fatal(Properties.Resources.LogSource, re.Message);
-				Helper.ModuleScmf.AddFatalError(re.Message);
+				Helper.LogFatal(re);
 				MessageBox.Show(re.Message, LogMessages.LoadRolesError, MessageBoxButton.OK, MessageBoxImage.Stop);
 				Application.Current.Shutdown(0);
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
-				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
-				Helper.ModuleScmf.AddError(dbe.Message);
+				Helper.LogError(e, dbe);
 				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 
 				IsConnectionInitialized = false;
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
 //				MessageBox.Show(e.Message);
-				Helper.Logger.Error(Properties.Resources.LogSource, e);
-				Helper.ModuleScmf.AddError(e.Message);
+				Helper.LogError(e);
 			}
 			finally
 			{

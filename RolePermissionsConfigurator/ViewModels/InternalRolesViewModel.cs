@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -80,21 +79,14 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
 				MessageBox.Show(e, LogMessages.ReadFromDB);
-
-				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
-				Helper.ModuleScmf.AddError(e);
+				Helper.LogError(e, dbe);
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
-				Helper.Logger.Error(Properties.Resources.LogSource, e);
-				Helper.ModuleScmf.AddError(e.Message);
-
+				Helper.LogError(e);
 				MessageBox.Show(e.Message);
 			}
 			finally
@@ -119,20 +111,14 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
-				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
-				Helper.ModuleScmf.AddError(e);
 
+				Helper.LogError(e, dbe);
 				MessageBox.Show(e);
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
-				Helper.Logger.Error(Properties.Resources.LogSource, e);
-				Helper.ModuleScmf.AddError(e.Message);
-
+				Helper.LogError(e);
 				MessageBox.Show(e.Message);
 			}
 			finally
@@ -172,17 +158,12 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-				Helper.Logger.Error(Properties.Resources.LogSource, dbe);
-				Helper.ModuleScmf.AddError(dbe.Message);
+				Helper.LogError(dbe);
 				MessageBox.Show(dbe.Message, LogMessages.WriteIntoDb);
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
-				Helper.Logger.Error(Properties.Resources.LogSource, e);
-				Helper.ModuleScmf.AddError(e.Message);
-
+				Helper.LogError(e);
 				MessageBox.Show(e.Message);
 			}
 			finally
@@ -207,29 +188,22 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				}
 				catch (Exception e)
 				{
-					Debug.WriteLine(e);
-					Helper.Logger.Error(Properties.Resources.LogSource, e);
-					Helper.ModuleScmf.AddError(e.Message);
+					Helper.LogError(e);
 				}
+
 				await SynchronizeAssountsAndUsersInDbAsync();
 				await LoadFullRolesInfoAsync();
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
-				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
-				Helper.ModuleScmf.AddError(e);
-
+				Helper.LogError(e, dbe);
 				MessageBox.Show(e, LogMessages.ReadFromDB);
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
-				Helper.Logger.Error(Properties.Resources.LogSource, e);
-				Helper.ModuleScmf.AddError(e.Message);
+				Helper.LogError(e);
 				MessageBox.Show(e.Message);
 			}
 			finally
@@ -363,8 +337,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 				}
 				catch (Exception e)
 				{
-					Helper.Logger.Error(Properties.Resources.LogSource, e);
-					Helper.ModuleScmf.AddError(e.Message);
+					Helper.LogError(e);
 				}
 
 				_pluginsFromConfig.Add(plugin);

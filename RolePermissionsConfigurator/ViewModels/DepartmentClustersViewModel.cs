@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -83,28 +82,22 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
-				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
-				Helper.ModuleScmf.AddError(e);
-
+				Helper.LogError(e, dbe);
 				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 			catch (ApplicationException e)
 			{
-				Debug.WriteLine(e);
+				Helper.LogError(Properties.Resources.ClusterAppointmentError, e);
 				MessageBox.Show(e.Message, Properties.Resources.ClusterAppointmentError, MessageBoxButton.OK,
 					MessageBoxImage.Error);
-				Helper.Logger.Error(Properties.Resources.LogSource, Properties.Resources.ClusterAppointmentError, e);
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
+				Helper.LogError(Properties.Resources.ClusterAppointmentError, e);
 				MessageBox.Show(e.Message, Properties.Resources.ClusterAppointmentError, MessageBoxButton.OK,
 					MessageBoxImage.Error);
-				Helper.Logger.Error(Properties.Resources.LogSource, Properties.Resources.ClusterAppointmentError, e);
 			}
 			finally
 			{
@@ -176,22 +169,16 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 				
-				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
-				Helper.ModuleScmf.AddError(e);
-
+				Helper.LogError(e, dbe);
 				MessageBox.Show(e, LogMessages.ReadFromDB, MessageBoxButton.OK, MessageBoxImage.Error);
 
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
 				MessageBox.Show(e.Message, Properties.Resources.LoadGroupingError, MessageBoxButton.OK, MessageBoxImage.Error);
-				Helper.Logger.Error(Properties.Resources.LogSource, e);
-				Helper.ModuleScmf.AddError(e.Message);
+				Helper.LogError(e);
 			}
 			finally
 			{

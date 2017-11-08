@@ -334,7 +334,7 @@
     <comment>Перезагрузить данные</comment>
   </data>
   <data name="SetServerConnection" xml:space="preserve">
-    <value>Définir la connexion au serveur</value>
-    <comment>Установить соединение с сервером</comment>
+    <value>Essayez à nouveau de vous connecter au serveur de base de données</value>
+    <comment>Повторить попытку соединения с сервером БД</comment>
   </data>
 </root>

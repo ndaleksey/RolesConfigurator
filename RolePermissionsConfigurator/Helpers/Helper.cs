@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using Swsu.Lignis.Logger.PrtAgent;
 using Swsu.Lignis.RolePermissionsConfigurator.Resources;
@@ -10,8 +11,8 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 	{
 		#region Properties
 
-		public static AppLogger Logger { get; }
-		public static ModuleSCMF ModuleScmf { get; }
+		private static AppLogger Logger { get; }
+		private static ModuleSCMF ModuleScmf { get; }
 
 		#endregion
 
@@ -28,6 +29,40 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 		#endregion
 
 		#region Methods
+
+		public static void LogError(string message, Exception e)
+		{
+			Debug.WriteLine(message + "\n" + e);
+			Logger.Error(Properties.Resources.LogSource, message, e);
+			ModuleScmf.AddError(message + "\n" + e.Message);
+		}
+
+		public static void LogError(Exception e)
+		{
+			Debug.WriteLine(e);
+			Logger.Error(Properties.Resources.LogSource, e);
+			ModuleScmf.AddError(e.Message);
+		}
+
+		public static void LogInfo(string message)
+		{
+			Debug.WriteLine(message);
+			Logger.Info(Properties.Resources.LogSource, message);
+		}
+
+		public static void LogFatal(Exception e)
+		{
+			Debug.WriteLine(e);
+			Logger.Fatal(Properties.Resources.LogSource, e);
+			ModuleScmf.AddError(e.Message);
+		}
+
+		public static void LogFatal(string message, Exception e)
+		{
+			Debug.WriteLine(message + "\n" + e);
+			Logger.Fatal(Properties.Resources.LogSource, message, e);
+			ModuleScmf.AddError(message + "\n" + e.StackTrace);
+		}
 
 		public static string GetPostgresErrorDescriptionBySqlState(string state)
 		{

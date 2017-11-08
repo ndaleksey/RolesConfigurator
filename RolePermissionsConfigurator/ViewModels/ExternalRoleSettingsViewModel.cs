@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using Npgsql;
@@ -94,20 +93,14 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			}
 			catch (PostgresException dbe)
 			{
-				Debug.WriteLine(dbe);
-
 				var e = Helper.GetPostgresErrorDescriptionBySqlState(dbe.SqlState);
 
-				Helper.Logger.Error(Properties.Resources.LogSource, e, dbe);
-				Helper.ModuleScmf.AddError(e);
-
+				Helper.LogError(e, dbe);
 				MessageBox.Show(dbe.Message, LogMessages.WriteIntoDb);
 			}
 			catch (Exception e)
 			{
-				Debug.WriteLine(e);
-				Helper.Logger.Error(Properties.Resources.LogSource, e);
-				Helper.ModuleScmf.AddError(e.Message);
+				Helper.LogError(e);
 			}
 			finally
 			{

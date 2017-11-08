@@ -338,6 +338,6 @@
     <value>Перезагрузить данные</value>
   </data>
   <data name="SetServerConnection" xml:space="preserve">
-    <value>Установить соединение с сервером</value>
+    <value>Повторить попытку соединения с сервером БД</value>
   </data>
 </root>

@@ -35,14 +35,13 @@ namespace Swsu.Lignis.RolePermissionsConfigurator
 			AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 			AppDomain.CurrentDomain.ProcessExit += OnCurrentDomainProcessExit;
 
-			Helper.Logger.Info(RolePermissionsConfigurator.Properties.Resources.LogSource, LogMessages.StartApplication);
+			Helper.LogInfo(LogMessages.StartApplication);
 		}
 
 		private void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs args)
 		{
 			var e = (Exception) args.ExceptionObject;
-			Helper.Logger.Error(RolePermissionsConfigurator.Properties.Resources.LogSource, e.Message);
-			Helper.ModuleScmf.AddFatalError(e.Message);
+			Helper.LogError(e);
 		}
 
 		private void OnCurrentDomainProcessExit(object sender, EventArgs e)
@@ -58,7 +57,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator
 		protected override void OnExit(ExitEventArgs e)
 		{
 			base.OnExit(e);
-			Helper.Logger.Info(RolePermissionsConfigurator.Properties.Resources.LogSource, LogMessages.StopApplication);
+			Helper.LogInfo(LogMessages.StopApplication);
 		}
 
 	}
