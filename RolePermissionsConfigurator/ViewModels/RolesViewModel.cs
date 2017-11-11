@@ -39,16 +39,14 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		#endregion
 
 		#region Constructors
-		protected RolesViewModel() { }
 
-		protected RolesViewModel(Guid currentClusterId)
+		protected RolesViewModel()
 		{
-			CurrentClusterId = currentClusterId;
 			AddRoleCommand = new DelegateCommand(AddRole, CanAddRole);
 			ModifyRoleCommand = new DelegateCommand(ModifyRole, CanModifyRole);
 			DeleteRoleCommand = new DelegateCommand(DeleteRole, CanDeleteRole);
 		}
-
+		
 		#endregion
 
 		#region Commands' methods

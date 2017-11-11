@@ -30,21 +30,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		public string CurrentDepartment { get; set; }
 
 		#endregion
-
-		#region Constructors
-
-		public InternalRolesViewModel()
-		{
-		}
-
-		public InternalRolesViewModel(Guid currentClusterId, string currentDepartment) : base(currentClusterId)
-		{
-			CurrentDepartment = currentDepartment;
-			Initialization();
-		}
-
-		#endregion
-
+		
 		#region Commands methods
 
 		public override bool CanAddRole()
@@ -137,8 +123,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 			try
 			{
 				if (MessageBox.Show($"{Properties.Resources.DeleteRoleAcquirement} \"{SelectedRole.Name}\"?",
-					    Properties.Resources.RoleDeleting,
-					    MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+					    Properties.Resources.RoleDeleting, MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
 					return;
 
 				WorkflowType = EWorkflowType.WorkWithDb;
