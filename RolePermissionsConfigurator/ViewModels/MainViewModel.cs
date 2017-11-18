@@ -182,7 +182,7 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.ViewModels
 		{
 			if (
 				MessageBox.Show(Properties.Resources.ChangeLanguageRequest, Properties.Resources.LanguageChanging,
-					MessageBoxButton.YesNo) == MessageBoxResult.No)
+					MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
 				return;
 
 			Settings.Default.Culture = Settings.Default.Culture.Name == "ru-RU"
