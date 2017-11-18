@@ -4,5 +4,6 @@
 /RolePermissionsConfigurator/bin
 /RolePermissionsConfigurator/obj
 /RolePermissionsConfigurator/Plugins
+packages
 Docs
 *.doc
