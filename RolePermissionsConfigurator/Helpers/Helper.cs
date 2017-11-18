@@ -20,9 +20,9 @@ namespace Swsu.Lignis.RolePermissionsConfigurator.Helpers
 
 		static Helper()
 		{
-
+			var processName = Process.GetCurrentProcess().ProcessName;
 			var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			ModuleScmf = new ModuleSCMF(Properties.Resources.ApplicationName, version);
+			ModuleScmf = new ModuleSCMF(processName, version, Properties.Resources.ApplicationName);
 			Logger = new AppLogger(null, Process.GetCurrentProcess().ProcessName, -1);
 		}
 
